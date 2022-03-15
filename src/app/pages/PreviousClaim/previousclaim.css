@@ -1,0 +1,158 @@
+.previousclaim {
+  /* min-height: rem(950px); */
+  margin-top: rem(20px);
+  margin-bottom: rem(80px);
+  @media only screen and (max-width: $sm) {
+    margin-bottom: rem(120px);
+  }
+  &__content {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    .bordercontainer {
+      @media only screen and (max-width: $sm) {
+        border: none;
+      }
+    }
+    .previous_btn {
+      margin-bottom: 0px;
+      @media only screen and (max-width: $sm) {
+        margin-bottom: -40px;
+      }
+    }
+    @media only screen and (max-width: $sm) {
+      display: block;
+    }
+    &__steps {
+      flex: 1;
+      padding: rem(100px) rem(50px);
+      padding-top: rem(0px);
+      padding-right: rem(0px);
+      /* margin-bottom: rem(150px); */
+      @media only screen and (max-width: $sm) {
+        margin-bottom: rem(0px);
+        padding-bottom: rem(20px);
+        padding-left: rem(20px);
+        padding-right: rem(20px);
+      }
+      h5 {
+        font-family: 'Lato-Regular';
+        font-size: rem(26px);
+        color: value($color-basic, dark);
+        letter-spacing: 0.5px;
+      }
+      p {
+        font-family: 'Lato-Regular';
+        font-size: rem(23px);
+        color: value($color-basic, dark);
+        letter-spacing: 0.5px;
+      }
+      h6 {
+        font-family: 'Lato-Regular';
+        font-size: rem(14px);
+        color: value($color-basic, dark);
+      }
+    }
+  }
+  &__claiminfo {
+    margin-top: rem(100px);
+    padding: rem(40px) rem(0px) rem(0px);
+    text-align: center;
+    @media only screen and (max-width: $sm) {
+      margin-top: rem(20px);
+    }
+    p {
+      padding: rem(0px) rem(35px);
+      font-family: 'Lato-Bold';
+      font-size: rem(18px);
+      color: value($color-basic, dark);
+      letter-spacing: 0.5px;
+      text-align: left;
+    }
+    h6 {
+      padding: rem(0px) rem(35px);
+      margin-top: rem(26px);
+      font-family: 'Lato-Regular';
+      font-size: rem(16px);
+      color: value($color-basic, dark);
+      text-align: left;
+    }
+    hr {
+      margin: rem(20px) rem(35px);
+      background-color: value($color-primary, normal);
+    }
+    &__hashInput {
+      border: none;
+      border-bottom: 2px solid #adca46;
+      background: transparent;
+      font-family: 'Lato-Regular';
+      font-size: rem(16px);
+      border-radius: 0px;
+      padding-left: 0px;
+      padding-bottom: rem(10px);
+      width: 80%;
+      margin: 0rem 2.1875rem;
+      margin-top: rem(20px);
+      &:focus {
+        outline: none;
+      }
+    }
+    &__button {
+      margin-top: rem(15px);
+      width: 100%;
+      padding: rem(15px) rem(0px);
+      border: none;
+      border-bottom-left-radius: rem(27px);
+      border-bottom-right-radius: rem(27px);
+      background-color: value($color-primary, normal);
+      font-family: 'Lato-Bold';
+      font-size: rem(20px);
+      color: value($color-basic, brightest);
+      &:disabled {
+        opacity: 0.5;
+      }
+      @media only screen and (max-width: $sm) {
+        text-align: center;
+        display: inline-block;
+        width: 80%;
+        border-radius: rem(15px);
+      }
+    }
+  }
+  .tokenitem {
+    padding-top: rem(30px);
+    display: flex;
+    justify-content: space-between;
+    p {
+      font-family: 'Lato-Regular';
+      font-size: rem(16px);
+      color: value($color-basic, dark);
+    }
+  }
+  &-option {
+    /* width: 50px;
+    height: 50px; */
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-right: rem(25px);
+    margin-top: rem(20px);
+    border: 2px solid value($color-basic, bright);
+    padding: rem(15px) rem(20px);
+    border-radius: rem(16px);
+    opacity: 0.4;
+    font-family: 'Lato-Regular';
+    font-size: rem(18px);
+    color: value($color-basic, dark);
+    img {
+      width: rem(36px);
+      height: rem(36px);
+      margin-right: rem(8px);
+    }
+  }
+  &-selected {
+    opacity: 1;
+  }
+}

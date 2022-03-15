@@ -1,0 +1,13 @@
+.guidepet {
+  text-align: center;
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  &__videoguide {
+    margin-left: rem(30px);
+    width: rem(190px);
+  }
+  @media only screen and (max-width: $md) {
+    bottom: -50px;
+  }
+}
