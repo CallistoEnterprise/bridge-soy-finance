@@ -5,7 +5,7 @@ export interface walletState {
   fromNetwork: any;
   toNetwork: any;
   selectedToken: any;
-  balance: any;
+  balance: { [symbol: string]: string };
   hash: string;
   destinationAddress: string;
   byte_data: string;

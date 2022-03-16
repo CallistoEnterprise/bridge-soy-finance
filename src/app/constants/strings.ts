@@ -1,8 +1,3 @@
-import bnbIcon from '~/assets/images/bnb.svg';
-import cloIcon from '~/assets/images/clo.svg';
-import etcIcon from '~/assets/images/etc.svg';
-import ethIcon from '~/assets/images/eth.svg';
-
 export const social = [
   {
     name: 'telegram',
@@ -468,28 +463,32 @@ export const tokenList: Array<any> = [
 // ETC in BSC : 0x3d6545b08693daE087E957cb1180ee38B9e3c25E
 export const Networks = [
   {
-    name: 'CLO testnet',
+    name: 'Callisto Network',
     symbol: 'CLO',
     devNet: 'mainnet',
-    img: cloIcon,
-    chainId: '20729',
-    rpcs: ['https://testnet-rpc.callisto.network'],
-    explorer: 'https://testnet-explorer.callisto.network'
+    img: '/images/clo.svg',
+    chainId: '820',
+    rpcs: ['https://clo-geth.0xinfra.com/'],
+    explorer: 'https://explorer.callisto.network/'
   },
   {
-    name: 'Smart Chain',
+    name: 'Binance Smart Chain',
     symbol: 'BNB',
     devNet: 'mainnet',
-    img: bnbIcon,
-    chainId: '97',
-    rpcs: ['https://data-seed-prebsc-1-s1.binance.org:8545/'],
-    explorer: 'https://testnet.bscscan.com'
+    img: '/images/bnb.svg',
+    chainId: '56',
+    rpcs: [
+      'https://bsc-dataseed.binance.org/',
+      'https://bsc-dataseed1.defibit.io/',
+      'https://bsc-dataseed1.ninicoin.io/'
+    ],
+    explorer: 'https://bscscan.com/'
   },
   {
     name: 'Ethereum Network',
     symbol: 'ETH',
     devNet: 'mainnet',
-    img: ethIcon,
+    img: '/images/eth.svg',
     chainId: '1',
     rpcs: ['https://mainnet.infura.io/v3/d819f1add1a34a60adab4df578e0e741'],
     explorer: 'https://etherscan.io/'
@@ -498,10 +497,19 @@ export const Networks = [
     name: 'Ethereum Classic',
     symbol: 'ETC',
     devNet: 'mainnet',
-    img: etcIcon,
+    img: '/images/etc.svg',
     chainId: '61',
     rpcs: ['https://www.ethercluster.com/etc'],
     explorer: 'https://blockscout.com/etc/mainnet/'
+  },
+  {
+    name: 'BitTorrent Chain',
+    symbol: 'BTT',
+    devNet: 'mainnet',
+    img: '/images/btt.png',
+    chainId: '199',
+    rpcs: ['https://rpc.bt.io/'],
+    explorer: 'https://scan.bt.io/#/'
   }
 ];
 

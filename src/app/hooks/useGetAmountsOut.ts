@@ -11,23 +11,23 @@ export const useGetAmountsOut = (amount: string) => {
   const [amountsOut, setAmountsOut] = useState(BIG_ZERO);
   const rpc = process.env.REACT_APP_NODE_1;
   const provider = useWeb3Provider(rpc);
-  const { selectedToken } = useGetWalletState();
+  const { selectedToken, toNetwork } = useGetWalletState();
+  const swapTokenAddrInCallisto = selectedToken?.address[820];
 
   useEffect(() => {
     const fetch = async () => {
       const contract = await getSoyRouterContractByWeb3(provider);
       const bigAmount = getDecimalAmount(new BigNumber(amount));
-      const swapTokenAddrInCallisto = selectedToken?.addresses.CLO;
-      const path = [swapTokenAddrInCallisto, '0xbd2D3BCe975FD72E44A73cC8e834aD1B8441BdDa'];
+      const path = [swapTokenAddrInCallisto, '0xF5AD6F6EDeC824C7fD54A66d241a227F6503aD3a'];
       const outAmt = await contract.methods.getAmountsOut(bigAmount.toString(), path).call();
       setAmountsOut(outAmt[1]);
     };
-    if (!Number.isNaN(parseFloat(amount))) {
+    if (!Number.isNaN(parseFloat(amount)) && swapTokenAddrInCallisto !== '' && toNetwork.chainId === '820') {
       fetch();
     } else {
       setAmountsOut(BIG_ZERO);
     }
-  }, [amount, provider, selectedToken]);
+  }, [amount, provider, selectedToken, swapTokenAddrInCallisto, toNetwork.chainId]);
 
   return amountsOut;
 };
@@ -36,23 +36,24 @@ export const useGetAmountsInput = (amount: string) => {
   const [amountsOut, setAmountsOut] = useState(BIG_ZERO);
   const rpc = process.env.REACT_APP_NODE_1;
   const provider = useWeb3Provider(rpc);
-  const { selectedToken } = useGetWalletState();
+  const { selectedToken, toNetwork } = useGetWalletState();
+  const swapTokenAddrInCallisto = selectedToken?.address[820];
 
   useEffect(() => {
     const fetch = async () => {
       const contract = await getSoyRouterContractByWeb3(provider);
       const bigAmount = getDecimalAmount(new BigNumber(amount));
-      const swapTokenAddrInCallisto = selectedToken?.addresses.CLO;
-      const path = [swapTokenAddrInCallisto, '0xbd2D3BCe975FD72E44A73cC8e834aD1B8441BdDa'];
+
+      const path = [swapTokenAddrInCallisto, '0xF5AD6F6EDeC824C7fD54A66d241a227F6503aD3a'];
       const outAmt = await contract.methods.getAmountsIn(bigAmount.toString(), path).call();
       setAmountsOut(outAmt[0]);
     };
-    if (!Number.isNaN(parseFloat(amount))) {
+    if (!Number.isNaN(parseFloat(amount)) && swapTokenAddrInCallisto !== '' && toNetwork.chainId === '820') {
       fetch();
     } else {
       setAmountsOut(BIG_ZERO);
     }
-  }, [amount, provider, selectedToken]);
+  }, [amount, provider, selectedToken, swapTokenAddrInCallisto, toNetwork.chainId]);
 
   return amountsOut;
 };

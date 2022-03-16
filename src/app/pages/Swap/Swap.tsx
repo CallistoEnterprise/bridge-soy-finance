@@ -38,11 +38,10 @@ const Swap = () => {
   const [canBuyCLO, setCanBuyCLO] = useState(false);
   const [txBlockNumber, setTxBlockNumber] = useState(0);
   const [switched, setSwitched] = useState(false);
-  // const [confirmedCounts, setConfirmedBlockCounts] = useState(0);
 
   const { balance, selectedToken, fromNetwork, toNetwork } = useGetWalletState();
-  const swapTokenAddr = selectedToken?.addresses[`${fromNetwork.symbol}`];
-  const swapTokenAddrInCallisto = selectedToken?.addresses.CLO;
+  const swapTokenAddr = selectedToken?.address[`${fromNetwork.chainId}`];
+  const swapTokenAddrInCallisto = selectedToken?.address[820];
 
   const { onApprove, allowed } = useGetAllowance(swapTokenAddr);
   const { onAdvancedSwap, onSimpleSwap } = useSwap();
@@ -133,7 +132,7 @@ const Swap = () => {
       const byte_data = await getEncodedData(web3, [
         buyBigAmount,
         amountsIn,
-        [swapTokenAddrInCallisto, '0xbd2D3BCe975FD72E44A73cC8e834aD1B8441BdDa'],
+        [swapTokenAddrInCallisto, '0xF5AD6F6EDeC824C7fD54A66d241a227F6503aD3a'],
         distinationAddress
       ]);
 
@@ -217,11 +216,8 @@ const Swap = () => {
                 {t('Previous')}
               </div>
             </CustomButton>
-            {/* <Default>
-          <GuidePet />
-        </Default> */}
             <div className="swap__content--mainboard">
-              <WalletInfo />
+              <WalletInfo fromNetwork={fromNetwork} />
               <div className="swap__content__steps">
                 <BorderContainer className="swap__content__bordercontainer">
                   <div>

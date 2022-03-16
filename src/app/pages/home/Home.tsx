@@ -37,7 +37,7 @@ export default function Home() {
   const onClaim = () => {
     // navigate('/network');
   };
-  console.log('====');
+
   const onPreviousClaim = async () => {
     setPage('previousclaim');
     login(isMobile ? ConnectorNames.WalletConnect : ConnectorNames.Injected, Networks[0]);

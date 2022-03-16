@@ -10,7 +10,7 @@ import { simpleRpcProvider } from '~/app/utils/providers';
 declare let window: any;
 
 export const injected = new InjectedConnector({
-  supportedChainIds: [1, 3, 4, 5, 42, 56, 61, 820, 20729, 97]
+  supportedChainIds: [1, 3, 4, 5, 42, 56, 61, 199, 820, 20729, 97]
 });
 
 export function useEagerConnect() {

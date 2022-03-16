@@ -68,7 +68,7 @@ const tokens = {
     symbol: 'WCLO',
     address: {
       820: '0xF5AD6F6EDeC824C7fD54A66d241a227F6503aD3a',
-      20729: ''
+      20729: '0xbd2D3BCe975FD72E44A73cC8e834aD1B8441BdDa'
     },
     decimals: 18,
     projectLink: 'https://explorer.callisto.network/token/0xA648A7824780780d272b6811ce8186a11b9c6591'

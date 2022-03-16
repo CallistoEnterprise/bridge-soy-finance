@@ -25,3 +25,19 @@
     }
   }
 }
+.tokens_container {
+  max-height: 300px;
+  overflow-y: scroll;
+}
+.tokens_container::-webkit-scrollbar {
+  border-radius: 5px;
+  width: 10px !important;
+}
+.tokens_container::-webkit-scrollbar-thumb {
+  background-color: rgba(126, 162, 36, 0.73);
+  border-radius: 5px;
+}
+.token-icon {
+  width: 24px;
+  height: 24px;
+}

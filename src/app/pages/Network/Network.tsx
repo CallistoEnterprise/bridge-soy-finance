@@ -9,10 +9,9 @@ import GuidePet from '~/app/components/common/GuidePet';
 import NetworkSelection from '~/app/components/NetworkSelection';
 import WalletInfo from '~/app/components/WalletInfo';
 import { INetwork } from '~/app/constants/interface';
-import { Networks, tokenList } from '~/app/constants/strings';
-import useActiveWeb3React from '~/app/hooks/useActiveWeb3';
-import { useGetTokenBalances, useNativeCoinBalance } from '~/app/hooks/wallet';
-import { setBalance, setFromNetwork, setToNetwork } from '~/app/modules/wallet/action';
+import { Networks } from '~/app/constants/strings';
+import { useGetTokenBalances } from '~/app/hooks/wallet';
+import { setFromNetwork, setToNetwork } from '~/app/modules/wallet/action';
 import { switchNetwork } from '~/app/utils/wallet';
 import previousIcon from '~/assets/images/previous.svg';
 import './network.css';
@@ -26,35 +25,21 @@ export default function Network() {
   const dispatch = useDispatch();
   const [t] = useTranslation();
   const navigate = useNavigate();
-  const [pendingBalance, setPendingBalance] = useState(false);
+  // const [pendingBalance, setPendingBalance] = useState(false);
   const [networkOne, setNetworkOne] = useState(Networks[0]);
-  const [networkTwo, setNetworkTwo] = useState<any>({});
-  const { chainId } = useActiveWeb3React();
+  const [networkTwo, setNetworkTwo] = useState<any>(Networks[1]);
 
-  const cloBalance = useNativeCoinBalance(networkOne, tokenList[0]);
-  const bnbBalance = useNativeCoinBalance(networkOne, tokenList[1]);
-
-  useGetTokenBalances(networkOne);
+  const pendingBalance = useGetTokenBalances(networkOne);
 
   useEffect(() => {
-    setPendingBalance(true);
-    if (cloBalance && cloBalance !== null && bnbBalance && bnbBalance !== null) {
-      const bnbValidBalance = parseInt(networkOne.chainId) === chainId ? bnbBalance : '0.00';
-      const cloValidBalance = parseInt(networkOne.chainId) === chainId ? cloBalance : '0.00';
-      dispatch(setBalance({ bnb: bnbValidBalance, clo: cloValidBalance }));
-      if (parseInt(networkOne.chainId) === chainId) setPendingBalance(false);
-    }
-  }, [bnbBalance, cloBalance, networkOne, chainId, dispatch]);
-
-  useEffect(() => {
-    if (networkOne.symbol === networkTwo.symbol) {
+    if (networkOne?.symbol === networkTwo?.symbol) {
       setNetworkTwo(null);
     }
   }, [networkOne, networkTwo]);
 
   const onChangeNetworkOne = async (option: INetwork) => {
     setNetworkOne(option);
-    setPendingBalance(true);
+    // setPendingBalance(true);
     await switchNetwork(option);
     dispatch(setFromNetwork(option));
   };
@@ -86,7 +71,7 @@ export default function Network() {
         <Default>
           <GuidePet />
         </Default>
-        <WalletInfo pending={pendingBalance} />
+        <WalletInfo pending={pendingBalance} fromNetwork={networkOne} />
         <div className="network__content__steps">
           <p>
             <strong>{t('Step 1:')}</strong> {t('Select the origin network')}

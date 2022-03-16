@@ -24,9 +24,9 @@ function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency): Pair[] {
   const bases: Token[] = useMemo(() => {
     if (!chainId) return [];
 
-    const common = BASES_TO_CHECK_TRADES_AGAINST[20729] ?? [];
-    const additionalA = tokenA ? ADDITIONAL_BASES[20729]?.[tokenA.address] ?? [] : [];
-    const additionalB = tokenB ? ADDITIONAL_BASES[20729]?.[tokenB.address] ?? [] : [];
+    const common = BASES_TO_CHECK_TRADES_AGAINST[820] ?? [];
+    const additionalA = tokenA ? ADDITIONAL_BASES[820]?.[tokenA.address] ?? [] : [];
+    const additionalB = tokenB ? ADDITIONAL_BASES[820]?.[tokenB.address] ?? [] : [];
 
     return [...common, ...additionalA, ...additionalB];
   }, [chainId, tokenA, tokenB]);
@@ -53,7 +53,7 @@ function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency): Pair[] {
             .filter(([t0, t1]) => t0.address !== t1.address)
             .filter(([tokenA_, tokenB_]) => {
               if (!chainId) return true;
-              const customBases = CUSTOM_BASES[20729];
+              const customBases = CUSTOM_BASES[820];
 
               const customBasesA: Token[] | undefined = customBases?.[tokenA_.address];
               const customBasesB: Token[] | undefined = customBases?.[tokenB_.address];

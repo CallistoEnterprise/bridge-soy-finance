@@ -40,7 +40,6 @@ export default function SwapForm({ submit, initialData, pending, canBuyCLO, setB
   const [destination_wallet, setDestWallet] = useState('');
 
   const { selectedToken } = useGetWalletState();
-  // const balance = useSelector((state: any) => state.walletBridge.balance);
 
   const onChangeDestination = (status: boolean) => {
     setDestination(status);

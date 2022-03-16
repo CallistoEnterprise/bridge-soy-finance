@@ -13,9 +13,9 @@ export default function TokenSelection({ options, className, onChange }: props) 
   return (
     <div className="tokenselection">
       <RadioGroup containerStyle={classNames('tokenselection-container', className)} onChange={onChange}>
-        {options.map((option, index) => (
+        {options.map((option) => (
           <Radio
-            key={index}
+            key={option.logoURI}
             value={option}
             render={({ isSelected }: any) => (
               <button
@@ -24,8 +24,8 @@ export default function TokenSelection({ options, className, onChange }: props) 
                 })}
               >
                 <div>
-                  <img src={option.icon} alt="icon" />
-                  {option.name}
+                  <img className="tokenselection-logo" src={option.logoURI} alt="icon" />
+                  {option.symbol}
                 </div>
               </button>
             )}

@@ -50,7 +50,7 @@ export default function SwapForm({ submit, initialData, pending, canBuyCLO, setB
   const [destination, setDestination] = useState(false);
   // const [isInput, setIsInput] = useState(true);
 
-  const { selectedToken } = useGetWalletState();
+  const { selectedToken, toNetwork } = useGetWalletState();
   const [swap_amount, setSwapAmount] = useState('');
   const [buy_amount, setBuyAmount] = useState('');
 
@@ -61,7 +61,7 @@ export default function SwapForm({ submit, initialData, pending, canBuyCLO, setB
   const intOutputAmount = buy_amount === '' ? 0 : parseFloat(buy_amount);
 
   const receiveOriginAmount = intInputAmount - getBalanceAmount(amountsIn).toNumber();
-  const fullOutAmount = getBalanceAmount(amountsOut, selectedToken?.decimals[`${selectedToken?.symbol}`]).toNumber();
+  const fullOutAmount = getBalanceAmount(amountsOut, selectedToken?.decimals[`${toNetwork.chainId}`]).toNumber();
 
   const onChangeDestination = (status: boolean) => {
     setDestination(status);
@@ -121,7 +121,7 @@ export default function SwapForm({ submit, initialData, pending, canBuyCLO, setB
                       <Field
                         name="swap_amount"
                         type="text"
-                        groupname={selectedToken.name}
+                        groupname={selectedToken.symbol}
                         component={FormInput}
                         value={swap_amount}
                         inputMode="decimal"

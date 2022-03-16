@@ -8,8 +8,9 @@ import GuidePet from '~/app/components/common/GuidePet';
 import TokenSelection from '~/app/components/TokenSelection';
 import WalletInfo from '~/app/components/WalletInfo';
 import { IToken } from '~/app/constants/interface';
-import { tokenList } from '~/app/constants/strings';
+import defaultTokens from '~/app/constants/tokenLists/tokenLists2.json';
 import { setSelectedToken } from '~/app/modules/wallet/action';
+import useGetWalletState from '~/app/modules/wallet/hooks';
 import previousIcon from '~/assets/images/previous.svg';
 import './tokenlist.css';
 
@@ -22,10 +23,13 @@ export default function TokenList() {
   const [t] = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { fromNetwork } = useGetWalletState();
+
   // const { selectedToken } = useGetWalletState();
   const [token, setToken] = useState(null);
   const [value, setValue] = useState('');
   // const swapTokenAddr = selectedToken?.addresses?.CLO;
+  const tokenList = defaultTokens.tokens.filter((t: any) => t.address[`${fromNetwork.chainId}`] !== '');
 
   // useEffect(() => {
   //   dispatch(
@@ -63,7 +67,7 @@ export default function TokenList() {
         <Default>
           <GuidePet />
         </Default>
-        <WalletInfo />
+        <WalletInfo pending={false} fromNetwork={fromNetwork} />
         <div className="tokenlist__content__steps">
           <p>
             <strong>{t('Step 3:')}</strong> {t('Select the token to swap')}

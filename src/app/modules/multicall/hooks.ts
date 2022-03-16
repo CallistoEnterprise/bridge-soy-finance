@@ -49,7 +49,7 @@ export const NEVER_RELOAD: ListenerOptions = {
 
 // the lowest level call for subscribing to contract data
 function useCallsData(calls: (Call | undefined)[], options?: ListenerOptions): CallResult[] {
-  const chainId = 20729;
+  const chainId = 820;
   const callResults = useSelector<AppState, AppState['multicallBridge']['callResults']>(
     (state: any) => state.multicallBridge.callResults
   );

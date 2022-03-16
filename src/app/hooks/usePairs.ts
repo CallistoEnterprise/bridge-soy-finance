@@ -19,10 +19,7 @@ export function usePairs(currencies: [Currency | undefined, Currency | undefined
   // const { chainId } = useActiveWeb3React();
   const tokens = useMemo(
     () =>
-      currencies.map(([currencyA, currencyB]) => [
-        wrappedCurrency(currencyA, 20729),
-        wrappedCurrency(currencyB, 20729)
-      ]),
+      currencies.map(([currencyA, currencyB]) => [wrappedCurrency(currencyA, 820), wrappedCurrency(currencyB, 820)]),
     [currencies]
   );
 

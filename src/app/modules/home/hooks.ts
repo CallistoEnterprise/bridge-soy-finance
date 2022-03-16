@@ -4,7 +4,7 @@ import { AppState } from '~/app/core/store';
 
 export function useBlockNumber(): number | undefined {
   // const { chainId } = useActiveWeb3React();
-  return useSelector((state: AppState) => state.homeBridge.blockNumber[20729]);
+  return useSelector((state: AppState) => state.homeBridge.blockNumber[820]);
 }
 
 export default useBlockNumber;

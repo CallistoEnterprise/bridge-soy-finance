@@ -49,7 +49,7 @@ const options = [
     name: 'ccBNB in Callisto',
     value: 'clo',
     symbol: 'ccBNB',
-    chainId: 20729,
+    chainId: 820,
     address: '0xCc0524d86Ba37Cb36B21a14B118723eAF609aDd8',
     network: 'Callisto'
   },
@@ -58,7 +58,7 @@ const options = [
     name: 'ccETH in Callisto',
     value: 'etc',
     symbol: 'ccETH',
-    chainId: 20729,
+    chainId: 820,
     address: '0xcC208c32Cc6919af5d8026dAB7A3eC7A57CD1796',
     network: 'Callisto'
   },
@@ -67,7 +67,7 @@ const options = [
     name: 'ccETC in Callisto',
     value: 'etc',
     symbol: 'ccETC',
-    chainId: 20729,
+    chainId: 820,
     address: '0xCCc766f97629a4E14b3af8C91EC54f0b5664A69F',
     network: 'Callisto'
   },
@@ -76,7 +76,7 @@ const options = [
     name: 'BUSDT in Callisto',
     value: 'etc',
     symbol: 'BUSDT',
-    chainId: 20729,
+    chainId: 820,
     address: '0xbf6c50889d3a620eb42C0F188b65aDe90De958c4',
     network: 'Callisto'
   }

@@ -3,9 +3,11 @@ import BigNumber from 'bignumber.js';
 import { ethers } from 'ethers';
 import sample from 'lodash/sample';
 import { useEffect, useMemo, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import Web3 from 'web3';
 import WETH_ABI from '~/app/constants/abis/weth.json';
 import defaultTokens from '~/app/constants/tokenLists/tokenLists2.json';
+import { setBalance } from '~/app/modules/wallet/action';
 import { getContract } from '~/app/utils';
 import useActiveWeb3React from './useActiveWeb3';
 
@@ -98,7 +100,41 @@ export const useTokenBalance = (fromNet: any, curAsset?: any) => {
 };
 
 export const useGetTokenBalances = (fromNet: any) => {
-  const [tokens, setTokens] = useState(defaultTokens.tokens);
+  const { account, chainId } = useActiveWeb3React();
+  const RPC_URL = useRpcProvider(fromNet.rpcs);
+  const dispatch = useDispatch();
+  const [pending, setPending] = useState(true);
+
+  useEffect(() => {
+    const getBalance = async () => {
+      setPending(true);
+      const tokens = defaultTokens.tokens.filter((t: any) => t.address[`${fromNet.chainId}`] !== '');
+      const temp: { [symbol: string]: string } = {};
+      tokens.forEach(async (curAsset: any, index: number) => {
+        if (fromNet.symbol === curAsset.symbol) {
+          const amount = await RPC_URL.getBalance(account);
+          // const bigAmt = new BigNumber(amount.toString());
+          const bn = new BigNumber(amount + 'e-' + 18);
+          temp[`${fromNet.symbol}`] = bn.toFixed(2);
+        } else {
+          const tokenContract = getErc20Contract(curAsset.address[`${fromNet.chainId}`], RPC_URL);
+          const balance: BigNumber = await tokenContract.balanceOf(account, { value: 0 });
+          const strBalance = balance.toString();
+          const decimal = curAsset.decimals[`${fromNet.chainId}`];
+          const decimalBalance = parseInt(((parseInt(strBalance.toString()) / 10 ** decimal) * 1000000).toString());
+          temp[`${curAsset.symbol}`] = (decimalBalance / 1000000).toFixed(2);
+        }
+        if (Object.keys(temp).length === tokens.length) {
+          setPending(false);
+          dispatch(setBalance(temp));
+        }
+      });
+    };
+    if (account && chainId) {
+      getBalance();
+    }
+  }, [account, chainId, RPC_URL, fromNet.rpcs, fromNet.chainId, fromNet.symbol, dispatch]);
+  return pending;
 };
 
 export const useERC20 = (address: string) => {
