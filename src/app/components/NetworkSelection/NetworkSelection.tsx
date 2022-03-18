@@ -27,7 +27,7 @@ export default function NetworkSelection({ options, selected, disabled, onChange
               >
                 <div>
                   <img src={option.img} alt="icon" />
-                  {option.symbol}
+                  {option.name}
                 </div>
               </button>
             )}

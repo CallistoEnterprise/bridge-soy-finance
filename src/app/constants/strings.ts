@@ -472,7 +472,7 @@ export const Networks = [
     explorer: 'https://explorer.callisto.network/'
   },
   {
-    name: 'Binance Smart Chain',
+    name: 'BSC Network',
     symbol: 'BNB',
     devNet: 'mainnet',
     img: '/images/bnb.svg',
@@ -518,49 +518,162 @@ export const addTokenList = [
     symbol: 'ccCLO',
     chainId: 1,
     address: '0xCcbf1C9E8b4f2cDF3Bfba1098b8f56f97d219D53',
-    network: 'Ethereum'
+    network: 'Ethereum',
+    decimals: 18
   },
   {
     symbol: 'ccCLO',
     chainId: 56,
     address: '0xCcbf1C9E8b4f2cDF3Bfba1098b8f56f97d219D53',
-    network: 'BSC'
+    network: 'BSC',
+    decimals: 18
   },
   {
     symbol: 'ccCLO',
     chainId: 61,
     address: '0xCcbf1C9E8b4f2cDF3Bfba1098b8f56f97d219D53',
-    network: 'ETC'
+    network: 'ETC',
+    decimals: 18
   },
   {
     symbol: 'ccBNB',
     chainId: 820,
-    address: '0xcc0524d86ba37cb36b21a14b118723eaf609add8',
-    network: 'Callisto'
+    address: '0xcCDe29903E621Ca12DF33BB0aD9D1ADD7261Ace9',
+    network: 'Callisto',
+    decimals: 18
   },
   {
     symbol: 'ccETH',
     chainId: 820,
     address: '0xcC208c32Cc6919af5d8026dAB7A3eC7A57CD1796',
-    network: 'Callisto'
+    network: 'Callisto',
+    decimals: 18
   },
   {
     symbol: 'ccETC',
     chainId: 820,
     address: '0xCCc766f97629a4E14b3af8C91EC54f0b5664A69F',
-    network: 'Callisto'
+    network: 'Callisto',
+    decimals: 18
   },
   {
     symbol: 'BUSDT',
     chainId: 820,
     address: '0xbf6c50889d3a620eb42C0F188b65aDe90De958c4',
-    network: 'Callisto'
+    network: 'Callisto',
+    decimals: 18
   },
   {
-    symbol: 'CAKE',
+    symbol: 'ccCAKE',
     chainId: 820,
     address: '0xCC2D45F7fE1b8864a13F5D552345eB3f5a005FEd',
-    network: 'Callisto'
+    network: 'Callisto',
+    decimals: 18
+  },
+  {
+    symbol: 'ccTWT',
+    chainId: 820,
+    address: '0xCC099e75152ACCda96d54FAbaf6e333ca44AD86e',
+    network: 'Callisto',
+    decimals: 18
+  },
+  {
+    symbol: 'ccWSG',
+    chainId: 820,
+    address: '0xccEbb9f0EE6D720DebccEE42f52915037f774A70',
+    network: 'Callisto',
+    decimals: 18
+  },
+  {
+    symbol: 'ccREEF',
+    chainId: 820,
+    address: '0xCc1530716A7eBecFdc7572eDCbF01766f042155c',
+    network: 'Callisto',
+    decimals: 18
+  },
+  {
+    symbol: 'ccBAKE',
+    chainId: 820,
+    address: '0xCCeC9F26F52E8e0D1d88365004f4F475f5274279',
+    network: 'Callisto',
+    decimals: 18
+  },
+  {
+    symbol: 'ccSHIB',
+    chainId: 820,
+    address: '0xccA4F2ED7Fc093461c13f7F5d79870625329549A',
+    network: 'Callisto',
+    decimals: 18
+  },
+  {
+    symbol: 'ccRACA',
+    chainId: 820,
+    address: '0xCC8B04c0f7d0797B3BD6b7BE8E0061ac0c3c0A9b',
+    network: 'Callisto',
+    decimals: 18
+  },
+  {
+    symbol: 'ccLINA',
+    chainId: 820,
+    address: '0xCC10A4050917f771210407DF7A4C048e8934332c',
+    network: 'Callisto',
+    decimals: 18
+  },
+  {
+    symbol: 'ccTON',
+    chainId: 820,
+    address: '0xCC50D400042177B9DAb6bd31ede73aE8e1ED6F08',
+    network: 'Callisto',
+    decimals: 9
+  },
+  {
+    symbol: 'ccXMS',
+    chainId: 820,
+    address: '0xcc45afedd2065EDcA770801055d1E376473a871B',
+    network: 'Callisto',
+    decimals: 18
+  },
+  {
+    symbol: 'ccFTM',
+    chainId: 820,
+    address: '0xcc50aB63766660C6C1157B8d6A5D51ceA82Dff34',
+    network: 'Callisto',
+    decimals: 18
+  },
+  {
+    symbol: 'ccBTT',
+    chainId: 820,
+    address: '0xCc99C6635Fae4DAcF967a3fc2913ab9fa2b349C3',
+    network: 'Callisto',
+    decimals: 18
+  },
+  {
+    symbol: 'ccBBT',
+    chainId: 820,
+    address: '0xcCCaC2f22752bbe77D4DAb4e9421F2AC6c988427',
+    network: 'Callisto',
+    decimals: 8
+  },
+  {
+    symbol: 'ccANTEX',
+    chainId: 820,
+    address: '0xCCd792f5D06b73685a1b54A32fE786346cAd1894',
+    network: 'Callisto',
+    decimals: 8
+  },
+  {
+    symbol: 'ccZOO',
+    chainId: 820,
+    address: '0xCC9aFcE1e164fC2b381A3a104909e2D9E52cfB5D',
+    network: 'Callisto',
+    decimals: 18
+  },
+  {
+    symbol: 'ccBCOIN',
+    chainId: 820,
+    address: '0xcC6e7E97A46B6F0eD3bC81518Fc816da78F7cb65',
+    network: 'Callisto',
+    decimals: 18
   }
 ];
 

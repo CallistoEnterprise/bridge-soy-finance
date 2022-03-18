@@ -17,10 +17,12 @@
   }
 
 .footer {
-  margin-top: rem(-45px);
-  background: url('../../assets/images/main-bg.svg');
-  background-repeat: repeat-x;
-  min-height: rem(480px);
+  margin-top: rem(45px);
+  background: url('../../assets/images/Footer.png');
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  background-position: top !important;
+  /* min-height: rem(700px); */
   min-width: 100vw;
 
   &__animation {
@@ -69,9 +71,9 @@
   &__content {
     display: flex;
     justify-content: space-between;
-    padding-top: rem(180px);
+    padding-top: rem(100px);
+    padding: 100px 10% 50px;
     @media only screen and (max-width: $sm) {
-      padding-top: rem(120px);
       display: block;
       text-align: center;
       /* margin-top: rem(50px); */
@@ -99,18 +101,29 @@
   &__bold {
     margin-top: rem(10px);
     font-family: 'Lato-Bold';
-    font-size: value($font-size, m);
     color: value($color-basic, brightest);
     letter-spacing: 0.8px;
     @media only screen and (max-width: $sm) {
       display: block;
-      margin-top: rem(20px);
+      margin-top: rem(30px);
     }
   }
+  &__column {
+    display: flex;
+    flex-direction: column;
+  }
   &__center {
-    margin-right: rem(50px);
-    margin-left: rem(50px);
+    /* margin-right: rem(50px);
+    margin-left: rem(50px); */
+
+    @media only screen and (max-width: $sm) {
+      margin-right: rem(10px);
+      margin-left: rem(10px);
+    }
+
     &__linklist {
+      display: flex;
+      flex-direction: column;
       @media only screen and (max-width: $sm) {
         display: none;
       }
@@ -143,12 +156,9 @@
     font-size: rem(16px);
     text-align: center;
     color: value($color-basic, brightest);
-    position: absolute;
     margin-left: auto;
     margin-right: auto;
-    left: 0;
-    right: 0;
     text-align: center;
-    bottom: rem(20px);
+    margin-top: 30px;
   }
 }

@@ -27,7 +27,7 @@ export default function Network() {
   const navigate = useNavigate();
   // const [pendingBalance, setPendingBalance] = useState(false);
   const [networkOne, setNetworkOne] = useState(Networks[0]);
-  const [networkTwo, setNetworkTwo] = useState<any>(Networks[1]);
+  const [networkTwo, setNetworkTwo] = useState<any>(null);
 
   const pendingBalance = useGetTokenBalances(networkOne);
 
@@ -64,7 +64,7 @@ export default function Network() {
       <div className="network__content">
         <CustomButton className="previous_btn" onClick={onPrevious}>
           <div>
-            <img src={previousIcon} alt="previousIcon" className="me-2" />
+            <img src={previousIcon} alt="Icon" className="me-2" />
             Previous
           </div>
         </CustomButton>
