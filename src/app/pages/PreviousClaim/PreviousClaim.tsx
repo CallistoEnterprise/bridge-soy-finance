@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -9,10 +9,10 @@ import Spinner from '~/app/components/common/Spinner';
 import NetworkSelection from '~/app/components/NetworkSelection';
 import WalletInfo from '~/app/components/WalletInfo';
 import { INetwork } from '~/app/constants/interface';
-import { Networks, tokenList } from '~/app/constants/strings';
+import { Networks } from '~/app/constants/strings';
 import useActiveWeb3React from '~/app/hooks/useActiveWeb3';
-import { useNativeCoinBalance } from '~/app/hooks/wallet';
-import { setBalance, setFromNetwork } from '~/app/modules/wallet/action';
+import { useGetTokenBalances } from '~/app/hooks/wallet';
+import { setFromNetwork } from '~/app/modules/wallet/action';
 import { getBridgeContract, shortAddress } from '~/app/utils';
 import getSignatures from '~/app/utils/getSignatures';
 import { switchNetwork } from '~/app/utils/wallet';
@@ -28,26 +28,11 @@ export default function PreviousClaim() {
 
   const [hash, setHash] = useState<string>('');
 
-  const fromNetwork = useSelector((state: any) => state.wallet.fromNetwork);
-  const { destinationAddress } = useSelector((state: any) => state.walletBridge);
-  const { library } = useActiveWeb3React();
-
-  const [pendingBalance, setPendingBalance] = useState(false);
+  const { fromNetwork, destinationAddress } = useSelector((state: any) => state.walletBridge);
+  const { library, chainId } = useActiveWeb3React();
   const [networkOne, setNetworkOne] = useState(Networks[0]);
-  const { chainId } = useActiveWeb3React();
 
-  const cloBalance = useNativeCoinBalance(networkOne, tokenList[0]);
-  const bnbBalance = useNativeCoinBalance(networkOne, tokenList[1]);
-
-  useEffect(() => {
-    setPendingBalance(true);
-    if (bnbBalance && bnbBalance !== null && cloBalance && cloBalance !== null) {
-      const bnbValidBalance = parseInt(networkOne.chainId) === chainId ? bnbBalance : '0.00';
-      const cloValidBalance = parseInt(networkOne.chainId) === chainId ? cloBalance : '0.00';
-      dispatch(setBalance({ bnb: bnbValidBalance, clo: cloValidBalance }));
-      if (parseInt(networkOne.chainId) === chainId) setPendingBalance(false);
-    }
-  }, [bnbBalance, cloBalance, networkOne, chainId, dispatch]);
+  const pendingBalance = useGetTokenBalances(networkOne);
 
   const onPrevious = () => {
     navigate('/');
@@ -75,8 +60,12 @@ export default function PreviousClaim() {
         try {
           toast.info('Please change your network to claim this transaction');
           await switchNetwork(toNetwork);
+          setPending(false);
+          return;
         } catch (error) {
           toast.warning('Please check your network connection and try again.');
+          setPending(false);
+          return;
         }
       } else {
         if (signatures.length === 0) {
@@ -117,7 +106,7 @@ export default function PreviousClaim() {
     <div className="previousclaim container">
       <div className="previousclaim__content">
         <div>
-          <WalletInfo pending={pendingBalance} />
+          <WalletInfo pending={pendingBalance} fromNetwork={networkOne} />
           <CustomButton className="previous_btn mt-4" onClick={onPrevious}>
             <div>
               <img src={previousIcon} alt="previousIcon" className="me-2" />
@@ -145,7 +134,7 @@ export default function PreviousClaim() {
           <hr />
           <button
             color="success"
-            disabled={hash === ''}
+            disabled={hash === '' || pending || pendingBalance}
             className="previousclaim__claiminfo__button"
             onClick={onPreviousClaim}
           >
