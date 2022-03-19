@@ -25,20 +25,10 @@ export default function TokenList() {
   const dispatch = useDispatch();
   const { fromNetwork } = useGetWalletState();
 
-  // const { selectedToken } = useGetWalletState();
   const [token, setToken] = useState(null);
   const [value, setValue] = useState('');
-  // const swapTokenAddr = selectedToken?.addresses?.CLO;
-  const tokenList = defaultTokens.tokens.filter((t: any) => t.address[`${fromNetwork.chainId}`] !== '');
 
-  // useEffect(() => {
-  //   dispatch(
-  //     selectCurrency({
-  //       field: FieldInput.INPUT,
-  //       currencyId: swapTokenAddr
-  //     })
-  //   );
-  // }, [swapTokenAddr, dispatch]);
+  const tokenList = defaultTokens.tokens.filter((t: any) => t.address[`${fromNetwork.chainId}`] !== '');
 
   const onChangeToken = (option: IToken) => {
     setToken(option.symbol);
@@ -70,13 +60,13 @@ export default function TokenList() {
         <WalletInfo pending={false} fromNetwork={fromNetwork} />
         <div className="tokenlist__content__steps">
           <p>
-            <strong>{t('Step 3:')}</strong> {t('Select the token to swap')}
+            <strong>{t('Step 3:')}</strong> {t('Select the asset to swap')}
           </p>
           <input
             className="form-control tokenlist__content__filter"
             value={value}
             onChange={(e) => setValue(e.target.value.toUpperCase())}
-            placeholder="Search token"
+            placeholder="🔍 Search asset"
           />
           <TokenSelection
             options={tokenList.filter((item) => {
