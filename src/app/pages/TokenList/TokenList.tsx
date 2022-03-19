@@ -66,7 +66,7 @@ export default function TokenList() {
             className="form-control tokenlist__content__filter"
             value={value}
             onChange={(e) => setValue(e.target.value.toUpperCase())}
-            placeholder="🔍 Search asset"
+            placeholder="🔍 Search an asset"
           />
           <TokenSelection
             options={tokenList.filter((item) => {
