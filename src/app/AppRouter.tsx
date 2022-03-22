@@ -21,20 +21,6 @@ export default function AppRouter() {
 
   return (
     <BrowserRouter>
-      <Header />
-
-      <Suspense fallback={<LoadingMessage />}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/network" element={<Network />} />
-          <Route path="/tokens" element={<TokenList />} />
-          <Route path="/swap" element={<Swap />} />
-          <Route path="/transfer" element={<Transfer />} />
-          <Route path="/previousclaim" element={<PreviousClaim />} />
-        </Routes>
-      </Suspense>
-
-      <Footer />
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -45,7 +31,22 @@ export default function AppRouter() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-      />
+      >
+        <Header />
+
+        <Suspense fallback={<LoadingMessage />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/network" element={<Network />} />
+            <Route path="/tokens" element={<TokenList />} />
+            <Route path="/swap" element={<Swap />} />
+            <Route path="/transfer" element={<Transfer />} />
+            <Route path="/previousclaim" element={<PreviousClaim />} />
+          </Routes>
+        </Suspense>
+
+        <Footer />
+      </ToastContainer>
     </BrowserRouter>
   );
 }
