@@ -17,18 +17,19 @@ const useGetAllowance = (tokenAddress: string) => {
         setAllowed(allowance.gt(0));
       }
     };
-    if (account && tokenAddress.slice(0, -2) !== '0x00000000000000000000000000000000000000') {
+    if (account && tokenAddress.slice(0, -2) !== '0x00000000000000000000000000000000000000' && tokenAddress !== '') {
       get();
     }
   }, [library, account, chainId, tokenAddress]);
 
   const handleApprove = useCallback(async () => {
-    const bridgeAddr = await getBridgeAddress(chainId);
-    const tkContract = await getTokenContract(tokenAddress, library, account);
-
-    const tx = tkContract.approve(bridgeAddr, ethers.constants.MaxUint256, { value: 0 });
-    const receipt = tx.wait();
-    return receipt.status;
+    if (tokenAddress !== '') {
+      const bridgeAddr = await getBridgeAddress(chainId);
+      const tkContract = await getTokenContract(tokenAddress, library, account);
+      const tx = await tkContract.approve(bridgeAddr, ethers.constants.MaxUint256, { value: 0 });
+      const receipt = await tx.wait();
+      return receipt.status;
+    }
   }, [library, account, chainId, tokenAddress]);
 
   return { onApprove: handleApprove, allowed };

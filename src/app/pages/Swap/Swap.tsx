@@ -84,6 +84,11 @@ const Swap = () => {
   }, [dispatch, txBlockNumber, pending, chainId, toNetwork, web3]);
 
   const onSubmit = (values: any) => {
+    const tokenBalance = balance[`${selectedToken.symbol}`];
+    if (parseFloat(values.swap_amount) > parseFloat(tokenBalance)) {
+      toast.warning('Inssuficient token balance!');
+      return;
+    }
     if (canBuyCLO) {
       advancedSwap(
         values.swap_amount,
