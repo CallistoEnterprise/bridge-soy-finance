@@ -17,11 +17,11 @@
   }
 
 .footer {
-  margin-top: rem(45px);
-  background: url('../../assets/images/Footer.png');
-  background-repeat: no-repeat !important;
+  margin-top: rem(-30px);
+  background: url('../../assets/images/main-bg.svg');
+  background-repeat: repeat-x;
   background-size: cover !important;
-  background-position: top !important;
+  /* background-position: top !important; */
   /* min-height: rem(700px); */
   min-width: 100vw;
 

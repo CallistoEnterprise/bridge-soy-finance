@@ -11,7 +11,7 @@ import WalletInfo from '~/app/components/WalletInfo';
 import { INetwork } from '~/app/constants/interface';
 import { Networks } from '~/app/constants/strings';
 import { useGetTokenBalances } from '~/app/hooks/wallet';
-import { setFromNetwork, setToNetwork } from '~/app/modules/wallet/action';
+import { setFromNetwork, setStartSwapping, setToNetwork } from '~/app/modules/wallet/action';
 import { switchNetwork } from '~/app/utils/wallet';
 import previousIcon from '~/assets/images/previous.svg';
 import './network.css';
@@ -36,6 +36,10 @@ export default function Network() {
       setNetworkTwo(null);
     }
   }, [networkOne, networkTwo]);
+
+  useEffect(() => {
+    dispatch(setStartSwapping(false));
+  }, [dispatch]);
 
   const onChangeNetworkOne = async (option: INetwork) => {
     setNetworkOne(option);

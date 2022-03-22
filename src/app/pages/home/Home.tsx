@@ -9,7 +9,7 @@ import CustomButton from '~/app/components/common/CustomButton';
 import { Networks } from '~/app/constants/strings';
 import useActiveWeb3React from '~/app/hooks/useActiveWeb3';
 import useAuth from '~/app/hooks/useAuth';
-import { setFromNetwork } from '~/app/modules/wallet/action';
+import { setFromNetwork, setStartSwapping } from '~/app/modules/wallet/action';
 import { setupEthereumNetwork, setupNetwork } from '~/app/utils/wallet';
 import animal from '~/assets/images/animal.png';
 import helpIcon from '~/assets/images/help.svg';
@@ -33,6 +33,10 @@ export default function Home() {
       navigate(`/${page}`);
     }
   }, [account, navigate, page]);
+
+  useEffect(() => {
+    dispatch(setStartSwapping(false));
+  }, [dispatch]);
 
   const onClaim = () => {
     // navigate('/network');

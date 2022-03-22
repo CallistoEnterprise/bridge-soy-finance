@@ -124,14 +124,14 @@ body {
       transform: translateY(-5px);
     }
     @media only screen and (max-width: $sm) {
-      bottom: rem(-50px);
+      /* bottom: rem(-50px); */
       right: 0px;
-      top: auto;
-      margin-left: auto;
+      top: rem(40px);
+      /* margin-left: auto;
       margin-right: auto;
       left: 0;
       right: 0;
-      text-align: center;
+      text-align: center; */
     }
   }
 }
