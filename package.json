@@ -22,7 +22,7 @@
     "@binance-chain/bsc-connector": "^1.0.0",
     "@reduxjs/toolkit": "^1.7.2",
     "@soy-libs/sdk2": "^0.0.3",
-    "@soy-libs/uikit": "^0.4.4",
+    "@soy-libs/uikit2": "^0.2.7",
     "@types/styled-components": "^5.1.24",
     "@uniswap/token-lists": "^1.0.0-beta.27",
     "@uniswap/v2-core": "^1.0.1",

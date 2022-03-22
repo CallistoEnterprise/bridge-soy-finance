@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
+import { ToastListener } from '~/app/contexts/ToastsContext';
 import '../styles/app.css';
 import Spinner from './components/common/Spinner';
 import { Footer, Header } from './layout';
@@ -21,7 +21,21 @@ export default function AppRouter() {
 
   return (
     <BrowserRouter>
-      <ToastContainer
+      <Header />
+
+      <Suspense fallback={<LoadingMessage />}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/network" element={<Network />} />
+          <Route path="/tokens" element={<TokenList />} />
+          <Route path="/swap" element={<Swap />} />
+          <Route path="/transfer" element={<Transfer />} />
+          <Route path="/previousclaim" element={<PreviousClaim />} />
+        </Routes>
+      </Suspense>
+
+      <Footer />
+      {/* <ToastContainer
         position="top-right"
         autoClose={5000}
         hideProgressBar={false}
@@ -31,22 +45,8 @@ export default function AppRouter() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-      >
-        <Header />
-
-        <Suspense fallback={<LoadingMessage />}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/network" element={<Network />} />
-            <Route path="/tokens" element={<TokenList />} />
-            <Route path="/swap" element={<Swap />} />
-            <Route path="/transfer" element={<Transfer />} />
-            <Route path="/previousclaim" element={<PreviousClaim />} />
-          </Routes>
-        </Suspense>
-
-        <Footer />
-      </ToastContainer>
+      /> */}
+      <ToastListener />
     </BrowserRouter>
   );
 }

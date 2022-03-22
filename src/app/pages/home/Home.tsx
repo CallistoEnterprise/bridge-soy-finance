@@ -1,4 +1,4 @@
-import { ConnectorNames } from '@soy-libs/uikit';
+import { ConnectorNames } from '@soy-libs/uikit2';
 import React, { useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { useTranslation } from 'react-i18next';

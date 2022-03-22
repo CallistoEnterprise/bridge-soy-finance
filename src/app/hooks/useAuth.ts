@@ -1,4 +1,4 @@
-import { connectorLocalStorageKey, ConnectorNames } from '@soy-libs/uikit';
+import { connectorLocalStorageKey, ConnectorNames } from '@soy-libs/uikit2';
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
 import {
   NoEthereumProviderError,
@@ -9,12 +9,13 @@ import {
   WalletConnectConnector
 } from '@web3-react/walletconnect-connector';
 import { useCallback } from 'react';
-import { toast } from 'react-toastify';
+import useToast from '~/app/hooks/useToast';
 import { setupNetwork } from '~/app/utils/wallet';
 import { connectorsByName } from '~/app/utils/web3React';
 
 const useAuth = () => {
   const { activate, deactivate } = useWeb3React();
+  const { toastError } = useToast();
 
   const login = useCallback(
     (connectorID: ConnectorNames, curNet) => {
@@ -29,7 +30,7 @@ const useAuth = () => {
           } else {
             window.localStorage.removeItem(connectorLocalStorageKey);
             if (error instanceof NoEthereumProviderError) {
-              toast.error('No provider was found');
+              toastError('No provider was found');
             } else if (
               error instanceof UserRejectedRequestErrorInjected ||
               error instanceof UserRejectedRequestErrorWalletConnect
@@ -38,18 +39,17 @@ const useAuth = () => {
                 const walletConnector = connector as WalletConnectConnector;
                 walletConnector.walletConnectProvider = null;
               }
-              toast.error('Please authorize to access your account');
+              toastError('Please authorize to access your account');
             } else {
-              toast.error(error.message);
+              toastError(error.message);
             }
           }
         });
       } else {
-        toast.warning('The connector config is wrong');
-        // toastError('Unable to find connector', 'The connector config is wrong');
+        toastError('Unable to find connector', 'The connector config is wrong');
       }
     },
-    [activate]
+    [activate, toastError]
   );
 
   const logout = useCallback(() => {

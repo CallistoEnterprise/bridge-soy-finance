@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import CustomButton from '~/app/components/common/CustomButton';
 import Spinner from '~/app/components/common/Spinner';
 import useClaim from '~/app/hooks/useClaim';
+import useToast from '~/app/hooks/useToast';
 import useGetWalletState from '~/app/modules/wallet/hooks';
 import getSignatures from '~/app/utils/getSignatures';
 import claimAnimal from '~/assets/images/animal.gif';
@@ -26,6 +26,7 @@ export default function Claim({ succeed, totalBlockCounts }: props) {
 
   const { hash, fromNetwork, swapType } = useGetWalletState();
   const { onSimpleClaim, onAdvancedClaim } = useClaim();
+  const { toastError, toastSuccess } = useToast();
 
   const onClaim = () => {
     if (hash === '') {
@@ -42,7 +43,7 @@ export default function Claim({ succeed, totalBlockCounts }: props) {
 
       if (signatures.length !== 3) {
         setPending(false);
-        toast.warning('Failed Signature');
+        toastError('Failed Signature');
         return;
       }
       try {
@@ -53,15 +54,15 @@ export default function Claim({ succeed, totalBlockCounts }: props) {
           window.localStorage.removeItem('prevData');
           setPending(false);
           navigate('/transfer');
-          toast.success('Claimed successfully.');
+          toastSuccess('Claimed successfully.');
         }
       } catch (error) {
         setPending(false);
-        toast.error('Failed to claim. Please try again.');
+        toastError('Failed to claim. Please try again.');
       }
     } catch (err) {
       setPending(false);
-      toast.error('Failed to get signature. Please try again.');
+      toastError('Failed to get signature. Please try again.');
     }
   }
 
@@ -72,7 +73,7 @@ export default function Claim({ succeed, totalBlockCounts }: props) {
       const { signatures, respJSON } = await getSignatures(hash, fromNetwork.chainId);
       if (signatures.length === 0) {
         setPending(false);
-        toast.warning('Invalid signature.');
+        toastError('Invalid signature.');
         return;
       }
       const receipt = await onSimpleClaim(respJSON, hash, fromNetwork.chainId, signatures);
@@ -82,10 +83,10 @@ export default function Claim({ succeed, totalBlockCounts }: props) {
         window.localStorage.removeItem('prevData');
         setPending(false);
         navigate('/transfer');
-        toast.success('Claimed successfully.');
+        toastSuccess('Claimed successfully.');
       }
     } catch (err) {
-      toast.error('Failed to get signature. Please try again.');
+      toastError('Failed to get signature. Please try again.');
       setPending(false);
     }
   }

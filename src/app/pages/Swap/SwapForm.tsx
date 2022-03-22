@@ -1,13 +1,14 @@
 import { Field, Formik } from 'formik';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 // import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 import CustomCheckbox from '~/app/components/common/CustomCheckbox';
 import FormInput from '~/app/components/common/FormInput';
 import Spinner from '~/app/components/common/Spinner';
 import { useGetAmountsInput, useGetAmountsOut } from '~/app/hooks/useGetAmountsOut';
+import useToast from '~/app/hooks/useToast';
 // import { FieldInput } from '~/app/modules/swap/action';
 // import { useSwapActionHandlers } from '~/app/modules/swap/hooks';
 // import useGetSwapState, { useDerivedSwapInfo, useSwapActionHandlers } from '~/app/modules/swap/hooks';
@@ -56,6 +57,7 @@ export default function SwapForm({ submit, initialData, pending, canBuyCLO, setB
 
   const amountsOut = useGetAmountsOut(swap_amount);
   const amountsIn = useGetAmountsInput(buy_amount);
+  const { toastError } = useToast();
 
   const intInputAmount = swap_amount === '' ? 0 : parseFloat(swap_amount);
   const intOutputAmount = buy_amount === '' ? 0 : parseFloat(buy_amount);
@@ -87,7 +89,7 @@ export default function SwapForm({ submit, initialData, pending, canBuyCLO, setB
   const handleBuyAmount = (e: any) => {
     const temp = e.target.value.replace(/,/g, '.');
     if (parseFloat(temp) > fullOutAmount) {
-      toast.error(`You can buy CLO less than ${fullOutAmount}`);
+      toastError(`You can buy CLO less than ${fullOutAmount}`);
       setBuyAmount(fullOutAmount.toString());
       return;
     }

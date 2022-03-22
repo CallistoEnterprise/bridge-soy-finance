@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 import BorderContainer from '~/app/components/common/BorderContainer';
 import CustomButton from '~/app/components/common/CustomButton';
 import Notice from '~/app/components/Notice';
@@ -13,6 +13,7 @@ import useActiveWeb3React from '~/app/hooks/useActiveWeb3';
 import useGetAllowance from '~/app/hooks/useGetAllowance';
 import useGetWeb3 from '~/app/hooks/useGetWeb3';
 import useSwap from '~/app/hooks/useSwap';
+import useToast from '~/app/hooks/useToast';
 import {
   setConfirmedBlockCounts,
   setDestinationAddress,
@@ -49,6 +50,7 @@ const Swap = () => {
 
   const [claimAddress, setClaimAddress] = useState('');
   const { account, chainId } = useActiveWeb3React();
+  const { toastError, toastWarning } = useToast();
 
   const disable = fromNetwork?.symbol === 'CLO' || toNetwork?.symbol !== 'CLO';
 
@@ -86,7 +88,7 @@ const Swap = () => {
   const onSubmit = (values: any) => {
     const tokenBalance = balance[`${selectedToken.symbol}`];
     if (parseFloat(values.swap_amount) > parseFloat(tokenBalance)) {
-      toast.warning('Inssuficient token balance!');
+      toastWarning('WARNING!', 'Inssuficient token balance!');
       return;
     }
     if (canBuyCLO) {
@@ -169,7 +171,7 @@ const Swap = () => {
     );
 
     if (swapTokenAddr === '') {
-      toast.warning('Please select another asset. Current asset is not supported yet!');
+      toastError('Please select another asset. Current asset is not supported yet!');
     } else {
       let value = '0';
       if (swapTokenAddr.slice(0, -2) === '0x00000000000000000000000000000000000000') {

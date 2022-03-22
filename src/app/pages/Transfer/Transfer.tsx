@@ -2,11 +2,12 @@ import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useMediaQuery } from 'react-responsive';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 import CustomButton from '~/app/components/common/CustomButton';
 import { TokenSelection2 } from '~/app/components/TokenSelection/TokenSelection';
 import { addTokenList } from '~/app/constants/strings';
 import useActiveWeb3React from '~/app/hooks/useActiveWeb3';
+import useToast from '~/app/hooks/useToast';
 import { registerToken } from '~/app/utils/wallet';
 import previousIcon from '~/assets/images/previous.svg';
 import './transfer.css';
@@ -21,6 +22,7 @@ export default function Transfer() {
   const navigate = useNavigate();
   const { account, chainId } = useActiveWeb3React();
   // const [networkOne, setNetworkOne] = useState(null);
+  const { toastError } = useToast();
 
   useEffect(() => {
     if (!account) {
@@ -31,7 +33,7 @@ export default function Transfer() {
   const onSelectToken = (option: any) => {
     // setNetworkOne(option.value);
     if (option.chainId !== chainId) {
-      toast.warning(`Please switch network to ${option.network}`);
+      toastError(`Please switch network to ${option.network}`);
       return;
     }
     registerToken(option.address, option.symbol, 18);

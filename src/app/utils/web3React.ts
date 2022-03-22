@@ -1,5 +1,5 @@
 import { BscConnector } from '@binance-chain/bsc-connector';
-import { ConnectorNames } from '@soy-libs/uikit';
+import { ConnectorNames } from '@soy-libs/uikit2';
 import { InjectedConnector } from '@web3-react/injected-connector';
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector';
 import { ethers } from 'ethers';
