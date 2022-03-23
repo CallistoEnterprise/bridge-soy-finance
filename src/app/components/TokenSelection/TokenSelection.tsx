@@ -38,6 +38,7 @@ export default function TokenSelection({ options, className, onChange }: props) 
 }
 
 export const TokenSelection2 = ({ options, className, onChange }: props) => {
+  console.log(options);
   return (
     <div className="tokenselection">
       <RadioGroup containerStyle={classNames('tokenselection-container', className)} onChange={onChange}>

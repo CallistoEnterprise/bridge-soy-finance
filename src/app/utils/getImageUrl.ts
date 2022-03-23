@@ -2,7 +2,9 @@ const getImageUrl = (symbol: any) => {
   return `https://callistobridge.netlify.app/images/${symbol}.png`;
 };
 export const getTokenLogoLink = (address: string) => {
-  return `https://app.soy.finance/images/${address}.png`;
+  return address === '0xCcbf1C9E8b4f2cDF3Bfba1098b8f56f97d219D53'
+    ? 'https://app.soy.finance/images/coins/clo.png'
+    : `https://app.soy.finance/images/coins/${address}.png`;
 };
 
 export default getImageUrl;
