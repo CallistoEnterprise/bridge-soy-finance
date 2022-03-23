@@ -1,8 +1,8 @@
 .walletinfo {
   &__balance {
-    padding: rem(38px) rem(44px);
+    padding: rem(38px) rem(14px);
     text-align: center;
-    min-width: rem(250px);
+    min-width: rem(280px);
     p {
       font-size: 15px;
     }
@@ -24,6 +24,15 @@
       }
     }
   }
+  &__addtoken--button {
+    border: none;
+    background: transparent;
+    width: 30px;
+    margin-left: 10px;
+  }
+  &__copyicon {
+    cursor: pointer;
+  }
 }
 .tokens_container {
   max-height: 300px;
@@ -40,4 +49,10 @@
 .token-icon {
   width: 24px;
   height: 24px;
+}
+.justify-center {
+  justify-content: center;
+}
+.me-copied {
+  color: rgba(126, 162, 36, 1);
 }

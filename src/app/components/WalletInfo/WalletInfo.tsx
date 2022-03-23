@@ -1,5 +1,5 @@
 import { useWeb3React } from '@web3-react/core';
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
@@ -9,6 +9,9 @@ import Spinner from '~/app/components/common/Spinner';
 import defaultTokens from '~/app/constants/tokenLists/tokenLists2.json';
 import { AppState } from '~/app/core/store';
 import useAuth from '~/app/hooks/useAuth';
+import useToast from '~/app/hooks/useToast';
+import { getAddress } from '~/app/utils/addressHelpers';
+import { registerToken } from '~/app/utils/wallet';
 import copyIcon from '~/assets/images/copy.svg';
 import metamaskIcon from '~/assets/images/metamask.svg';
 import './walletinfo.css';
@@ -22,8 +25,10 @@ export default function WalletInfo({ pending, fromNetwork }: walletInfoProps) {
   const [t] = useTranslation();
   const navigate = useNavigate();
   const isMobile = useMediaQuery({ maxWidth: 767 });
+  const { toastWarning } = useToast();
+  const [isTooltipDisplayed, setIsTooltipDisplayed] = useState(false);
 
-  const { account, active } = useWeb3React();
+  const { account, active, chainId } = useWeb3React();
 
   const tokenList = useMemo(() => {
     return defaultTokens.tokens.filter((token: any) => token.address[`${fromNetwork.chainId}`] !== '');
@@ -46,16 +51,44 @@ export default function WalletInfo({ pending, fromNetwork }: walletInfoProps) {
     navigate('/');
   };
 
+  const handleAddToken = async (item: any) => {
+    const address = getAddress(item.address, chainId);
+    if (address === '') {
+      toastWarning('WARNING!', 'Not supported asset!');
+      return;
+    }
+    const decimal = item.decimals[chainId];
+    await registerToken(address, item.symbol, decimal, item.logoURI);
+  };
+
+  const handleClipboard = async () => {
+    navigator.clipboard.writeText(account).then(() => {
+      displayTooltip();
+    });
+  };
+
+  function displayTooltip() {
+    setIsTooltipDisplayed(true);
+    setTimeout(() => {
+      setIsTooltipDisplayed(false);
+    }, 1000);
+  }
+
   return (
     <>
       {!isMobile ? (
         <BorderContainer className="walletinfo__balance">
           <div>
             <img src={metamaskIcon} alt="metamaskIcon" />
-            <div className="d-flex">
+            <div className="d-flex justify-center">
               <p className="me-1">{accountEllipsis}</p>
-              <img src={copyIcon} alt="copyIcon" />
+              <img src={copyIcon} className="walletinfo__copyicon" alt="copyIcon" onClick={handleClipboard} />
             </div>
+            {isTooltipDisplayed && (
+              <div className="d-flex justify-center">
+                <p className="me-copied">Copied</p>
+              </div>
+            )}
             <p className="walletinfo__balance--title">{t('Balance')}</p>
             {pending || tokenList.length !== balanceLen ? (
               <Spinner className="mt-5" size="sm" />
@@ -68,6 +101,9 @@ export default function WalletInfo({ pending, fromNetwork }: walletInfoProps) {
                       <div className="d-flex align-items-center">
                         <img className="me-2 token-icon" src={item.logoURI} alt="icon" />
                         <p className="ms-2">{`${balance[`${item.symbol}`]}`}</p>
+                        <button className="walletinfo__addtoken--button" onClick={() => handleAddToken(item)}>
+                          <img className="me-2 token-icon" src={metamaskIcon} alt="icon" />
+                        </button>
                       </div>
                       <p style={{ marginRight: 10 }}>{item.symbol}</p>
                     </li>
