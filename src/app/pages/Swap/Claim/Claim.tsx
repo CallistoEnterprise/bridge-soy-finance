@@ -71,7 +71,7 @@ export default function Claim({ succeed, totalBlockCounts }: props) {
 
     try {
       const { signatures, respJSON } = await getSignatures(hash, fromNetwork.chainId);
-      if (signatures.length === 0) {
+      if (signatures.length < 3) {
         setPending(false);
         toastError('Invalid signature.');
         return;
