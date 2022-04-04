@@ -10,6 +10,7 @@ import Notice from '~/app/components/Notice';
 import WalletInfo from '~/app/components/WalletInfo';
 import { blockConfirmations } from '~/app/constants/config';
 import useActiveWeb3React from '~/app/hooks/useActiveWeb3';
+import useCurrentBlockTimestamp from '~/app/hooks/useCurrentBlockTimestamp';
 import useGetAllowance from '~/app/hooks/useGetAllowance';
 import useGetWeb3 from '~/app/hooks/useGetWeb3';
 import useSwap from '~/app/hooks/useSwap';
@@ -47,6 +48,7 @@ const Swap = () => {
   const { onApprove, allowed } = useGetAllowance(swapTokenAddr);
   const { onAdvancedSwap, onSimpleSwap } = useSwap();
   const web3 = useGetWeb3(fromNetwork?.rpcs[0]);
+  const deadline = useCurrentBlockTimestamp();
 
   const [claimAddress, setClaimAddress] = useState('');
   const { account, chainId } = useActiveWeb3React();
@@ -136,7 +138,7 @@ const Swap = () => {
     }
 
     try {
-      const byte_data = await getEncodedData(web3, [
+      const byte_data = await getEncodedData(web3, deadline, [
         buyBigAmount,
         amountsIn,
         [swapTokenAddrInCallisto, '0xF5AD6F6EDeC824C7fD54A66d241a227F6503aD3a'],
