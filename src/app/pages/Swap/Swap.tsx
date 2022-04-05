@@ -89,7 +89,7 @@ const Swap = () => {
 
   const onSubmit = (values: any) => {
     const tokenBalance = balance[`${selectedToken.symbol}`];
-    if (parseFloat(values.swap_amount) > parseFloat(tokenBalance)) {
+    if (Number(values.swap_amount) > Number(tokenBalance)) {
       toastWarning('WARNING!', 'Inssuficient token balance!');
       return;
     }
@@ -138,11 +138,13 @@ const Swap = () => {
     }
 
     try {
-      const byte_data = await getEncodedData(web3, deadline, [
+      const maxAmountsIn = Math.floor(1.05 * Number(amountsIn));
+      const byte_data = await getEncodedData(web3, [
         buyBigAmount,
-        amountsIn,
+        new BigNumber(maxAmountsIn),
         [swapTokenAddrInCallisto, '0xF5AD6F6EDeC824C7fD54A66d241a227F6503aD3a'],
-        distinationAddress
+        distinationAddress,
+        new BigNumber(deadline)
       ]);
 
       try {
@@ -156,6 +158,7 @@ const Swap = () => {
         dispatch(setStartSwapping(false));
       }
     } catch (error) {
+      console.log(error);
       setPending(false);
       setSucced(false);
       dispatch(setStartSwapping(false));

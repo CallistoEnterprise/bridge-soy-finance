@@ -43,7 +43,7 @@ export default function Claim({ succeed, totalBlockCounts }: props) {
 
       if (signatures.length !== 3) {
         setPending(false);
-        toastError('Failed Signature');
+        toastError('Failed to get signature.');
         return;
       }
       try {

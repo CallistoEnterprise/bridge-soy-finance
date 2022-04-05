@@ -14,15 +14,11 @@ const method = {
   ]
 };
 
-const getEncodedData = async (
-  web3: any,
-  deadline: number,
-  params: [BigNumber, BigNumber, [string, string], string]
-) => {
+const getEncodedData = async (web3: any, params: [BigNumber, BigNumber, [string, string], string, BigNumber]) => {
   // const today = new Date();
   // const deadline = today.setHours(today.getHours() + 1);
-  const funParams = [...params, deadline];
-  const data = await web3.eth.abi.encodeFunctionCall(method, funParams);
+  // const funParams = [...params];
+  const data = await web3.eth.abi.encodeFunctionCall(method, params);
   return data;
 };
 
