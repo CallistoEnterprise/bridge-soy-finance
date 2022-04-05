@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -47,6 +47,13 @@ export default function PreviousClaim() {
     dispatch(setFromNetwork(option));
   };
 
+  useEffect(() => {
+    const changeNetwork = async () => {
+      await switchNetwork(networkOne);
+    };
+    changeNetwork();
+  }, [networkOne]);
+
   async function handleClaim() {
     if (hash) {
       setPending(true);
@@ -68,7 +75,7 @@ export default function PreviousClaim() {
           return;
         }
       } else {
-        if (signatures.length === 0) {
+        if (signatures.length < 3) {
           setPending(false);
           toast.warning('Please check your network connection and try again.');
           return;

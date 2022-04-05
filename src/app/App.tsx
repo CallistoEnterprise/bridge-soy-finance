@@ -7,7 +7,7 @@ import { ThemeProvider } from 'styled-components';
 // import 'react-toastify/dist/ReactToastify.css';
 // import 'react-toastify/dist/ReactToastify.min.css';
 import { ToastsProvider } from '~/app/contexts/ToastsContext';
-import HomeUpdater from '~/app/modules/home/updater';
+// import HomeUpdater from '~/app/modules/home/updater';
 import './app.i18n';
 import AppRouter from './AppRouter';
 import configureStore from './core/store';
@@ -32,7 +32,7 @@ export default function App() {
       <Provider store={configureStore}>
         <ToastsProvider>
           <ThemeProviderWrapper>
-            <HomeUpdater />
+            {/* <HomeUpdater /> */}
             <div className="app">
               <AppRouter />
             </div>

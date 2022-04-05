@@ -479,8 +479,8 @@ export const Networks = [
     chainId: '56',
     rpcs: [
       'https://bsc-dataseed.binance.org/',
-      'https://bsc-dataseed1.defibit.io/',
-      'https://bsc-dataseed1.ninicoin.io/'
+      'https://bsc-dataseed1.defibit.io/'
+      // 'https://bsc-dataseed1.ninicoin.io/'
     ],
     explorer: 'https://bscscan.com/'
   },

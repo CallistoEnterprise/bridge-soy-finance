@@ -25,7 +25,6 @@ export default function Network() {
   const dispatch = useDispatch();
   const [t] = useTranslation();
   const navigate = useNavigate();
-  // const [pendingBalance, setPendingBalance] = useState(false);
   const [networkOne, setNetworkOne] = useState(Networks[0]);
   const [networkTwo, setNetworkTwo] = useState<any>(null);
 
@@ -38,13 +37,18 @@ export default function Network() {
   }, [networkOne, networkTwo]);
 
   useEffect(() => {
+    const changeNetwork = async () => {
+      await switchNetwork(networkOne);
+    };
+    changeNetwork();
+  }, [networkOne]);
+
+  useEffect(() => {
     dispatch(setStartSwapping(false));
   }, [dispatch]);
 
   const onChangeNetworkOne = async (option: INetwork) => {
     setNetworkOne(option);
-    // setPendingBalance(true);
-    await switchNetwork(option);
     dispatch(setFromNetwork(option));
   };
 

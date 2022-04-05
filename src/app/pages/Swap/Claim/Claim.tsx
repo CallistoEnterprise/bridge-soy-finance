@@ -55,6 +55,8 @@ export default function Claim({ succeed, totalBlockCounts }: props) {
           setPending(false);
           navigate('/transfer');
           toastSuccess('Claimed successfully.');
+        } else {
+          setPending(false);
         }
       } catch (error) {
         setPending(false);
@@ -84,6 +86,8 @@ export default function Claim({ succeed, totalBlockCounts }: props) {
         setPending(false);
         navigate('/transfer');
         toastSuccess('Claimed successfully.');
+      } else {
+        setPending(false);
       }
     } catch (err) {
       toastError('Failed to get signature. Please try again.');

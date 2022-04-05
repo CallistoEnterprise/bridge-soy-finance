@@ -104,7 +104,6 @@ export const useGetTokenBalances = (fromNet: any) => {
   const RPC_URL = useRpcProvider(fromNet.rpcs);
   const dispatch = useDispatch();
   const [pending, setPending] = useState(true);
-
   useEffect(() => {
     const getBalance = async () => {
       setPending(true);
@@ -130,10 +129,10 @@ export const useGetTokenBalances = (fromNet: any) => {
         }
       });
     };
-    if (account && chainId) {
+    if (account && chainId && chainId === Number(fromNet.chainId)) {
       getBalance();
     }
-  }, [account, chainId, RPC_URL, fromNet.rpcs, fromNet.chainId, fromNet.symbol, dispatch]);
+  }, [account, chainId, RPC_URL, fromNet, dispatch]);
   return pending;
 };
 
