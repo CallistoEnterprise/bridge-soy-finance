@@ -147,13 +147,6 @@ const Swap = () => {
         new BigNumber(deadline + 15000)
       ]);
 
-      console.log(
-        buyBigAmount.toString(),
-        new BigNumber(maxAmountsIn).toString(),
-        [swapTokenAddrInCallisto, '0xF5AD6F6EDeC824C7fD54A66d241a227F6503aD3a'],
-        distinationAddress,
-        new BigNumber(deadline + 500).toString()
-      );
       try {
         const tx = await onAdvancedSwap(address, swapTokenAddr, bigAmount, toNetwork.chainId, byte_data, value);
         if (tx.hash) {
@@ -165,7 +158,6 @@ const Swap = () => {
         dispatch(setStartSwapping(false));
       }
     } catch (error) {
-      console.log(error);
       setPending(false);
       setSucced(false);
       dispatch(setStartSwapping(false));

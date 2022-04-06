@@ -16,7 +16,7 @@ export default function TokenSelection({ options, className, onChange }: props) 
       <RadioGroup containerStyle={classNames('tokenselection-container', className)} onChange={onChange}>
         {options.map((option) => (
           <Radio
-            key={option.logoURI}
+            key={`${option.address}-${option.network}`}
             value={option}
             render={({ isSelected }: any) => (
               <button
@@ -38,13 +38,12 @@ export default function TokenSelection({ options, className, onChange }: props) 
 }
 
 export const TokenSelection2 = ({ options, className, onChange }: props) => {
-  console.log(options);
   return (
     <div className="tokenselection">
       <RadioGroup containerStyle={classNames('tokenselection-container', className)} onChange={onChange}>
         {options.map((option) => (
           <Radio
-            key={option.logoURI}
+            key={`${option.address}-${option.network}`}
             value={option}
             render={({ isSelected }: any) => (
               <button

@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import BorderContainer from '~/app/components/common/BorderContainer';
 import CustomButton from '~/app/components/common/CustomButton';
 import Spinner from '~/app/components/common/Spinner';
@@ -11,6 +10,7 @@ import WalletInfo from '~/app/components/WalletInfo';
 import { INetwork } from '~/app/constants/interface';
 import { Networks } from '~/app/constants/strings';
 import useActiveWeb3React from '~/app/hooks/useActiveWeb3';
+import useToast from '~/app/hooks/useToast';
 import { useGetTokenBalances } from '~/app/hooks/wallet';
 import { setFromNetwork } from '~/app/modules/wallet/action';
 import { getBridgeContract, shortAddress } from '~/app/utils';
@@ -29,10 +29,11 @@ export default function PreviousClaim() {
   const [hash, setHash] = useState<string>('');
 
   const { fromNetwork, destinationAddress } = useSelector((state: any) => state.walletBridge);
-  const { library, chainId } = useActiveWeb3React();
+  const { library, chainId, account } = useActiveWeb3React();
   const [networkOne, setNetworkOne] = useState(Networks[0]);
 
-  const pendingBalance = useGetTokenBalances(networkOne);
+  const pendingBalance = useGetTokenBalances(Networks[0]);
+  const { toastError, toastWarning, toastInfo, toastSuccess } = useToast();
 
   const onPrevious = () => {
     navigate('/');
@@ -47,12 +48,12 @@ export default function PreviousClaim() {
     dispatch(setFromNetwork(option));
   };
 
-  useEffect(() => {
-    const changeNetwork = async () => {
-      await switchNetwork(networkOne);
-    };
-    changeNetwork();
-  }, [networkOne]);
+  // useEffect(() => {
+  //   const changeNetwork = async () => {
+  //     await switchNetwork(networkOne);
+  //   };
+  //   changeNetwork();
+  // }, [networkOne]);
 
   async function handleClaim() {
     if (hash) {
@@ -61,50 +62,69 @@ export default function PreviousClaim() {
 
     try {
       const { signatures, respJSON } = await getSignatures(hash, fromNetwork.chainId);
-
+      if (signatures.length < 3) {
+        setPending(false);
+        toastWarning(
+          'Warning!',
+          'Failed to get the signatures. Please check the network connection or select the correct network.'
+        );
+        return;
+      }
       if (respJSON.chainId !== chainId.toString()) {
         const toNetwork = Networks.find((item) => item.chainId === respJSON.chainId);
         try {
-          toast.info('Please change your network to claim this transaction');
+          toastInfo('Info!', 'Please change your network to claim this transaction');
           await switchNetwork(toNetwork);
           setPending(false);
           return;
         } catch (error) {
-          toast.warning('Please check your network connection and try again.');
+          toastWarning('Warning!', 'Please check your network connection and try again.');
           setPending(false);
           return;
         }
       } else {
-        if (signatures.length < 3) {
-          setPending(false);
-          toast.warning('Please check your network connection and try again.');
-          return;
-        }
-        const bridgeContract = await getBridgeContract(respJSON.bridge, library, destinationAddress);
-        const tx = await bridgeContract.claim(
-          respJSON.token,
-          hash,
-          respJSON.to,
-          respJSON.value,
-          fromNetwork.chainId,
-          signatures,
-          { value: 0 }
-        );
+        const dest = destinationAddress === '' ? account : destinationAddress;
+        const bridgeContract = await getBridgeContract(respJSON.bridge, library, dest);
+        const tx =
+          respJSON.data && respJSON.toContract
+            ? await bridgeContract.claimToContract(
+                respJSON.token,
+                hash,
+                respJSON.to,
+                respJSON.value,
+                fromNetwork.chainId,
+                respJSON.toContract,
+                respJSON.data,
+                signatures,
+                {
+                  value: 0
+                }
+              )
+            : await bridgeContract.claim(
+                respJSON.token,
+                hash,
+                respJSON.to,
+                respJSON.value,
+                fromNetwork.chainId,
+                signatures,
+                { value: 0 }
+              );
+
         const receipt = await tx.wait();
         if (receipt.status) {
           window.localStorage.removeItem('prevData');
           setPending(false);
           setHash('');
           navigate('/transfer');
-          toast.success('Claimed successfully.');
+          toastSuccess('Success!', 'Claimed successfully.');
         } else {
           setPending(false);
-          toast.error('Failed to claim. Please try again1.');
+          toastError('Error!', 'Failed to claim. Please try again1.');
         }
         setPending(false);
       }
     } catch (err) {
-      toast.error('Failed to claim. Please try again2.');
+      toastError('Error!', 'Failed to claim. Please try again.');
       setPending(false);
     }
   }
@@ -113,7 +133,7 @@ export default function PreviousClaim() {
     <div className="previousclaim container">
       <div className="previousclaim__content">
         <div>
-          <WalletInfo pending={pendingBalance} fromNetwork={networkOne} />
+          <WalletInfo pending={pendingBalance} fromNetwork={Networks[0]} />
           <CustomButton className="previous_btn mt-4" onClick={onPrevious}>
             <div>
               <img src={previousIcon} alt="previousIcon" className="me-2" />
@@ -137,7 +157,7 @@ export default function PreviousClaim() {
             autoFocus
           />
           <p className="mt-5">Destination wallet</p>
-          <h6>{shortAddress(destinationAddress, 21, 7)}</h6>
+          <h6>{shortAddress(destinationAddress === '' ? account : destinationAddress, 21, 7)}</h6>
           <hr />
           <button
             color="success"
