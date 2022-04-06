@@ -73,23 +73,12 @@ export const switchNetwork = async (curNet: any) => {
         params: [
           {
             chainId: `0x${chainId.toString(16)}`
-            // fallbackRpc: {
-            //   chainId: `0x${chainId.toString(16)}`,
-            //   chainName: `${curNet.name}`,
-            //   rpcUrl: curNet.rpcs[0],
-            //   nativeCurrency: {
-            //     name: `${curNet.name}`,
-            //     symbol: `${curNet.symbol}`,
-            //     decimals: parseInt(curNet.decimals)
-            //   },
-            //   blockExplorerUrl: `${curNet.explorer}`
-            // }
           }
         ]
       });
       return true;
     } catch (error: any) {
-      if (error.code === 4902) {
+      if (error.code === 4902 || error.code === -32603) {
         try {
           await provider.request({
             method: 'wallet_addEthereumChain',
@@ -97,18 +86,18 @@ export const switchNetwork = async (curNet: any) => {
               {
                 chainId: `0x${chainId.toString(16)}`,
                 chainName: `${curNet.name}`,
-                rpcUrls: curNet.rpcs[0],
+                rpcUrls: curNet.rpcs,
                 nativeCurrency: {
                   name: `${curNet.name}`,
                   symbol: `${curNet.symbol}`,
                   decimals: parseInt(curNet.decimals)
                 },
-                blockExplorerUrls: `${curNet.explorer}`
+                blockExplorerUrls: [`${curNet.explorer}`]
               }
             ]
           });
         } catch (error: any) {
-          alert(error.message);
+          console.log(error.message);
         }
       }
       return false;

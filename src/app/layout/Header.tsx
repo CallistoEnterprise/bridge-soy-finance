@@ -24,6 +24,10 @@ export default function Header() {
     }
   };
 
+  const handleLaunchFinance = () => {
+    window.open('https://app.soy.finance', '_blank');
+  };
+
   return (
     <Navbar className="header" expand="lg">
       <Navbar.Brand href="/">
@@ -31,8 +35,10 @@ export default function Header() {
       </Navbar.Brand>
       <Navbar.Toggle />
       <Navbar.Collapse className="header__right justify-content-end">
-        <p> {t('SOY Bridge Security Model')}</p>
-        <CustomButton>{t('Launch SOY Finance')}</CustomButton>
+        <a href="https://soy.finance.bridge/security-modal" target="_blank" rel="noreferrer">
+          {t('SOY Bridge Security Model')}
+        </a>
+        <CustomButton onClick={handleLaunchFinance}>{t('Launch SOY Finance')}</CustomButton>
         <NavDropdown
           className="header__dropdownToggle"
           title={getCurrentLanguage()}

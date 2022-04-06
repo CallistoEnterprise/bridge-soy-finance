@@ -4,6 +4,7 @@ export interface INetwork {
   devNet: string;
   img: string;
   chainId: string;
+  decimals: string;
   rpcs: Array<string>;
   explorer: string;
 }

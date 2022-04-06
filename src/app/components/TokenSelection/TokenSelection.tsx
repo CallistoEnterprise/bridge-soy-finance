@@ -14,9 +14,9 @@ export default function TokenSelection({ options, className, onChange }: props) 
   return (
     <div className="tokenselection">
       <RadioGroup containerStyle={classNames('tokenselection-container', className)} onChange={onChange}>
-        {options.map((option) => (
+        {options.map((option, index) => (
           <Radio
-            key={`${option.address}-${option.network}`}
+            key={`${option.address}-${index}`}
             value={option}
             render={({ isSelected }: any) => (
               <button
@@ -40,21 +40,23 @@ export default function TokenSelection({ options, className, onChange }: props) 
 export const TokenSelection2 = ({ options, className, onChange }: props) => {
   return (
     <div className="tokenselection">
-      <RadioGroup containerStyle={classNames('tokenselection-container', className)} onChange={onChange}>
-        {options.map((option) => (
+      <RadioGroup containerStyle={classNames('tokenselection-container', className)}>
+        {options.map((option, index) => (
           <Radio
-            key={`${option.address}-${option.network}`}
+            key={`${option.address}-${index}`}
             value={option}
             render={({ isSelected }: any) => (
               <button
                 className={classNames('tokenselection-option', {
                   'tokenselection-selected': isSelected
                 })}
+                onClick={() => onChange(option)}
               >
                 <div>
                   <img className="tokenselection-logo" src={getTokenLogoLink(option.address)} alt="icon" />
                   {option.symbol}
                 </div>
+                {`(${option.network})`}
               </button>
             )}
           />

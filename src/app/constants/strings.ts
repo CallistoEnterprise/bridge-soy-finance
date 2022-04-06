@@ -468,6 +468,7 @@ export const Networks = [
     devNet: 'mainnet',
     img: '/images/clo.svg',
     chainId: '820',
+    decimals: '18',
     rpcs: ['https://clo-geth.0xinfra.com/'],
     explorer: 'https://explorer.callisto.network/'
   },
@@ -477,6 +478,7 @@ export const Networks = [
     devNet: 'mainnet',
     img: '/images/bnb.svg',
     chainId: '56',
+    decimals: '18',
     rpcs: [
       'https://bsc-dataseed.binance.org/',
       'https://bsc-dataseed1.defibit.io/'
@@ -490,6 +492,7 @@ export const Networks = [
     devNet: 'mainnet',
     img: '/images/eth.svg',
     chainId: '1',
+    decimals: '18',
     rpcs: ['https://mainnet.infura.io/v3/d819f1add1a34a60adab4df578e0e741'],
     explorer: 'https://etherscan.io/'
   },
@@ -499,6 +502,7 @@ export const Networks = [
     devNet: 'mainnet',
     img: '/images/etc.svg',
     chainId: '61',
+    decimals: '18',
     rpcs: ['https://www.ethercluster.com/etc'],
     explorer: 'https://blockscout.com/etc/mainnet/'
   },
@@ -508,8 +512,9 @@ export const Networks = [
     devNet: 'mainnet',
     img: '/images/btt.png',
     chainId: '199',
+    decimals: '18',
     rpcs: ['https://rpc.bt.io/'],
-    explorer: 'https://scan.bt.io/#/'
+    explorer: 'https://scan.bt.io/'
   }
 ];
 

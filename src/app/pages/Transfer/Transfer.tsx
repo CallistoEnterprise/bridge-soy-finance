@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useMediaQuery } from 'react-responsive';
 import { useNavigate } from 'react-router-dom';
-// import { toast } from 'react-toastify';
 import CustomButton from '~/app/components/common/CustomButton';
 import { TokenSelection2 } from '~/app/components/TokenSelection/TokenSelection';
 import { addTokenList } from '~/app/constants/strings';
@@ -21,7 +20,6 @@ export default function Transfer() {
   const [t] = useTranslation();
   const navigate = useNavigate();
   const { account, chainId } = useActiveWeb3React();
-  // const [networkOne, setNetworkOne] = useState(null);
   const { toastError } = useToast();
 
   useEffect(() => {
@@ -31,12 +29,11 @@ export default function Transfer() {
   }, [account, navigate]);
 
   const onSelectToken = (option: any) => {
-    // setNetworkOne(option.value);
     if (option.chainId !== chainId) {
       toastError(`Please switch network to ${option.network}`);
       return;
     }
-    registerToken(option.address, option.symbol, 18);
+    registerToken(option.address, option.symbol, option.decimals);
   };
 
   const onPrevious = () => {
@@ -52,9 +49,6 @@ export default function Transfer() {
             {t('Previous')}
           </div>
         </CustomButton>
-        {/* <Default>
-          <ClaimPet />
-        </Default> */}
 
         <div className="transfer__content__steps">
           <h4>{t('Transfert complete!')}</h4>
@@ -68,7 +62,6 @@ export default function Transfer() {
             <p>Stay zen and click here!</p>
             <button type="submit" color="success" className="transfer__mobile__submit">
               {t('SWAP')}
-              {/* {isPending(state) ? 'Wait...' : 'Submit'} */}
             </button>
           </div>
         </Mobile>

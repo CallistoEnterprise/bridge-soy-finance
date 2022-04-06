@@ -48,13 +48,13 @@ export default function Network() {
   }, [dispatch]);
 
   const onChangeNetworkOne = async (option: INetwork) => {
-    setNetworkOne(option);
     dispatch(setFromNetwork(option));
+    setNetworkOne(option);
   };
 
   const onChangeNetworkTwo = (option: INetwork) => {
-    setNetworkTwo(option);
     dispatch(setToNetwork(option));
+    setNetworkTwo(option);
   };
 
   const onPrevious = () => {

@@ -94,10 +94,10 @@ export default function WalletInfo({ pending, fromNetwork }: walletInfoProps) {
               <Spinner className="mt-5" size="sm" />
             ) : (
               <div className="tokens_container">
-                {tokenList.map((item) => {
+                {tokenList.map((item, index) => {
                   if (balance[`${item.symbol}`] === undefined) return null;
                   return (
-                    <li className="tokenitem" key={item.logoURI}>
+                    <li className="tokenitem" key={index}>
                       <div className="d-flex align-items-center">
                         <img className="me-2 token-icon" src={item.logoURI} alt="icon" />
                         <p className="ms-2">{`${balance[`${item.symbol}`]}`}</p>

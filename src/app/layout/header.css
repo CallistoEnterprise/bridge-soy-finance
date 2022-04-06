@@ -22,5 +22,14 @@
       padding-top: rem(20px);
       padding-bottom: rem(20px);
     }
+    a {
+      font-size: calc(10px + 0.7vmin);
+      font-family: 'Lato-Bold';
+      color: value($color-basic, darker);
+      margin-right: rem(20px);
+      &:hover {
+        color: #000000;
+      }
+    }
   }
 }
