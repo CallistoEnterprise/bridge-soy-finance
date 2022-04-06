@@ -1,15 +1,16 @@
 import classNames from 'classnames';
-import React, { useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
+import Facebook from '~/app/components/Svg/Icons/Facebook';
+import Medium from '~/app/components/Svg/Icons/Medium';
+import Pulse from '~/app/components/Svg/Icons/Pulse';
+import Redit from '~/app/components/Svg/Icons/Redit';
+import Telegram from '~/app/components/Svg/Icons/Telegram';
+import Twitter from '~/app/components/Svg/Icons/Twitter';
 import useActiveWeb3React from '~/app/hooks/useActiveWeb3React';
-import arrowDown from '~/assets/images/arrowdown.svg';
 import blockIcon from '~/assets/images/block.png';
-import facebook from '~/assets/images/facebook.svg';
-import medium from '~/assets/images/medium.svg';
-import telegram from '~/assets/images/telegram.svg';
-import twitter from '~/assets/images/twitter.svg';
 import whiteLogo from '~/assets/images/white-logo.svg';
 import { blockConfirmations } from '../constants/config';
 import './footer.css';
@@ -27,9 +28,9 @@ const Default = ({ children }: any) => {
 export default function Footer() {
   const { chainId } = useActiveWeb3React();
   const [t] = useTranslation();
-  const [soyFinance, setSoyFinance] = useState(false);
-  const [documentList, setDocumentList] = useState(false);
-  const [resourceslist, setResourcesList] = useState(false);
+  // const [soyFinance, setSoyFinance] = useState(true);
+  // const [documentList, setDocumentList] = useState(true);
+  // const [resourceslist, setResourcesList] = useState(true);
 
   const { start_swapping, confirmedBlockCounts } = useSelector((state: any) => state.walletBridge);
 
@@ -50,7 +51,7 @@ export default function Footer() {
           <img src={whiteLogo} alt="whitelogo" />
           <Default>
             <>
-              <p className="footer__link">{t('All rights reserved by')}</p>
+              <p className="footer__text">{t('All rights reserved by')}</p>
               <p className="footer__bold">{t('Callisto Enterprise')}</p>
             </>
           </Default>
@@ -60,18 +61,18 @@ export default function Footer() {
         <div className="footer__center">
           <div
             className="footer__center__dropdown"
-            onClick={() => {
-              setSoyFinance(!soyFinance);
-              setResourcesList(false);
-              setDocumentList(false);
-            }}
+            // onClick={() => {
+            //   setSoyFinance(!soyFinance);
+            //   setResourcesList(false);
+            //   setDocumentList(false);
+            // }}
           >
             <p className="footer__bold">{t('Soy Finance')}</p>
-            <Mobile>
+            {/* <Mobile>
               <img src={arrowDown} alt="arrowDown" />
-            </Mobile>
+            </Mobile> */}
           </div>
-          <div className={classNames('footer__column', { footer__center__linklist: !soyFinance })}>
+          <div className={classNames('footer__column', { footer__center__linklist: false })}>
             <a
               className="footer__link"
               href="https://soy-finance.gitbook.io/soy-finance/miscellaneous/media-kit"
@@ -89,18 +90,18 @@ export default function Footer() {
         <div className="footer__center">
           <div
             className="footer__center__dropdown"
-            onClick={() => {
-              setResourcesList(!resourceslist);
-              setDocumentList(false);
-              setSoyFinance(false);
-            }}
+            // onClick={() => {
+            //   setResourcesList(!resourceslist);
+            //   setDocumentList(false);
+            //   setSoyFinance(false);
+            // }}
           >
-            <p className="footer__bold">{t('Ressources')}</p>
-            <Mobile>
+            <p className="footer__bold">{t('Resources')}</p>
+            {/* <Mobile>
               <img src={arrowDown} alt="arrowDown" />
-            </Mobile>
+            </Mobile> */}
           </div>
-          <div className={classNames('footer__column', { footer__center__linklist: !resourceslist })}>
+          <div className={classNames('footer__column', { footer__center__linklist: false })}>
             <a className="footer__link" href="https://callistoenterprise.com/team" target="_blank" rel="noreferrer">
               {t('Team')}
             </a>
@@ -119,18 +120,18 @@ export default function Footer() {
         <div className="footer__center">
           <div
             className="footer__center__dropdown"
-            onClick={() => {
-              setDocumentList(!documentList);
-              setResourcesList(false);
-              setSoyFinance(false);
-            }}
+            // onClick={() => {
+            //   setDocumentList(!documentList);
+            //   setResourcesList(false);
+            //   setSoyFinance(false);
+            // }}
           >
             <p className="footer__bold">{t('Documentation')}</p>
-            <Mobile>
+            {/* <Mobile>
               <img src={arrowDown} alt="arrowDown" />
-            </Mobile>
+            </Mobile> */}
           </div>
-          <div className={classNames('footer__column', { footer__center__linklist: !documentList })}>
+          <div className={classNames('footer__column', { footer__center__linklist: false })}>
             <a
               className="footer__link"
               href="https://callisto.network/soy-finance-soy-security-audit/"
@@ -163,19 +164,25 @@ export default function Footer() {
         {/* </div> */}
 
         <div className="footer__socialmedia u-align-center">
-          <p className="footer__bold">{t('Social Media')}</p>
+          {/* <p className="footer__bold">{t('Social Media')}</p> */}
           <div className="mt-3">
             <a href="https://t.me/Soy_Finance" target="_blank" rel="noreferrer">
-              <img src={telegram} alt="telegram" />
+              <Telegram />
             </a>
             <a href="https://twitter.com/Soy_Finance" target="_blank" rel="noreferrer">
-              <img src={twitter} alt="twitter" />
+              <Twitter />
+            </a>
+            <a href="https://www.reddit.com/Soy.Finance" target="_blank" rel="noreferrer">
+              <Redit />
             </a>
             <a href="https://www.facebook.com/Soy.Finance" target="_blank" rel="noreferrer">
-              <img src={facebook} alt="facebook" />
+              <Facebook />
             </a>
             <a href="https://soy-finance.gitbook.io/" target="_blank" rel="noreferrer">
-              <img src={medium} alt="medium" />
+              <Medium />
+            </a>
+            <a href="https://defillama.com/protocol/soy-finance" target="_blank" rel="noreferrer">
+              <Pulse width="38px" height="38px" />
             </a>
           </div>
         </div>

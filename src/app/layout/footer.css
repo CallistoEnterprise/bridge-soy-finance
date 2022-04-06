@@ -89,23 +89,32 @@
   }
   &__link {
     cursor: pointer;
-    margin-top: rem(20px);
+    margin-top: rem(15x);
     font-family: 'Lato-Light';
-    font-size: value($font-size, m);
+    font-size: 16px;
     color: value($color-basic, brightest);
-    letter-spacing: 0.5px;
+    font-weight: 500;
     &:hover {
-      text-decoration: underline;
+      text-decoration: none;
+      color: rgb(128, 128, 128);
     }
+  }
+  &__text {
+    margin-top: rem(15x);
+    font-family: 'Lato-Light';
+    font-size: 16px;
+    color: value($color-basic, brightest);
+    font-weight: 500;
   }
   &__bold {
     margin-top: rem(10px);
     font-family: 'Lato-Bold';
     color: value($color-basic, brightest);
     letter-spacing: 0.8px;
+    font-size: 16px;
     @media only screen and (max-width: $sm) {
       display: block;
-      margin-top: rem(30px);
+      margin-top: rem(50px);
     }
   }
   &__column {
@@ -136,11 +145,17 @@
       img {
         margin-bottom: rem(5px);
       }
+      @media only screen and (max-width: $sm) {
+        justify-content: center;
+      }
     }
   }
   &__socialmedia {
     @media only screen and (max-width: $sm) {
       margin-top: rem(50px);
+    }
+    a {
+      margin: 0 2px;
     }
     img {
       margin-left: rem(5px);
