@@ -86,3 +86,5 @@ export const ONE_HUNDRED_PERCENT = new Percent('1');
 
 // SDN OFAC addresses
 export const BLOCKED_ADDRESSES: string[] = [];
+
+export const DEFAULT_GAS_LIMIT = 3000000;
