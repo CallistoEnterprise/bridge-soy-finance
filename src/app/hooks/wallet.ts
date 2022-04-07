@@ -114,14 +114,14 @@ export const useGetTokenBalances = (fromNet: any) => {
           const amount = await RPC_URL.getBalance(account);
           // const bigAmt = new BigNumber(amount.toString());
           const bn = new BigNumber(amount + 'e-' + 18);
-          temp[`${fromNet.symbol}`] = bn.toFixed(2);
+          temp[`${fromNet.symbol}`] = bn.toFixed(5);
         } else {
           const tokenContract = getErc20Contract(curAsset.address[`${fromNet.chainId}`], RPC_URL);
           const balance: BigNumber = await tokenContract.balanceOf(account, { value: 0 });
           const strBalance = balance.toString();
           const decimal = curAsset.decimals[`${fromNet.chainId}`];
           const decimalBalance = parseInt(((parseInt(strBalance.toString()) / 10 ** decimal) * 1000000).toString());
-          temp[`${curAsset.symbol}`] = (decimalBalance / 1000000).toFixed(2);
+          temp[`${curAsset.symbol}`] = (decimalBalance / 1000000).toFixed(5);
         }
         if (Object.keys(temp).length === tokens.length) {
           setPending(false);

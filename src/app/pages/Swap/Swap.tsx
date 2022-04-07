@@ -53,7 +53,7 @@ const Swap = () => {
   const [claimAddress, setClaimAddress] = useState('');
   const { account, chainId } = useActiveWeb3React();
   const { toastError, toastWarning } = useToast();
-
+  const tokenBalance = balance[`${selectedToken.symbol}`];
   const disable = fromNetwork?.symbol === 'CLO' || toNetwork?.symbol !== 'CLO';
 
   const onPrevious = () => {
@@ -88,9 +88,16 @@ const Swap = () => {
   }, [dispatch, txBlockNumber, pending, chainId, toNetwork, web3]);
 
   const onSubmit = (values: any) => {
-    const tokenBalance = balance[`${selectedToken.symbol}`];
-    if (Number(values.swap_amount) > Number(tokenBalance)) {
+    let neededTokenBalance = Number(tokenBalance);
+    if (selectedToken.symbol === fromNetwork.symbol) {
+      neededTokenBalance += 0.005;
+    }
+    if (Number(values.swap_amount) > neededTokenBalance) {
       toastWarning('WARNING!', 'Inssuficient token balance!');
+      return;
+    }
+    if (Number(balance[`${fromNetwork.symbol}`]) < 0.005) {
+      toastWarning('WARNING!', `Inssuficient ${fromNetwork.symbol} balance!`);
       return;
     }
     if (canBuyCLO) {
@@ -182,7 +189,13 @@ const Swap = () => {
         value = bigAmount.toString();
       } else {
         if (!allowed) {
-          await onApprove();
+          try {
+            await onApprove();
+          } catch (err) {
+            setPending(false);
+            setSucced(false);
+            return;
+          }
         }
       }
 
@@ -242,6 +255,7 @@ const Swap = () => {
                       canBuyCLO={canBuyCLO}
                       initialData={{ swap_amount: '0', buy_amount: '0', destination_wallet: account }}
                       setBuyCLO={() => setCanBuyCLO(!canBuyCLO)}
+                      tokenBalance={tokenBalance}
                     />
                   </div>
                 </BorderContainer>

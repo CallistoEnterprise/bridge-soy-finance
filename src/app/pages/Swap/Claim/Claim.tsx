@@ -102,7 +102,7 @@ export default function Claim({ succeed, totalBlockCounts }: props) {
           <img src={claimAnimal} className="claim__content__animal" alt="claimAnimal" />
         </div>
         <div className="claim__content--text">
-          <h4>{succeed ? t('Transfert done!') : t('Transfert in progress')}</h4>
+          <h4>{succeed ? t('Transfer done!') : t('Transfer in progress')}</h4>
           <p>
             {t(
               `Please wait for ${totalBlockCounts} ${

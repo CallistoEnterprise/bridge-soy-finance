@@ -51,7 +51,7 @@ export default function Transfer() {
         </CustomButton>
 
         <div className="transfer__content__steps">
-          <h4>{t('Transfert complete!')}</h4>
+          <h4>{t('Transfer complete!')}</h4>
           <h6 className="mt-5">{t('You don’t see your tokens?')}</h6>
           <h6 className="mt-3">{t('Just add your asset to your wallet by clicking on its icon!')}</h6>
           <TokenSelection2 options={addTokenList} onChange={onSelectToken} className="transfer__selection" />

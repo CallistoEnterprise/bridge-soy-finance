@@ -22,6 +22,7 @@ type props = {
   submit?: (data: any) => void;
   state?: any;
   disable?: boolean;
+  tokenBalance?: number;
   initialData?: any;
   pending: boolean;
   canBuyCLO: boolean;
@@ -44,7 +45,7 @@ const registerSchema = Yup.object().shape({
 
 const inputRegex = RegExp(`^\\d*(?:\\\\[.])?\\d*$`);
 
-export default function SwapForm({ submit, initialData, pending, canBuyCLO, setBuyCLO, disable }: props) {
+export default function SwapForm({ submit, initialData, pending, canBuyCLO, setBuyCLO, disable, tokenBalance }: props) {
   const [t] = useTranslation();
   // const dispatch = useDispatch();
 
@@ -98,6 +99,10 @@ export default function SwapForm({ submit, initialData, pending, canBuyCLO, setB
     }
   };
 
+  const handleMaxInput = () => {
+    setSwapAmount(tokenBalance.toString());
+  };
+
   return (
     <div className="swapform">
       <Formik
@@ -119,7 +124,12 @@ export default function SwapForm({ submit, initialData, pending, canBuyCLO, setB
                 <div className="col">
                   <div className="row mt-3 swapform__row">
                     <div className="col">
-                      <label htmlFor="swap_amount">{t('Amount to swap')} </label>
+                      <div className="justify-content-between swapform__label">
+                        <label htmlFor="swap_amount">{t('Amount to swap')} </label>
+                        <label className="swapform__max-text" onClick={handleMaxInput}>
+                          {t('MAX')}
+                        </label>
+                      </div>
                       <Field
                         name="swap_amount"
                         type="text"

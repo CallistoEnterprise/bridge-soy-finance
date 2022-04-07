@@ -58,6 +58,16 @@
   &__row {
     padding: rem(0px) rem(44px);
   }
+  &__label {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__max-text {
+    color: #7ea224 !important;
+    font-weight: bold !important;
+  }
 }
 .w-100 {
   width: 100%;
