@@ -5,7 +5,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useTranslation } from 'react-i18next';
 import { changeCurrentLanguage, getCurrentLanguage, Language } from '~/app/app.i18n';
 import CustomButton from '~/app/components/common/CustomButton';
-import logo from '~/assets/images/logo.svg';
+import logo from '~/assets/images/newLogo.png';
 import './header.css';
 
 export default function Header() {
@@ -31,7 +31,7 @@ export default function Header() {
   return (
     <Navbar className="header" expand="lg">
       <Navbar.Brand href="/">
-        <img src={logo} alt="logo" />
+        <img src={logo} className="header__logo" alt="logo" />
       </Navbar.Brand>
       <Navbar.Toggle />
       <Navbar.Collapse className="header__right justify-content-end">
