@@ -71,6 +71,11 @@
     background-color: #7ea224 !important;
     color: value($color-basic, brightest);
     font-weight: bold !important;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.8;
+      color: #000000;
+    }
   }
 }
 .w-100 {

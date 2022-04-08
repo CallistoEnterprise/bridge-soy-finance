@@ -55,8 +55,6 @@ export default function Home() {
   };
 
   const onClickMetamask = async (connectorId: ConnectorNames) => {
-    setPage('network');
-
     login(connectorId, Networks[0]);
     const network = Networks[0];
     dispatch(setFromNetwork(network));
@@ -65,6 +63,7 @@ export default function Home() {
     } else {
       await setupNetwork(network);
     }
+    setPage('network');
   };
 
   return (
@@ -95,7 +94,7 @@ export default function Home() {
             </BorderContainer>
           </div>
           <div className="mt-4">
-            <BorderContainer className="home__wallets__block" onClick={onClaim}>
+            <BorderContainer className="home__wallets__block" onClick={() => onClickMetamask(ConnectorNames.Injected)}>
               <div>
                 <img src={trustIcon} alt="trustIcon" />
                 <p className="home__wallets__block--more">trust wallet</p>

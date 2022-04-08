@@ -126,9 +126,9 @@ export default function SwapForm({ submit, initialData, pending, canBuyCLO, setB
                     <div className="col">
                       <div className="justify-content-between swapform__label">
                         <label htmlFor="swap_amount">{t('Amount to swap')} </label>
-                        <button className="swapform__max-button" onClick={handleMaxInput}>
+                        <div className="swapform__max-button" onClick={handleMaxInput}>
                           {t('MAX')}
-                        </button>
+                        </div>
                       </div>
                       <Field
                         name="swap_amount"

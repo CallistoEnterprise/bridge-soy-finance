@@ -11,7 +11,7 @@ import {
 import { useCallback } from 'react';
 import useToast from '~/app/hooks/useToast';
 import { setupNetwork } from '~/app/utils/wallet';
-import { connectorsByName } from '~/app/utils/web3React';
+import { connectorsByName, getConnectorsByName } from '~/app/utils/web3React';
 
 const useAuth = () => {
   const { activate, deactivate } = useWeb3React();
@@ -19,7 +19,8 @@ const useAuth = () => {
 
   const login = useCallback(
     (connectorID: ConnectorNames, curNet) => {
-      const connector = connectorsByName[connectorID];
+      const connectorsByName1 = getConnectorsByName(curNet);
+      const connector = connectorsByName1[connectorID];
       if (connector) {
         activate(connector, async (error: Error) => {
           if (error instanceof UnsupportedChainIdError) {

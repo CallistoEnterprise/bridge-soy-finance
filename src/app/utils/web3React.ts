@@ -7,7 +7,15 @@ import getNodeUrl from './getRpcUrl';
 
 const POLLING_INTERVAL = 12000;
 const rpcUrl = getNodeUrl();
-const chainId = parseInt(process.env.REACT_APP_CHAIN_ID, 10);
+const chainId = process.env.REACT_APP_CHAIN_ID;
+
+// const rpcUrls = {
+//   '820': rpcUrl,
+//   '1': ['https://mainnet.infura.io/v3/d819f1add1a34a60adab4df578e0e741'],
+//   '56': ['https://bsc-dataseed.binance.org/', 'https://bsc-dataseed1.defibit.io/'],
+//   '61': ['https://www.ethercluster.com/etc'],
+//   '199': ['https://rpc.bt.io/']
+// };
 
 const injected = new InjectedConnector({ supportedChainIds: [1, 4, 56, 61, 820, 20729, 97, 199] });
 
@@ -31,4 +39,18 @@ export const getLibrary = (provider: any): ethers.providers.Web3Provider => {
   const library = new ethers.providers.Web3Provider(provider);
   library.pollingInterval = POLLING_INTERVAL;
   return library;
+};
+
+export const getConnectorsByName = (curNet: any): any => {
+  const rpc = curNet.rpc;
+  const walletconnect1 = new WalletConnectConnector({
+    rpc: { [curNet.chainId]: rpc },
+    qrcode: true
+  });
+  const connectorsByName1: { [connectorName in ConnectorNames]: any } = {
+    [ConnectorNames.Injected]: injected,
+    [ConnectorNames.WalletConnect]: walletconnect1,
+    [ConnectorNames.BSC]: bscConnector
+  };
+  return connectorsByName1;
 };
