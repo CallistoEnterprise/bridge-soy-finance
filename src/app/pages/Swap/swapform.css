@@ -64,8 +64,12 @@
     align-items: center;
     justify-content: space-between;
   }
-  &__max-text {
-    color: #7ea224 !important;
+  &__max-button {
+    border: none;
+    padding: 2px 10px;
+    border-radius: 5px;
+    background-color: #7ea224 !important;
+    color: value($color-basic, brightest);
     font-weight: bold !important;
   }
 }

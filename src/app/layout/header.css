@@ -33,9 +33,9 @@
     }
   }
   &__logo {
-    width: 120px;
+    width: 100px;
     @media only screen and (max-width: $sm) {
-      width: 100px;
+      width: 80px;
     }
   }
 }
