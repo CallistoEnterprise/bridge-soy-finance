@@ -17,7 +17,6 @@ import { getBridgeContract, shortAddress } from '~/app/utils';
 import getSignatures from '~/app/utils/getSignatures';
 import { switchNetwork } from '~/app/utils/wallet';
 import previousIcon from '~/assets/images/previous.svg';
-import { DEFAULT_GAS_LIMIT } from '../../constants';
 import './previousclaim.css';
 
 export default function PreviousClaim() {
@@ -98,8 +97,8 @@ export default function PreviousClaim() {
                 respJSON.data,
                 signatures,
                 {
-                  value: 0,
-                  gasLimit: DEFAULT_GAS_LIMIT
+                  value: 0
+                  // gasLimit: DEFAULT_GAS_LIMIT
                 }
               )
             : await bridgeContract.claim(
@@ -109,7 +108,7 @@ export default function PreviousClaim() {
                 respJSON.value,
                 fromNetwork.chainId,
                 signatures,
-                { value: 0, gasLimit: DEFAULT_GAS_LIMIT }
+                { value: 0 }
               );
 
         const receipt = await tx.wait();

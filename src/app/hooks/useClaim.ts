@@ -1,5 +1,4 @@
 import { useCallback } from 'react';
-import { DEFAULT_GAS_LIMIT } from '../constants';
 import { getBridgeContract } from '../utils';
 import useActiveWeb3React from './useActiveWeb3';
 
@@ -10,8 +9,8 @@ const useClaim = () => {
     async (respJson: any, txHash: string, fromChainId: number, sig: string) => {
       const bridgeContract = await getBridgeContract(respJson.bridge, library, account);
       const tx = await bridgeContract.claim(respJson.token, txHash, respJson.to, respJson.value, fromChainId, sig, {
-        value: 0,
-        gasLimit: DEFAULT_GAS_LIMIT
+        value: 0
+        // gasLimit: DEFAULT_GAS_LIMIT
       });
       const receipt = tx.wait();
       return receipt;
@@ -32,8 +31,8 @@ const useClaim = () => {
         respJson.data,
         sig,
         {
-          value: 0,
-          gasLimit: DEFAULT_GAS_LIMIT
+          value: 0
+          // gasLimit: DEFAULT_GAS_LIMIT
         }
       );
       const receipt = tx.wait();
