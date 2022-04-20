@@ -96,11 +96,13 @@ export default function WalletInfo({ pending, fromNetwork }: walletInfoProps) {
               <div className="tokens_container">
                 {tokenList.map((item, index) => {
                   if (balance[`${item.symbol}`] === undefined) return null;
+                  const bb = Math.floor(balance[`${item.symbol}`] * 100000);
+
                   return (
                     <li className="tokenitem" key={index}>
                       <div className="d-flex align-items-center">
                         <img className="me-2 token-icon" src={item.logoURI} alt="icon" />
-                        <p className="ms-2">{`${balance[`${item.symbol}`]}`}</p>
+                        <p className="ms-2">{`${bb / 100000}`}</p>
                         <button className="walletinfo__addtoken--button" onClick={() => handleAddToken(item)}>
                           <img className="me-2 token-icon" src={metamaskIcon} alt="icon" />
                         </button>

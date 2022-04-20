@@ -9,6 +9,7 @@ import WETH_ABI from '~/app/constants/abis/weth.json';
 import defaultTokens from '~/app/constants/tokenLists/tokenLists2.json';
 import { setBalance } from '~/app/modules/wallet/action';
 import { getContract } from '~/app/utils';
+import { getBalanceAmount } from '~/app/utils/decimal';
 import useActiveWeb3React from './useActiveWeb3';
 
 // returns null on errors
@@ -104,11 +105,13 @@ export const useGetTokenBalances = (fromNet: any) => {
   const RPC_URL = useRpcProvider(fromNet.rpcs);
   const dispatch = useDispatch();
   const [pending, setPending] = useState(true);
+
   useEffect(() => {
     const getBalance = async () => {
       setPending(true);
       const tokens = defaultTokens.tokens.filter((t: any) => t.address[`${fromNet.chainId}`] !== '');
-      const temp: { [symbol: string]: string } = {};
+      const temp: { [symbol: string]: string | number } = {};
+
       tokens.forEach(async (curAsset: any, index: number) => {
         if (fromNet.symbol === curAsset.symbol) {
           const amount = await RPC_URL.getBalance(account);
@@ -118,10 +121,10 @@ export const useGetTokenBalances = (fromNet: any) => {
         } else {
           const tokenContract = getErc20Contract(curAsset.address[`${fromNet.chainId}`], RPC_URL);
           const balance: BigNumber = await tokenContract.balanceOf(account, { value: 0 });
-          const strBalance = balance.toString();
+          // const strBalance = balance.toString();
           const decimal = curAsset.decimals[`${fromNet.chainId}`];
-          const decimalBalance = parseInt(((parseInt(strBalance.toString()) / 10 ** decimal) * 1000000).toString());
-          temp[`${curAsset.symbol}`] = (decimalBalance / 1000000).toFixed(5);
+          const decimalBalance = getBalanceAmount(balance, decimal); // parseInt(((parseInt(strBalance.toString()) / 10 ** decimal) * 1000000).toString());
+          temp[`${curAsset.symbol}`] = decimalBalance.toNumber();
         }
         if (Object.keys(temp).length === tokens.length) {
           setPending(false);

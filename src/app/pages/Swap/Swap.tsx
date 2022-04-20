@@ -92,6 +92,7 @@ const Swap = () => {
     if (selectedToken.symbol === fromNetwork.symbol) {
       neededTokenBalance += 0.005;
     }
+
     if (Number(values.swap_amount) > neededTokenBalance) {
       toastWarning('WARNING!', 'Inssuficient token balance!');
       return;
