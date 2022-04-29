@@ -3,8 +3,10 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import CustomButton from '~/app/components/common/CustomButton';
 import Spinner from '~/app/components/common/Spinner';
+import { faucetLink } from '~/app/constants/endpoints';
 import useClaim from '~/app/hooks/useClaim';
 import useToast from '~/app/hooks/useToast';
+import { useGetCLOBalance } from '~/app/hooks/wallet';
 import useGetWalletState from '~/app/modules/wallet/hooks';
 import getSignatures from '~/app/utils/getSignatures';
 import claimAnimal from '~/assets/images/animal.gif';
@@ -23,8 +25,9 @@ export default function Claim({ succeed, totalBlockCounts }: props) {
   const navigate = useNavigate();
 
   const [pending, setPending] = useState(false);
+  const cloBalance = useGetCLOBalance();
 
-  const { hash, fromNetwork, swapType } = useGetWalletState();
+  const { hash, fromNetwork, swapType, toNetwork } = useGetWalletState();
   const { onSimpleClaim, onAdvancedClaim } = useClaim();
   const { toastError, toastSuccess } = useToast();
 
@@ -95,6 +98,10 @@ export default function Claim({ succeed, totalBlockCounts }: props) {
     }
   }
 
+  const handleGetFreeCLO = () => {
+    window.open(faucetLink, '_blank');
+  };
+
   return (
     <div className="claim container">
       <div className="claim__content">
@@ -111,7 +118,11 @@ export default function Claim({ succeed, totalBlockCounts }: props) {
             )}
           </p>
           {succeed && (
-            <CustomButton className="claim__claimbtn" disabled={pending} onClick={onClaim}>
+            <CustomButton
+              className="claim__claimbtn"
+              disabled={pending || (cloBalance === 0 && Number(toNetwork.chainId) === 820)}
+              onClick={onClaim}
+            >
               {pending ? (
                 <div>
                   <Spinner className="me-2" size="sm" />
@@ -120,6 +131,11 @@ export default function Claim({ succeed, totalBlockCounts }: props) {
               ) : (
                 t('Claim')
               )}
+            </CustomButton>
+          )}
+          {succeed && cloBalance === 0 && Number(toNetwork.chainId) === 820 && (
+            <CustomButton className="claim__getclo" onClick={handleGetFreeCLO}>
+              {t('Get CLO')}
             </CustomButton>
           )}
         </div>

@@ -55,6 +55,27 @@
       opacity: 0.5;
     }
   }
+  &__button {
+    margin-top: rem(15px);
+    width: 100%;
+    padding: rem(10px) rem(0px);
+    border: none;
+    background-color: value($color-primary, normal);
+    font-family: 'Lato-Bold';
+    font-size: rem(20px);
+    color: value($color-basic, brightest);
+    letter-spacing: 1px;
+    @media only screen and (max-width: $sm) {
+      width: 80%;
+      border-bottom-left-radius: rem(15px);
+      border-bottom-right-radius: rem(15px);
+      border-top-left-radius: rem(15px);
+      border-top-right-radius: rem(15px);
+    }
+    &:disabled {
+      opacity: 0.5;
+    }
+  }
   &__row {
     padding: rem(0px) rem(44px);
   }

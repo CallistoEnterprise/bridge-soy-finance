@@ -1,3 +1,4 @@
+import { useWeb3React } from '@web3-react/core';
 import { Field, Formik } from 'formik';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -7,8 +8,10 @@ import * as Yup from 'yup';
 import CustomCheckbox from '~/app/components/common/CustomCheckbox';
 import FormInput from '~/app/components/common/FormInput';
 import Spinner from '~/app/components/common/Spinner';
+import { faucetLink } from '~/app/constants/endpoints';
 import { useGetAmountsInput, useGetAmountsOut } from '~/app/hooks/useGetAmountsOut';
 import useToast from '~/app/hooks/useToast';
+import { useGetCLOBalance } from '~/app/hooks/wallet';
 // import { FieldInput } from '~/app/modules/swap/action';
 // import { useSwapActionHandlers } from '~/app/modules/swap/hooks';
 // import useGetSwapState, { useDerivedSwapInfo, useSwapActionHandlers } from '~/app/modules/swap/hooks';
@@ -50,9 +53,10 @@ export default function SwapForm({ submit, initialData, pending, canBuyCLO, setB
   // const dispatch = useDispatch();
 
   const [destination, setDestination] = useState(false);
-  // const [isInput, setIsInput] = useState(true);
+  const { chainId } = useWeb3React();
 
   const { selectedToken, toNetwork } = useGetWalletState();
+  const cloBalance = useGetCLOBalance();
   const [swap_amount, setSwapAmount] = useState('');
   const [buy_amount, setBuyAmount] = useState('');
 
@@ -101,6 +105,10 @@ export default function SwapForm({ submit, initialData, pending, canBuyCLO, setB
 
   const handleMaxInput = () => {
     setSwapAmount(tokenBalance.toString());
+  };
+
+  const handleGetFreeCLO = () => {
+    window.open(faucetLink, '_blank');
   };
 
   return (
@@ -220,11 +228,23 @@ export default function SwapForm({ submit, initialData, pending, canBuyCLO, setB
                     </div>
                   </div>
 
+                  {cloBalance === 0 && chainId === 820 && (
+                    <button type="button" color="success" className="swapform__button" onClick={handleGetFreeCLO}>
+                      {t('GET FREE CLO')}
+                    </button>
+                  )}
+
                   <button
                     type="submit"
                     color="success"
                     className="swapform__submit"
-                    disabled={swap_amount === '0' || swap_amount === '' || values.destination_wallet === '' || pending}
+                    disabled={
+                      swap_amount === '0' ||
+                      swap_amount === '' ||
+                      values.destination_wallet === '' ||
+                      pending ||
+                      cloBalance === 0
+                    }
                   >
                     {pending ? (
                       <div>

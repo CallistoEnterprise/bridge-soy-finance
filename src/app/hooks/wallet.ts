@@ -12,6 +12,8 @@ import { getContract } from '~/app/utils';
 import { getBalanceAmount } from '~/app/utils/decimal';
 import useActiveWeb3React from './useActiveWeb3';
 
+const cloRPCs = ['https://clo-geth.0xinfra.com/'];
+
 // returns null on errors
 function useContract(address: string | undefined, ABI: any, withSignerIfPossible = true): Contract | null {
   const { library, account } = useActiveWeb3React();
@@ -29,6 +31,25 @@ function useContract(address: string | undefined, ABI: any, withSignerIfPossible
 
 const getNodeUrl = (nodes: any) => {
   return sample(nodes);
+};
+
+export const useGetCLOBalance = () => {
+  const { account, chainId } = useActiveWeb3React();
+  const [amt, setAmt] = useState<number>(0);
+  const RPC_URL = useRpcProvider(cloRPCs);
+
+  useEffect(() => {
+    const getBalance = async () => {
+      const amount = await RPC_URL.getBalance(account);
+      const bn = new BigNumber(amount + 'e-' + 18);
+      setAmt(bn.toNumber());
+    };
+    if (chainId === 820 && account) {
+      getBalance();
+    }
+  }, [account, chainId, RPC_URL]);
+
+  return amt;
 };
 
 export const useNativeCoinBalance = (fromNet: any, curAsset?: any) => {
