@@ -230,7 +230,7 @@ export default function SwapForm({ submit, initialData, pending, canBuyCLO, setB
 
                   {cloBalance === 0 && chainId === 820 && (
                     <button type="button" color="success" className="swapform__button" onClick={handleGetFreeCLO}>
-                      {t('GET FREE CLO')}
+                      {t('GET CLO')}
                     </button>
                   )}
 
