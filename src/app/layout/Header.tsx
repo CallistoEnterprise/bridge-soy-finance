@@ -35,7 +35,7 @@ export default function Header() {
       </Navbar.Brand>
       <Navbar.Toggle />
       <Navbar.Collapse className="header__right justify-content-end">
-        <a href="https://soy.finance.bridge/security-modal" target="_blank" rel="noreferrer">
+        <a href="https://callisto.network/cross-chain-bridges-security-model/" target="_blank" rel="noreferrer">
           {t('SOY Bridge Security Model')}
         </a>
         <CustomButton onClick={handleLaunchFinance}>{t('Launch SOY Finance')}</CustomButton>
