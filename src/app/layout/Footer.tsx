@@ -28,9 +28,6 @@ const Default = ({ children }: any) => {
 export default function Footer() {
   const { chainId } = useActiveWeb3React();
   const [t] = useTranslation();
-  // const [soyFinance, setSoyFinance] = useState(true);
-  // const [documentList, setDocumentList] = useState(true);
-  // const [resourceslist, setResourcesList] = useState(true);
 
   const { start_swapping, confirmedBlockCounts } = useSelector((state: any) => state.walletBridge);
 
@@ -57,20 +54,9 @@ export default function Footer() {
           </Default>
         </div>
 
-        {/* <div className="footer__content--center"> */}
         <div className="footer__center">
-          <div
-            className="footer__center__dropdown"
-            // onClick={() => {
-            //   setSoyFinance(!soyFinance);
-            //   setResourcesList(false);
-            //   setDocumentList(false);
-            // }}
-          >
+          <div className="footer__center__dropdown">
             <p className="footer__bold">{t('Soy Finance')}</p>
-            {/* <Mobile>
-              <img src={arrowDown} alt="arrowDown" />
-            </Mobile> */}
           </div>
           <div className={classNames('footer__column', { footer__center__linklist: false })}>
             <a
@@ -88,18 +74,8 @@ export default function Footer() {
         </div>
 
         <div className="footer__center">
-          <div
-            className="footer__center__dropdown"
-            // onClick={() => {
-            //   setResourcesList(!resourceslist);
-            //   setDocumentList(false);
-            //   setSoyFinance(false);
-            // }}
-          >
+          <div className="footer__center__dropdown">
             <p className="footer__bold">{t('Resources')}</p>
-            {/* <Mobile>
-              <img src={arrowDown} alt="arrowDown" />
-            </Mobile> */}
           </div>
           <div className={classNames('footer__column', { footer__center__linklist: false })}>
             <a className="footer__link" href="https://callistoenterprise.com/team" target="_blank" rel="noreferrer">
@@ -118,18 +94,8 @@ export default function Footer() {
         </div>
 
         <div className="footer__center">
-          <div
-            className="footer__center__dropdown"
-            // onClick={() => {
-            //   setDocumentList(!documentList);
-            //   setResourcesList(false);
-            //   setSoyFinance(false);
-            // }}
-          >
+          <div className="footer__center__dropdown">
             <p className="footer__bold">{t('Documentation')}</p>
-            {/* <Mobile>
-              <img src={arrowDown} alt="arrowDown" />
-            </Mobile> */}
           </div>
           <div className={classNames('footer__column', { footer__center__linklist: false })}>
             <a
@@ -161,10 +127,8 @@ export default function Footer() {
             </a>
           </div>
         </div>
-        {/* </div> */}
 
         <div className="footer__socialmedia u-align-center">
-          {/* <p className="footer__bold">{t('Social Media')}</p> */}
           <div className="mt-3">
             <a href="https://t.me/Soy_Finance" target="_blank" rel="noreferrer">
               <Telegram />
