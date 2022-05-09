@@ -239,11 +239,8 @@ export default function SwapForm({ submit, initialData, pending, canBuyCLO, setB
                     color="success"
                     className="swapform__submit"
                     disabled={
-                      swap_amount === '0' ||
-                      swap_amount === '' ||
-                      values.destination_wallet === '' ||
-                      pending ||
-                      cloBalance === 0
+                      swap_amount === '0' || swap_amount === '' || values.destination_wallet === '' || pending
+                      // cloBalance === 0
                     }
                   >
                     {pending ? (
