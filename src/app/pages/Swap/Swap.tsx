@@ -54,7 +54,7 @@ const Swap = () => {
   const { account, chainId } = useActiveWeb3React();
   const { toastError, toastWarning } = useToast();
   const tokenBalance = balance[`${selectedToken.symbol}`];
-  const disable = fromNetwork?.symbol === 'CLO' || toNetwork?.symbol !== 'CLO';
+  const disable = fromNetwork?.symbol === 'CLO' || toNetwork?.symbol !== 'CLO' || selectedToken.symbol === 'CLO';
 
   const onPrevious = () => {
     navigate('/tokens');
@@ -222,7 +222,6 @@ const Swap = () => {
   };
 
   const claim_address = useMemo(() => claimAddress, [claimAddress]);
-
   return (
     <>
       {pending || succeed ? (

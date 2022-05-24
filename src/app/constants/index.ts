@@ -88,3 +88,8 @@ export const ONE_HUNDRED_PERCENT = new Percent('1');
 export const BLOCKED_ADDRESSES: string[] = [];
 
 export const DEFAULT_GAS_LIMIT = 3000000;
+
+export const MIN_GAS_AMOUNT = {
+  820: 0.1,
+  199: 50
+};

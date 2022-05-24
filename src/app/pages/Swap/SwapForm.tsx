@@ -8,7 +8,6 @@ import * as Yup from 'yup';
 import CustomCheckbox from '~/app/components/common/CustomCheckbox';
 import FormInput from '~/app/components/common/FormInput';
 import Spinner from '~/app/components/common/Spinner';
-import { faucetLink } from '~/app/constants/endpoints';
 import { useGetAmountsInput, useGetAmountsOut } from '~/app/hooks/useGetAmountsOut';
 import useToast from '~/app/hooks/useToast';
 import { useGetCLOBalance } from '~/app/hooks/wallet';
@@ -55,8 +54,8 @@ export default function SwapForm({ submit, initialData, pending, canBuyCLO, setB
   const [destination, setDestination] = useState(false);
   const { chainId } = useWeb3React();
 
-  const { selectedToken, toNetwork } = useGetWalletState();
-  const cloBalance = useGetCLOBalance();
+  const { selectedToken, fromNetwork, toNetwork } = useGetWalletState();
+  const cloBalance = useGetCLOBalance(fromNetwork);
   const [swap_amount, setSwapAmount] = useState('');
   const [buy_amount, setBuyAmount] = useState('');
 
@@ -107,9 +106,9 @@ export default function SwapForm({ submit, initialData, pending, canBuyCLO, setB
     setSwapAmount(tokenBalance.toString());
   };
 
-  const handleGetFreeCLO = () => {
-    window.open(faucetLink, '_blank');
-  };
+  // const handleGetFreeCLO = () => {
+  //   window.open(faucetLink, '_blank');
+  // };
 
   return (
     <div className="swapform">
@@ -162,7 +161,7 @@ export default function SwapForm({ submit, initialData, pending, canBuyCLO, setB
                     <div className="row mt-4 swapform__row">
                       <div className="col">
                         <CustomCheckbox
-                          label={t('Buy Callisto coins')}
+                          label={t('Buy Callisto coin')}
                           checked={canBuyCLO}
                           onChangeCheckbox={setBuyCLO}
                         />
@@ -228,19 +227,22 @@ export default function SwapForm({ submit, initialData, pending, canBuyCLO, setB
                     </div>
                   </div>
 
-                  {cloBalance === 0 && chainId === 820 && (
+                  {/* {cloBalance === 0 && chainId === 820 && (
                     <button type="button" color="success" className="swapform__button" onClick={handleGetFreeCLO}>
                       {t('GET CLO')}
                     </button>
-                  )}
+                  )} */}
 
                   <button
                     type="submit"
                     color="success"
                     className="swapform__submit"
                     disabled={
-                      swap_amount === '0' || swap_amount === '' || values.destination_wallet === '' || pending
-                      // cloBalance === 0
+                      swap_amount === '0' ||
+                      swap_amount === '' ||
+                      values.destination_wallet === '' ||
+                      pending ||
+                      (cloBalance === 0 && chainId === 820)
                     }
                   >
                     {pending ? (

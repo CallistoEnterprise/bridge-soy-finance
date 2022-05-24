@@ -4,3 +4,5 @@ export const endpoints = {
 };
 
 export const faucetLink = 'https://clo.click/Callisto-Faucet';
+
+export const CLAIMAPI = 'https://ip-159-225.cust.aspone.cz/claim?';

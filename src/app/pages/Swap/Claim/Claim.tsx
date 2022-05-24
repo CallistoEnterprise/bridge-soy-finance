@@ -3,11 +3,13 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import CustomButton from '~/app/components/common/CustomButton';
 import Spinner from '~/app/components/common/Spinner';
-import { faucetLink } from '~/app/constants/endpoints';
+import { MIN_GAS_AMOUNT } from '~/app/constants';
+import useActiveWeb3React from '~/app/hooks/useActiveWeb3React';
 import useClaim from '~/app/hooks/useClaim';
 import useToast from '~/app/hooks/useToast';
 import { useGetCLOBalance } from '~/app/hooks/wallet';
 import useGetWalletState from '~/app/modules/wallet/hooks';
+import { submitClaimAction } from '~/app/utils/apiHelper';
 import getSignatures from '~/app/utils/getSignatures';
 import claimAnimal from '~/assets/images/animal.gif';
 import './claim.css';
@@ -22,21 +24,42 @@ type props = {
 
 export default function Claim({ succeed, totalBlockCounts }: props) {
   const [t] = useTranslation();
+  const { chainId } = useActiveWeb3React();
   const navigate = useNavigate();
 
   const [pending, setPending] = useState(false);
-  const cloBalance = useGetCLOBalance();
 
   const { hash, fromNetwork, swapType, toNetwork } = useGetWalletState();
+  const cloBalance = useGetCLOBalance(toNetwork);
   const { onSimpleClaim, onAdvancedClaim } = useClaim();
   const { toastError, toastSuccess } = useToast();
 
-  const onClaim = () => {
+  const onClaim = async () => {
     if (hash === '') {
       return;
     }
-    if (swapType === 'swap') handleClaim();
-    else if (swapType === 'advanced-swap') handleAdvancedClaim();
+    if (
+      (cloBalance < MIN_GAS_AMOUNT[820] && chainId === 820) ||
+      (cloBalance < MIN_GAS_AMOUNT[199] && chainId === 199)
+    ) {
+      setPending(true);
+      submitClaimAction(hash, chainId)
+        .then((res: any) => {
+          if (res?.isSuccess) {
+            setPending(false);
+            window.localStorage.removeItem('prevData');
+            navigate('/transfer');
+            toastSuccess('Claimed successfully.');
+          }
+        })
+        .catch((err) => {
+          toastError('Failed to claim. Please try again.');
+          setPending(false);
+        });
+    } else {
+      if (swapType === 'swap') handleClaim();
+      else if (swapType === 'advanced-swap') handleAdvancedClaim();
+    }
   };
 
   async function handleAdvancedClaim() {
@@ -55,7 +78,6 @@ export default function Claim({ succeed, totalBlockCounts }: props) {
           // await handleSetPending();
           setPending(false);
           window.localStorage.removeItem('prevData');
-          setPending(false);
           navigate('/transfer');
           toastSuccess('Claimed successfully.');
         } else {
@@ -86,7 +108,6 @@ export default function Claim({ succeed, totalBlockCounts }: props) {
         // await handleSetPending();
         setPending(false);
         window.localStorage.removeItem('prevData');
-        setPending(false);
         navigate('/transfer');
         toastSuccess('Claimed successfully.');
       } else {
@@ -98,9 +119,9 @@ export default function Claim({ succeed, totalBlockCounts }: props) {
     }
   }
 
-  const handleGetFreeCLO = () => {
-    window.open(faucetLink, '_blank');
-  };
+  // const handleGetFreeCLO = () => {
+  //   window.open(faucetLink, '_blank');
+  // };
 
   return (
     <div className="claim container">
@@ -117,12 +138,12 @@ export default function Claim({ succeed, totalBlockCounts }: props) {
               } to claim your transaction.`
             )}
           </p>
+          {(cloBalance < MIN_GAS_AMOUNT[820] || cloBalance < MIN_GAS_AMOUNT[199]) &&
+            chainId === Number(toNetwork.chainId) &&
+            pending && <p>{t(`Please wait, we are claiming for you...`)}</p>}
+
           {succeed && (
-            <CustomButton
-              className="claim__claimbtn"
-              disabled={pending || (cloBalance === 0 && Number(toNetwork.chainId) === 820)}
-              onClick={onClaim}
-            >
+            <CustomButton className="claim__claimbtn" disabled={pending} onClick={onClaim}>
               {pending ? (
                 <div>
                   <Spinner className="me-2" size="sm" />
@@ -133,11 +154,11 @@ export default function Claim({ succeed, totalBlockCounts }: props) {
               )}
             </CustomButton>
           )}
-          {succeed && cloBalance === 0 && Number(toNetwork.chainId) === 820 && (
+          {/* {succeed && cloBalance === 0 && Number(toNetwork.chainId) === 820 && (
             <CustomButton className="claim__getclo" onClick={handleGetFreeCLO}>
               {t('Get CLO')}
             </CustomButton>
-          )}
+          )} */}
         </div>
       </div>
     </div>

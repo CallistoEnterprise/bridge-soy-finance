@@ -12,8 +12,6 @@ import { getContract } from '~/app/utils';
 import { getBalanceAmount } from '~/app/utils/decimal';
 import useActiveWeb3React from './useActiveWeb3';
 
-const cloRPCs = ['https://clo-geth.0xinfra.com/'];
-
 // returns null on errors
 function useContract(address: string | undefined, ABI: any, withSignerIfPossible = true): Contract | null {
   const { library, account } = useActiveWeb3React();
@@ -33,10 +31,10 @@ const getNodeUrl = (nodes: any) => {
   return sample(nodes);
 };
 
-export const useGetCLOBalance = () => {
+export const useGetCLOBalance = (net: any) => {
   const { account, chainId } = useActiveWeb3React();
   const [amt, setAmt] = useState<number>(0);
-  const RPC_URL = useRpcProvider(cloRPCs);
+  const RPC_URL = useRpcProvider(net.rpcs);
 
   useEffect(() => {
     const getBalance = async () => {
@@ -44,7 +42,7 @@ export const useGetCLOBalance = () => {
       const bn = new BigNumber(amount + 'e-' + 18);
       setAmt(bn.toNumber());
     };
-    if (chainId === 820 && account) {
+    if ((chainId === 820 || chainId === 199) && account) {
       getBalance();
     }
   }, [account, chainId, RPC_URL]);
@@ -56,7 +54,8 @@ export const useNativeCoinBalance = (fromNet: any, curAsset?: any) => {
   const { account, chainId } = useActiveWeb3React();
   const [amt, setAmt] = useState<number | string>(0);
   const RPC_URL = useRpcProvider(fromNet.rpcs);
-  const tokenContract = getErc20Contract(curAsset.addresses[`${fromNet.symbol}`], RPC_URL);
+  const tokenContract = getErc20Contract(curAsset.address[`${fromNet.symbol}`], RPC_URL);
+
   useEffect(() => {
     const getBalance = async () => {
       if (account && fromNet.symbol === curAsset.symbol && parseInt(fromNet.chainId) === chainId) {
