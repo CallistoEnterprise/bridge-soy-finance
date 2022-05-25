@@ -50,6 +50,44 @@ export const useGetCLOBalance = (net: any) => {
   return amt;
 };
 
+export const useGetCLOBalance1 = () => {
+  const { account, chainId } = useActiveWeb3React();
+  const [amt, setAmt] = useState<number>(0);
+  const RPC_URL = useRpcProvider(['https://clo-geth.0xinfra.com/']);
+
+  useEffect(() => {
+    const getBalance = async () => {
+      const amount = await RPC_URL.getBalance(account);
+      const bn = new BigNumber(amount + 'e-' + 18);
+      setAmt(bn.toNumber());
+    };
+    if (chainId === 820 && account) {
+      getBalance();
+    }
+  }, [account, chainId, RPC_URL]);
+
+  return amt;
+};
+
+export const useGetBTTBalance = () => {
+  const { account, chainId } = useActiveWeb3React();
+  const [amt, setAmt] = useState<number>(0);
+  const RPC_URL = useRpcProvider(['https://rpc.bt.io/']);
+
+  useEffect(() => {
+    const getBalance = async () => {
+      const amount = await RPC_URL.getBalance(account);
+      const bn = new BigNumber(amount + 'e-' + 18);
+      setAmt(bn.toNumber());
+    };
+    if (chainId === 199 && account) {
+      getBalance();
+    }
+  }, [account, chainId, RPC_URL]);
+
+  return amt;
+};
+
 export const useNativeCoinBalance = (fromNet: any, curAsset?: any) => {
   const { account, chainId } = useActiveWeb3React();
   const [amt, setAmt] = useState<number | string>(0);
