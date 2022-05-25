@@ -7,13 +7,15 @@ import CustomButton from '~/app/components/common/CustomButton';
 import Spinner from '~/app/components/common/Spinner';
 import NetworkSelection from '~/app/components/NetworkSelection';
 import WalletInfo from '~/app/components/WalletInfo';
+import { MIN_GAS_AMOUNT } from '~/app/constants';
 import { INetwork } from '~/app/constants/interface';
 import { Networks } from '~/app/constants/strings';
 import useActiveWeb3React from '~/app/hooks/useActiveWeb3';
 import useToast from '~/app/hooks/useToast';
-import { useGetTokenBalances } from '~/app/hooks/wallet';
+import { useGetBTTBalance, useGetCLOBalance1, useGetTokenBalances } from '~/app/hooks/wallet';
 import { setFromNetwork } from '~/app/modules/wallet/action';
 import { getBridgeContract, shortAddress } from '~/app/utils';
+import { submitClaimAction } from '~/app/utils/apiHelper';
 import getSignatures from '~/app/utils/getSignatures';
 import { switchNetwork } from '~/app/utils/wallet';
 import previousIcon from '~/assets/images/previous.svg';
@@ -34,6 +36,9 @@ export default function PreviousClaim() {
 
   const pendingBalance = useGetTokenBalances(Networks[0]);
   const { toastError, toastWarning, toastInfo, toastSuccess } = useToast();
+
+  const cloBalance = useGetCLOBalance1();
+  const bttBalance = useGetBTTBalance();
 
   const onPrevious = () => {
     navigate('/');
@@ -58,6 +63,8 @@ export default function PreviousClaim() {
   async function handleClaim() {
     if (hash) {
       setPending(true);
+    } else {
+      return;
     }
 
     try {
@@ -83,46 +90,67 @@ export default function PreviousClaim() {
           return;
         }
       } else {
-        const dest = destinationAddress === '' ? account : destinationAddress;
-        const bridgeContract = await getBridgeContract(respJSON.bridge, library, dest);
-        const tx =
-          respJSON.data && respJSON.toContract
-            ? await bridgeContract.claimToContract(
-                respJSON.token,
-                hash,
-                respJSON.to,
-                respJSON.value,
-                fromNetwork.chainId,
-                respJSON.toContract,
-                respJSON.data,
-                signatures,
-                {
-                  value: 0
-                  // gasLimit: DEFAULT_GAS_LIMIT
-                }
-              )
-            : await bridgeContract.claim(
-                respJSON.token,
-                hash,
-                respJSON.to,
-                respJSON.value,
-                fromNetwork.chainId,
-                signatures,
-                { value: 0 }
-              );
-
-        const receipt = await tx.wait();
-        if (receipt.status) {
-          window.localStorage.removeItem('prevData');
-          setPending(false);
-          setHash('');
-          navigate('/transfer');
-          toastSuccess('Success!', 'Claimed successfully.');
+        if (
+          (cloBalance < MIN_GAS_AMOUNT[820] && chainId === 820) ||
+          (bttBalance < MIN_GAS_AMOUNT[199] && chainId === 199)
+        ) {
+          submitClaimAction(hash, chainId)
+            .then((res: any) => {
+              if (res?.isSuccess) {
+                setPending(false);
+                window.localStorage.removeItem('prevData');
+                navigate('/transfer');
+                setHash('');
+                toastSuccess('Claimed successfully.');
+              }
+            })
+            .catch((err) => {
+              toastError('Failed to claim. Please try again.');
+              setPending(false);
+              setHash('');
+            });
         } else {
+          const dest = destinationAddress === '' ? account : destinationAddress;
+          const bridgeContract = await getBridgeContract(respJSON.bridge, library, dest);
+          const tx =
+            respJSON.data && respJSON.toContract
+              ? await bridgeContract.claimToContract(
+                  respJSON.token,
+                  hash,
+                  respJSON.to,
+                  respJSON.value,
+                  fromNetwork.chainId,
+                  respJSON.toContract,
+                  respJSON.data,
+                  signatures,
+                  {
+                    value: 0
+                    // gasLimit: DEFAULT_GAS_LIMIT
+                  }
+                )
+              : await bridgeContract.claim(
+                  respJSON.token,
+                  hash,
+                  respJSON.to,
+                  respJSON.value,
+                  fromNetwork.chainId,
+                  signatures,
+                  { value: 0 }
+                );
+
+          const receipt = await tx.wait();
+          if (receipt.status) {
+            window.localStorage.removeItem('prevData');
+            setPending(false);
+            setHash('');
+            navigate('/transfer');
+            toastSuccess('Success!', 'Claimed successfully.');
+          } else {
+            setPending(false);
+            toastError('Error!', 'Failed to claim. Please try again1.');
+          }
           setPending(false);
-          toastError('Error!', 'Failed to claim. Please try again1.');
         }
-        setPending(false);
       }
     } catch (err) {
       toastError('Error!', 'Failed to claim. Please try again.');
