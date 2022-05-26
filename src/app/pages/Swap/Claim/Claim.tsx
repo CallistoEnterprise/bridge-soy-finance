@@ -51,7 +51,7 @@ export default function Claim({ succeed, totalBlockCounts }: props) {
             navigate('/transfer');
             toastSuccess('Claimed successfully.');
           } else {
-            toastError('Failed to claim. Please try again.');
+            toastError(`Failed to claim. ${res.message}`);
             setPending(false);
           }
         })
