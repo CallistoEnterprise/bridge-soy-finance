@@ -101,13 +101,21 @@ export default function WalletInfo({ pending, fromNetwork }: walletInfoProps) {
                   return (
                     <li className="tokenitem" key={index}>
                       <div className="d-flex align-items-center">
-                        <img className="me-2 token-icon" src={item.logoURI} alt="icon" />
+                        <img
+                          className="me-2 token-icon"
+                          src={
+                            item.symbol === 'BUSDT' && fromNetwork.chainId !== '820' ? 'images/usdt.png' : item.logoURI
+                          }
+                          alt="icon"
+                        />
                         <p className="ms-2">{`${bb / 100000}`}</p>
                         <button className="walletinfo__addtoken--button" onClick={() => handleAddToken(item)}>
                           <img className="me-2 token-icon" src={metamaskIcon} alt="icon" />
                         </button>
                       </div>
-                      <p style={{ marginRight: 10 }}>{item.symbol}</p>
+                      <p style={{ marginRight: 10 }}>
+                        {item.symbol === 'BUSDT' ? (fromNetwork.chainId === '820' ? 'BUSDT' : 'USDT') : item.symbol}
+                      </p>
                     </li>
                   );
                 })}

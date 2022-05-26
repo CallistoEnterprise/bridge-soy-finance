@@ -81,6 +81,7 @@ export default function TokenList() {
               }
               return false;
             })}
+            fromNetwork={fromNetwork}
             onChange={onChangeToken}
           />
           <CustomButton className="mt-5" onClick={onNext} disabled={token === null}>

@@ -6,11 +6,12 @@ import './tokenselection.css';
 
 type props = {
   options: Array<any>;
+  fromNetwork?: any;
   onChange?: (option: any) => void;
   className?: string;
 };
 
-export default function TokenSelection({ options, className, onChange }: props) {
+export default function TokenSelection({ options, fromNetwork, className, onChange }: props) {
   return (
     <div className="tokenselection">
       <RadioGroup containerStyle={classNames('tokenselection-container', className)} onChange={onChange}>
@@ -25,8 +26,14 @@ export default function TokenSelection({ options, className, onChange }: props) 
                 })}
               >
                 <div>
-                  <img className="tokenselection-logo" src={option.logoURI} alt="icon" />
-                  {option.symbol}
+                  <img
+                    className="tokenselection-logo"
+                    src={
+                      option.symbol === 'BUSDT' && fromNetwork.chainId !== '820' ? 'images/usdt.png' : option.logoURI
+                    }
+                    alt="icon"
+                  />
+                  {option.symbol === 'BUSDT' ? (fromNetwork.chainId === '820' ? 'BUSDT' : 'USDT') : option.symbol}
                 </div>
               </button>
             )}
@@ -37,7 +44,7 @@ export default function TokenSelection({ options, className, onChange }: props) 
   );
 }
 
-export const TokenSelection2 = ({ options, className, onChange }: props) => {
+export const TokenSelection2 = ({ options, fromNetwork, className, onChange }: props) => {
   return (
     <div className="tokenselection">
       <RadioGroup containerStyle={classNames('tokenselection-container', className)}>
@@ -53,8 +60,16 @@ export const TokenSelection2 = ({ options, className, onChange }: props) => {
                 onClick={() => onChange(option)}
               >
                 <div>
-                  <img className="tokenselection-logo" src={getTokenLogoLink(option.address)} alt="icon" />
-                  {option.symbol}
+                  <img
+                    className="tokenselection-logo"
+                    src={
+                      option.symbol === 'BUSDT' && fromNetwork.chainId !== '820'
+                        ? 'images/usdt.png'
+                        : getTokenLogoLink(option.address)
+                    }
+                    alt="icon"
+                  />
+                  {option.symbol === 'BUSDT' ? (fromNetwork.chainId === '820' ? 'BUSDT' : 'USDT') : option.symbol}
                 </div>
                 {`(${option.network})`}
               </button>
