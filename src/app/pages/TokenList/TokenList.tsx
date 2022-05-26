@@ -23,12 +23,14 @@ export default function TokenList() {
   const [t] = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { fromNetwork } = useGetWalletState();
+  const { fromNetwork, toNetwork } = useGetWalletState();
 
   const [token, setToken] = useState(null);
   const [value, setValue] = useState('');
 
-  const tokenList = defaultTokens.tokens.filter((t: any) => t.address[`${fromNetwork.chainId}`] !== '');
+  const tokenList = defaultTokens.tokens.filter(
+    (t: any) => t.address[`${fromNetwork.chainId}`] !== '' && t.address[`${toNetwork.chainId}`] !== ''
+  );
 
   const onChangeToken = (option: IToken) => {
     setToken(option.symbol);

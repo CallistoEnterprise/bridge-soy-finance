@@ -43,13 +43,16 @@ export default function Claim({ succeed, totalBlockCounts }: props) {
       (cloBalance < MIN_GAS_AMOUNT[199] && chainId === 199)
     ) {
       setPending(true);
-      submitClaimAction(hash, chainId)
+      submitClaimAction(hash, fromNetwork.chainId)
         .then((res: any) => {
           if (res?.isSuccess) {
             setPending(false);
             window.localStorage.removeItem('prevData');
             navigate('/transfer');
             toastSuccess('Claimed successfully.');
+          } else {
+            toastError('Failed to claim. Please try again.');
+            setPending(false);
           }
         })
         .catch((err) => {

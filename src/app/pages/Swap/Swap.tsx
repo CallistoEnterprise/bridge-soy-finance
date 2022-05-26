@@ -228,7 +228,7 @@ const Swap = () => {
         <Claim
           succeed={succeed}
           address={claim_address}
-          totalBlockCounts={switched ? 1 : blockConfirmations[chainId]}
+          totalBlockCounts={switched ? 1 : blockConfirmations[fromNetwork.chainId]}
           web3={web3}
         />
       ) : (
