@@ -7,6 +7,7 @@ import { TokenSelection2 } from '~/app/components/TokenSelection/TokenSelection'
 import { addTokenList } from '~/app/constants/strings';
 import useActiveWeb3React from '~/app/hooks/useActiveWeb3';
 import useToast from '~/app/hooks/useToast';
+import useGetWalletState from '~/app/modules/wallet/hooks';
 import { registerToken } from '~/app/utils/wallet';
 import previousIcon from '~/assets/images/previous.svg';
 import './transfer.css';
@@ -21,6 +22,7 @@ export default function Transfer() {
   const navigate = useNavigate();
   const { account, chainId } = useActiveWeb3React();
   const { toastError } = useToast();
+  const { fromNetwork } = useGetWalletState();
 
   useEffect(() => {
     if (!account) {
@@ -54,7 +56,12 @@ export default function Transfer() {
           <h4>{t('Transfer complete!')}</h4>
           <h6 className="mt-5">{t('You don’t see your tokens?')}</h6>
           <h6 className="mt-3">{t('Just add your asset to your wallet by clicking on its icon!')}</h6>
-          <TokenSelection2 options={addTokenList} onChange={onSelectToken} className="transfer__selection" />
+          <TokenSelection2
+            options={addTokenList}
+            fromNetwork={fromNetwork}
+            onChange={onSelectToken}
+            className="transfer__selection"
+          />
         </div>
         <Mobile>
           <div className="transfer__mobile">
