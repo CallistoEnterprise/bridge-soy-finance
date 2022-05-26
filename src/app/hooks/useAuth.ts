@@ -18,7 +18,7 @@ const useAuth = () => {
   const { toastError } = useToast();
 
   const login = useCallback(
-    (connectorID: ConnectorNames, curNet) => {
+    (connectorID: ConnectorNames, curNet: any) => {
       const connectorsByName1 = getConnectorsByName(curNet);
       const connector = connectorsByName1[connectorID];
       if (connector) {

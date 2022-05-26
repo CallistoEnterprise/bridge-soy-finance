@@ -94,7 +94,7 @@ export default function PreviousClaim() {
           (cloBalance < MIN_GAS_AMOUNT[820] && chainId === 820) ||
           (bttBalance < MIN_GAS_AMOUNT[199] && chainId === 199)
         ) {
-          submitClaimAction(hash, chainId)
+          submitClaimAction(hash, fromNetwork.chainId)
             .then((res: any) => {
               if (res?.isSuccess) {
                 setPending(false);
@@ -102,6 +102,10 @@ export default function PreviousClaim() {
                 navigate('/transfer');
                 setHash('');
                 toastSuccess('Claimed successfully.');
+              } else {
+                toastError('Failed to claim. Please try again.');
+                setPending(false);
+                setHash('');
               }
             })
             .catch((err) => {
