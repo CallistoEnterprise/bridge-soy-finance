@@ -103,7 +103,7 @@ export default function PreviousClaim() {
                 setHash('');
                 toastSuccess('Claimed successfully.');
               } else {
-                toastError('Failed to claim. Please try again.');
+                toastError(`Failed to claim. ${res.message}`);
                 setPending(false);
                 setHash('');
               }

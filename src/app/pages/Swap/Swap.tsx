@@ -68,7 +68,7 @@ const Swap = () => {
     const getCurrentBlock = () => {
       const timer = setInterval(async () => {
         const b = await web3.eth.getBlockNumber();
-        if (b - txBlockNumber >= blockConfirmations[chainId]) {
+        if (b - txBlockNumber >= blockConfirmations[fromNetwork.chainId]) {
           clearInterval(timer);
           setSucced(true);
           setPending(false);
@@ -85,7 +85,7 @@ const Swap = () => {
     if (txBlockNumber !== 0 && pending) {
       getCurrentBlock();
     }
-  }, [dispatch, txBlockNumber, pending, chainId, toNetwork, web3]);
+  }, [dispatch, txBlockNumber, pending, chainId, toNetwork, web3, fromNetwork]);
 
   const onSubmit = (values: any) => {
     let neededTokenBalance = Number(tokenBalance);
