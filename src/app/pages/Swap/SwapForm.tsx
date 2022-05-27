@@ -106,10 +106,6 @@ export default function SwapForm({ submit, initialData, pending, canBuyCLO, setB
     setSwapAmount(tokenBalance.toString());
   };
 
-  // const handleGetFreeCLO = () => {
-  //   window.open(faucetLink, '_blank');
-  // };
-
   return (
     <div className="swapform">
       <Formik
@@ -161,7 +157,7 @@ export default function SwapForm({ submit, initialData, pending, canBuyCLO, setB
                     <div className="row mt-4 swapform__row">
                       <div className="col">
                         <CustomCheckbox
-                          label={t('Buy Callisto coin')}
+                          label={t(`Buy ${toNetwork.chainId === '820' ? 'Callisto' : 'BitTorrent'} coin`)}
                           checked={canBuyCLO}
                           onChangeCheckbox={setBuyCLO}
                         />
@@ -193,6 +189,7 @@ export default function SwapForm({ submit, initialData, pending, canBuyCLO, setB
                               swap_amount: `${receiveOriginAmount} ${selectedToken?.symbol}`,
                               buy_amount: `${intOutputAmount}`
                             }}
+                            toNetwork={toNetwork}
                           />
                         </div>
                       </div>
@@ -226,12 +223,6 @@ export default function SwapForm({ submit, initialData, pending, canBuyCLO, setB
                       )}
                     </div>
                   </div>
-
-                  {/* {cloBalance === 0 && chainId === 820 && (
-                    <button type="button" color="success" className="swapform__button" onClick={handleGetFreeCLO}>
-                      {t('GET CLO')}
-                    </button>
-                  )} */}
 
                   <button
                     type="submit"

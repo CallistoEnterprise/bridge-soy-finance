@@ -8,7 +8,7 @@ import { ethers } from 'ethers';
 import bridgeABI from '~/app/constants/abis/bridge.json';
 import soyRouterABI from '~/app/constants/abis/soyRouter.json';
 import tokenABI from '~/app/constants/abis/weth.json';
-import { getSoyRouterAddress } from './addressHelpers';
+import { getSoyRouterAddress, getSoyRouterAddressByChain } from './addressHelpers';
 import { simpleRpcProvider } from './providers';
 
 // returns the checksummed address if the address is valid, otherwise returns false
@@ -76,8 +76,8 @@ export function getSoyRouterContract(signer?: ethers.Signer | ethers.providers.P
   return getContractWithSigner(soyRouterABI, address, signer);
 }
 
-export function getSoyRouterContractByWeb3(web3?: any): Contract {
-  const address = getSoyRouterAddress();
+export function getSoyRouterContractByWeb3(web3?: any, chainId?: number): Contract {
+  const address = getSoyRouterAddressByChain(chainId);
   return new web3.eth.Contract(soyRouterABI, address);
 }
 

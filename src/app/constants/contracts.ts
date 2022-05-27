@@ -11,7 +11,8 @@ const contracts: any = {
   },
   soyRouter: {
     820: '0xeB5B468fAacC6bBdc14c4aacF0eec38ABCCC13e7',
-    20729: '0xdbe46b17FFd35D6865b69F9398AC5454389BF38c'
+    20729: '0xdbe46b17FFd35D6865b69F9398AC5454389BF38c',
+    199: '0x8Cb2e43e5AEB329de592F7e49B6c454649b61929'
   }
 };
 

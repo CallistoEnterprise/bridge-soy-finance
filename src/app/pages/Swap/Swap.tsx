@@ -9,6 +9,7 @@ import CustomButton from '~/app/components/common/CustomButton';
 import Notice from '~/app/components/Notice';
 import WalletInfo from '~/app/components/WalletInfo';
 import { blockConfirmations } from '~/app/constants/config';
+import { NATIVE_W_COINS } from '~/app/constants/tokens';
 import useActiveWeb3React from '~/app/hooks/useActiveWeb3';
 import useCurrentBlockTimestamp from '~/app/hooks/useCurrentBlockTimestamp';
 import useGetAllowance from '~/app/hooks/useGetAllowance';
@@ -32,6 +33,7 @@ import './swap.css';
 import SwapForm from './SwapForm';
 
 const Swap = () => {
+  const { account, chainId } = useActiveWeb3React();
   const [t] = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -43,7 +45,8 @@ const Swap = () => {
 
   const { balance, selectedToken, fromNetwork, toNetwork } = useGetWalletState();
   const swapTokenAddr = selectedToken?.address[`${fromNetwork.chainId}`];
-  const swapTokenAddrInCallisto = selectedToken?.address[820];
+  const swapTokenAddrInCallisto = selectedToken?.address[`${toNetwork.chainId}`];
+  const wAddr = NATIVE_W_COINS[`${toNetwork.chainId}`];
 
   const { onApprove, allowed } = useGetAllowance(swapTokenAddr);
   const { onAdvancedSwap, onSimpleSwap } = useSwap();
@@ -51,10 +54,13 @@ const Swap = () => {
   const deadline = useCurrentBlockTimestamp();
 
   const [claimAddress, setClaimAddress] = useState('');
-  const { account, chainId } = useActiveWeb3React();
   const { toastError, toastWarning } = useToast();
   const tokenBalance = balance[`${selectedToken.symbol}`];
-  const disable = fromNetwork?.symbol === 'CLO' || toNetwork?.symbol !== 'CLO' || selectedToken.symbol === 'CLO';
+  const disable =
+    ((fromNetwork?.symbol === 'CLO' || toNetwork?.symbol !== 'CLO' || selectedToken.symbol === 'CLO') &&
+      toNetwork.chainId === '820') ||
+    ((fromNetwork?.symbol === 'BTT' || toNetwork?.symbol !== 'BTT' || selectedToken.symbol === 'BTT') &&
+      toNetwork.chainId === '199');
 
   const onPrevious = () => {
     navigate('/tokens');
@@ -150,7 +156,7 @@ const Swap = () => {
       const byte_data = await getEncodedData(web3, [
         buyBigAmount,
         new BigNumber(maxAmountsIn),
-        [swapTokenAddrInCallisto, '0xF5AD6F6EDeC824C7fD54A66d241a227F6503aD3a'],
+        [swapTokenAddrInCallisto, wAddr],
         distinationAddress,
         new BigNumber(deadline + 15000)
       ]);

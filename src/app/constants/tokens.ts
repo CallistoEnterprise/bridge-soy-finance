@@ -120,4 +120,15 @@ const tokens = {
   }
 };
 
+export const NATIVE_W_COINS: { [chainId: number | string]: string } = {
+  '20729': '0xF5AD6F6EDeC824C7fD54A66d241a227F6503aD3a',
+  '820': '0xF5AD6F6EDeC824C7fD54A66d241a227F6503aD3a',
+  '56': '',
+  '97': '',
+  '1': '',
+  '42': '',
+  '61': '',
+  '199': '0x33e85f0e26600a6644b6c910639B0bc7a99fd34e'
+};
+
 export default tokens;
