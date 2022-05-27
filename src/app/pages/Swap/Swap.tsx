@@ -228,6 +228,7 @@ const Swap = () => {
   };
 
   const claim_address = useMemo(() => claimAddress, [claimAddress]);
+
   return (
     <>
       {pending || succeed ? (

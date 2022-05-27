@@ -172,7 +172,7 @@ export default function SwapForm({ submit, initialData, pending, canBuyCLO, setB
                           <Field
                             name="buy_amount"
                             type={'text'}
-                            groupname="CLO"
+                            groupname={toNetwork.chainId === '820' ? 'CLO' : 'BTT'}
                             component={FormInput}
                             value={buy_amount}
                             inputMode="decimal"
