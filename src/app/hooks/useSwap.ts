@@ -13,9 +13,8 @@ const useSwap = () => {
       const bridgeContract = await getBridgeContract(bridgeAddr, library, account);
       const tx = await bridgeContract.depositTokens(receiver, tkAddress, amount.toString(), toChainId, {
         value
-        // gasLimit: DEFAULT_GAS_LIMIT
       });
-      // const receipt = await tx.wait(64);
+
       return {
         status: false,
         hash: tx.hash
@@ -38,10 +37,9 @@ const useSwap = () => {
         byteData,
         {
           value
-          // gasLimit: DEFAULT_GAS_LIMIT
         }
       );
-      // const receipt = await tx.wait();
+
       return {
         status: false,
         hash: tx.hash

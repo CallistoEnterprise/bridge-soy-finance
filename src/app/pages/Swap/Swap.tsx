@@ -150,7 +150,6 @@ const Swap = () => {
         await onApprove();
       }
     }
-
     try {
       const maxAmountsIn = Math.floor(1.05 * Number(amountsIn));
       const byte_data = await getEncodedData(web3, [
