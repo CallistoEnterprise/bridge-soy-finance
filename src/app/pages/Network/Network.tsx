@@ -91,7 +91,11 @@ export default function Network() {
             <strong>{t('Step 2:')}</strong> {t('Select the destination network')}
           </p>
           <h6>{t('The network to which you want to send your assets.')}</h6>
-          <NetworkSelection options={Networks} disabled={networkOne.symbol} onChange={onChangeNetworkTwo} />
+          <NetworkSelection
+            options={networkOne.symbol === 'CLO' ? Networks : [Networks[0]]}
+            disabled={networkOne.symbol}
+            onChange={onChangeNetworkTwo}
+          />
           <CustomButton
             className="mt-5"
             onClick={onNext}
