@@ -6,10 +6,12 @@ type SwapFooterProps = {
     swap_amount: string;
     buy_amount: string;
   };
+  toNetwork?: any;
 };
 
-const SwapFooter = ({ values }: SwapFooterProps) => {
+const SwapFooter = ({ values, toNetwork }: SwapFooterProps) => {
   const [t] = useTranslation();
+  const symbol = toNetwork.chainId === '820' ? 'CLO' : 'BTT';
   return (
     <div>
       <div className="d-flex justify-content-between">
@@ -18,7 +20,7 @@ const SwapFooter = ({ values }: SwapFooterProps) => {
         </p>
         <div className="receive_tokens">
           <p className="swapform__subtext">{`${values.swap_amount}`}</p>
-          <p className="swapform__subtext margin-top-5">{`${values.buy_amount} CLO`}</p>
+          <p className="swapform__subtext margin-top-5">{`${values.buy_amount} ${symbol}`}</p>
         </div>
       </div>
       <div className="d-flex justify-content-between mt-3">
