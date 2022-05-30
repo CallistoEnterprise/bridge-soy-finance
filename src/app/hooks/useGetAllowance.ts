@@ -2,25 +2,35 @@ import { ethers } from 'ethers';
 import { useCallback, useEffect, useState } from 'react';
 import { getTokenContract } from '../utils';
 import { getBridgeAddress } from '../utils/addressHelpers';
-import useActiveWeb3React from './useActiveWeb3';
+import useActiveWeb3React from './useActiveWeb3React';
 
-const useGetAllowance = (tokenAddress: string) => {
+const useGetAllowance = (tokenAddress: string, succeed?: boolean) => {
   const { account, library, chainId } = useActiveWeb3React();
   const [allowed, setAllowed] = useState(false);
 
   useEffect(() => {
     const get = async () => {
-      const bridgeAddr = await getBridgeAddress(chainId);
-      const tkContract = await getTokenContract(tokenAddress, library, account);
-      if (tkContract) {
-        const allowance = await tkContract.allowance(account, bridgeAddr, { value: 0 });
-        setAllowed(allowance.gt(0));
+      try {
+        const bridgeAddr = await getBridgeAddress(chainId);
+        const tkContract = await getTokenContract(tokenAddress, library, account);
+
+        if (tkContract) {
+          const allowance = await tkContract.allowance(account, bridgeAddr, { value: 0 });
+          setAllowed(allowance.gt(0));
+        }
+      } catch (error) {
+        console.log(error);
       }
     };
-    if (account && tokenAddress.slice(0, -2) !== '0x00000000000000000000000000000000000000' && tokenAddress !== '') {
+    if (
+      account &&
+      tokenAddress.slice(0, -2) !== '0x00000000000000000000000000000000000000' &&
+      tokenAddress !== '' &&
+      !succeed
+    ) {
       get();
     }
-  }, [library, account, chainId, tokenAddress]);
+  }, [library, account, chainId, tokenAddress, succeed]);
 
   const handleApprove = useCallback(async () => {
     if (tokenAddress !== '') {

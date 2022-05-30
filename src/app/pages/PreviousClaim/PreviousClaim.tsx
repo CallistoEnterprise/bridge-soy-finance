@@ -10,7 +10,7 @@ import WalletInfo from '~/app/components/WalletInfo';
 import { MIN_GAS_AMOUNT } from '~/app/constants';
 import { INetwork } from '~/app/constants/interface';
 import { Networks } from '~/app/constants/strings';
-import useActiveWeb3React from '~/app/hooks/useActiveWeb3';
+import useActiveWeb3React from '~/app/hooks/useActiveWeb3React';
 import useToast from '~/app/hooks/useToast';
 import { useGetBTTBalance, useGetCLOBalance1, useGetTokenBalances } from '~/app/hooks/wallet';
 import { setFromNetwork } from '~/app/modules/wallet/action';
@@ -81,7 +81,7 @@ export default function PreviousClaim() {
         const toNetwork = Networks.find((item) => item.chainId === respJSON.chainId);
         try {
           toastInfo('Info!', 'Please change your network to claim this transaction');
-          await switchNetwork(toNetwork);
+          await switchNetwork(toNetwork, library);
           setPending(false);
           return;
         } catch (error) {

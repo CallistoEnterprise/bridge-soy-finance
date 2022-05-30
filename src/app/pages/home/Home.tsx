@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import BorderContainer from '~/app/components/common/BorderContainer';
 import CustomButton from '~/app/components/common/CustomButton';
 import { Networks } from '~/app/constants/strings';
-import useActiveWeb3React from '~/app/hooks/useActiveWeb3';
+import useActiveWeb3React from '~/app/hooks/useActiveWeb3React';
 import useAuth from '~/app/hooks/useAuth';
 import { setFromNetwork, setStartSwapping } from '~/app/modules/wallet/action';
 import { setupEthereumNetwork, setupNetwork } from '~/app/utils/wallet';

@@ -18,16 +18,21 @@ export const useGetAmountsOut = (amount: string) => {
 
   useEffect(() => {
     const fetch = async () => {
-      const contract = await getSoyRouterContractByWeb3(provider, Number(toNetwork.chainId));
-      const bigAmount = getDecimalAmount(new BigNumber(amount));
-      const path = [swapTokenAddrInCallisto, NATIVE_W_COINS[`${toNetwork.chainId}`]];
-      const outAmt = await contract.methods.getAmountsOut(bigAmount.toString(), path).call();
-      setAmountsOut(outAmt[1]);
+      try {
+        const contract = await getSoyRouterContractByWeb3(provider, Number(toNetwork.chainId));
+        const bigAmount = getDecimalAmount(new BigNumber(amount));
+        const path = [swapTokenAddrInCallisto, NATIVE_W_COINS[`${toNetwork.chainId}`]];
+        const outAmt = await contract.methods.getAmountsOut(bigAmount.toString(), path).call();
+        setAmountsOut(outAmt[1]);
+      } catch (error) {
+        console.log(error);
+      }
     };
     if (
       !Number.isNaN(parseFloat(amount)) &&
       swapTokenAddrInCallisto !== '' &&
-      (toNetwork.chainId === '820' || toNetwork.chainId === '199')
+      (toNetwork.chainId === '820' || toNetwork.chainId === '199') &&
+      swapTokenAddrInCallisto.slice(0, -2) !== '0x00000000000000000000000000000000000000'
     ) {
       fetch();
     } else {
@@ -56,7 +61,8 @@ export const useGetAmountsInput = (amount: string) => {
     if (
       !Number.isNaN(parseFloat(amount)) &&
       swapTokenAddrInCallisto !== '' &&
-      (toNetwork.chainId === '820' || toNetwork.chainId === '199')
+      (toNetwork.chainId === '820' || toNetwork.chainId === '199') &&
+      swapTokenAddrInCallisto.slice(0, -2) !== '0x00000000000000000000000000000000000000'
     ) {
       fetch();
     } else {

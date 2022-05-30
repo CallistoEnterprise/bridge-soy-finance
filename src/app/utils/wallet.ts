@@ -61,12 +61,11 @@ export const setupEthereumNetwork = async (curNet: any) => {
   }
 };
 
-export const switchNetwork = async (curNet: any) => {
-  const provider = window.ethereum;
+export const switchNetwork = async (curNet: any, library?: any) => {
+  const provider = await library?.provider;
 
   if (provider) {
     const chainId = parseInt(curNet.chainId, 10);
-
     try {
       await provider.request({
         method: 'wallet_switchEthereumChain',
