@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { getBridgeContract } from '../utils';
-import useActiveWeb3React from './useActiveWeb3';
+import useActiveWeb3React from './useActiveWeb3React';
 
 const useClaim = () => {
   const { library, account } = useActiveWeb3React();

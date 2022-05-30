@@ -2,7 +2,7 @@ import BigNumber from 'bignumber.js';
 import { useCallback } from 'react';
 import { getBridgeContract } from '../utils';
 import { getBridgeAddress, getSoyRouterAddressByChain } from '../utils/addressHelpers';
-import useActiveWeb3React from './useActiveWeb3';
+import useActiveWeb3React from './useActiveWeb3React';
 
 const useSwap = () => {
   const { library, account, chainId } = useActiveWeb3React();

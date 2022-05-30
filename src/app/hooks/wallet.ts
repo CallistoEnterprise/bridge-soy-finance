@@ -10,7 +10,7 @@ import defaultTokens from '~/app/constants/tokenLists/tokenLists2.json';
 import { setBalance } from '~/app/modules/wallet/action';
 import { getContract } from '~/app/utils';
 import { getBalanceAmount } from '~/app/utils/decimal';
-import useActiveWeb3React from './useActiveWeb3';
+import useActiveWeb3React from './useActiveWeb3React';
 
 // returns null on errors
 function useContract(address: string | undefined, ABI: any, withSignerIfPossible = true): Contract | null {
@@ -32,7 +32,7 @@ const getNodeUrl = (nodes: any) => {
 };
 
 export const useGetCLOBalance = (net: any) => {
-  const { account, chainId } = useActiveWeb3React();
+  const { account } = useActiveWeb3React();
   const [amt, setAmt] = useState<number>(0);
   const RPC_URL = useRpcProvider(net.rpcs);
 
@@ -42,10 +42,10 @@ export const useGetCLOBalance = (net: any) => {
       const bn = new BigNumber(amount + 'e-' + 18);
       setAmt(bn.toNumber());
     };
-    if ((chainId === 820 || chainId === 199) && account) {
+    if ((net.chainId === '820' || net.chainId === '199') && account) {
       getBalance();
     }
-  }, [account, chainId, RPC_URL]);
+  }, [account, RPC_URL, net]);
 
   return amt;
 };

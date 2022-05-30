@@ -10,7 +10,7 @@ import Notice from '~/app/components/Notice';
 import WalletInfo from '~/app/components/WalletInfo';
 import { blockConfirmations } from '~/app/constants/config';
 import { NATIVE_W_COINS } from '~/app/constants/tokens';
-import useActiveWeb3React from '~/app/hooks/useActiveWeb3';
+import useActiveWeb3React from '~/app/hooks/useActiveWeb3React';
 import useCurrentBlockTimestamp from '~/app/hooks/useCurrentBlockTimestamp';
 import useGetAllowance from '~/app/hooks/useGetAllowance';
 import useGetWeb3 from '~/app/hooks/useGetWeb3';
@@ -33,7 +33,7 @@ import './swap.css';
 import SwapForm from './SwapForm';
 
 const Swap = () => {
-  const { account, chainId } = useActiveWeb3React();
+  const { account, library } = useActiveWeb3React();
   const [t] = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -48,7 +48,7 @@ const Swap = () => {
   const swapTokenAddrInCallisto = selectedToken?.address[`${toNetwork.chainId}`];
   const wAddr = NATIVE_W_COINS[`${toNetwork.chainId}`];
 
-  const { onApprove, allowed } = useGetAllowance(swapTokenAddr);
+  const { onApprove, allowed } = useGetAllowance(swapTokenAddr, succeed);
   const { onAdvancedSwap, onSimpleSwap } = useSwap();
   const web3 = useGetWeb3(fromNetwork?.rpcs[0]);
   const deadline = useCurrentBlockTimestamp();
@@ -79,7 +79,7 @@ const Swap = () => {
           setSucced(true);
           setPending(false);
           dispatch(setStartSwapping(false));
-          await switchNetwork(toNetwork);
+          await switchNetwork(toNetwork, library);
           setSwitched(true);
           setTxBlockNumber(0);
           dispatch(setConfirmedBlockCounts(0));
@@ -91,7 +91,7 @@ const Swap = () => {
     if (txBlockNumber !== 0 && pending) {
       getCurrentBlock();
     }
-  }, [dispatch, txBlockNumber, pending, chainId, toNetwork, web3, fromNetwork]);
+  }, [dispatch, txBlockNumber, pending, library, toNetwork, web3, fromNetwork]);
 
   const onSubmit = (values: any) => {
     let neededTokenBalance = Number(tokenBalance);

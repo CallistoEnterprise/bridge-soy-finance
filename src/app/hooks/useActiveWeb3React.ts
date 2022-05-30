@@ -5,7 +5,7 @@ import { Web3ReactContextInterface } from '@web3-react/core/dist/types';
 import { InjectedConnector } from '@web3-react/injected-connector';
 import { useEffect, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
-import { simpleRpcProvider } from '~/app/utils/providers';
+import { getProviderByChainId } from '~/app/utils/getRpcUrl';
 
 declare let window: any;
 
@@ -84,6 +84,23 @@ export function useInactiveListener(suppress = false) {
   }, [active, error, suppress, activate]);
 }
 
+const useGetSimpleRpcProvider = (chainId: number) => {
+  const [provider, setSimpleProvider] = useState(null);
+
+  useEffect(() => {
+    const get = async () => {
+      const pvd = getProviderByChainId(chainId);
+      setSimpleProvider(pvd);
+    };
+    if (chainId) {
+      get();
+    } else {
+      setSimpleProvider(null);
+    }
+  }, [chainId]);
+
+  return provider;
+};
 /**
  * Provides a web3 provider with or without user's signer
  * Recreate web3 instance only if the provider change
@@ -91,16 +108,18 @@ export function useInactiveListener(suppress = false) {
 const useActiveWeb3React = (): Web3ReactContextInterface<Web3Provider> => {
   const { library, chainId, ...web3React } = useWeb3React();
   const refEth = useRef(library);
-  const [provider, setprovider] = useState(library || simpleRpcProvider);
+  const simpleRpcProviderForMulti = useGetSimpleRpcProvider(chainId);
+  const [provider, setprovider] = useState(library || simpleRpcProviderForMulti);
 
   useEffect(() => {
     if (library !== refEth.current) {
-      setprovider(library || simpleRpcProvider);
+      setprovider(library || simpleRpcProviderForMulti);
+      library.provider.removeAllListeners(['networkChanged']);
       refEth.current = library;
     }
-  }, [library]);
+  }, [library, simpleRpcProviderForMulti]);
 
-  return { library: provider, chainId: chainId ?? parseInt(process.env.REACT_APP_CHAIN_ID, 10), ...web3React };
+  return { library: provider, chainId, ...web3React };
 };
 
 export default useActiveWeb3React;

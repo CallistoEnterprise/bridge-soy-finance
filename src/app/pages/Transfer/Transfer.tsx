@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import CustomButton from '~/app/components/common/CustomButton';
 import { TokenSelection2 } from '~/app/components/TokenSelection/TokenSelection';
 import { addTokenList } from '~/app/constants/strings';
-import useActiveWeb3React from '~/app/hooks/useActiveWeb3';
+import useActiveWeb3React from '~/app/hooks/useActiveWeb3React';
 import useToast from '~/app/hooks/useToast';
 import useGetWalletState from '~/app/modules/wallet/hooks';
 import { registerToken } from '~/app/utils/wallet';
