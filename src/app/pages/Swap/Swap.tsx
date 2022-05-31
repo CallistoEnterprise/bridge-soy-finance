@@ -251,7 +251,7 @@ const Swap = () => {
                 <BorderContainer className="swap__content__bordercontainer">
                   <div>
                     <p className="swap__content--row">
-                      <strong>{t('Step 4:')}</strong> {t('Swap')}
+                      <strong>{t('Step 4:')}</strong> {t('Transfer')}
                     </p>
                     <SwapForm
                       submit={onSubmit}

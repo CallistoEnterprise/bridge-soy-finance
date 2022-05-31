@@ -62,7 +62,7 @@ export default function TokenList() {
         <WalletInfo pending={false} fromNetwork={fromNetwork} />
         <div className="tokenlist__content__steps">
           <p>
-            <strong>{t('Step 3:')}</strong> {t('Select the asset to swap')}
+            <strong>{t('Step 3:')}</strong> {t('Select the asset to transfer')}
           </p>
           <input
             className="form-control tokenlist__content__filter"
