@@ -153,7 +153,7 @@ export default function SwapForm({ submit, initialData, pending, canBuyCLO, setB
                       </div>
                     </div>
                   </div>
-                  {!disable && (
+                  {disable && (
                     <div className="row mt-4 swapform__row">
                       <div className="col">
                         <CustomCheckbox
@@ -242,7 +242,7 @@ export default function SwapForm({ submit, initialData, pending, canBuyCLO, setB
                         Wait...
                       </div>
                     ) : (
-                      t('SWAP')
+                      t('TRANSFER')
                     )}
                   </button>
                 </div>

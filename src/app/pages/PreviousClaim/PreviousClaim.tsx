@@ -9,7 +9,7 @@ import NetworkSelection from '~/app/components/NetworkSelection';
 import WalletInfo from '~/app/components/WalletInfo';
 import { MIN_GAS_AMOUNT } from '~/app/constants';
 import { INetwork } from '~/app/constants/interface';
-import { Networks } from '~/app/constants/strings';
+import { Networks, NetworksObj } from '~/app/constants/strings';
 import useActiveWeb3React from '~/app/hooks/useActiveWeb3React';
 import useToast from '~/app/hooks/useToast';
 import { useGetBTTBalance, useGetCLOBalance1, useGetTokenBalances } from '~/app/hooks/wallet';
@@ -32,9 +32,9 @@ export default function PreviousClaim() {
 
   const { fromNetwork, destinationAddress } = useSelector((state: any) => state.walletBridge);
   const { library, chainId, account } = useActiveWeb3React();
-  const [networkOne, setNetworkOne] = useState(Networks[0]);
+  const [networkOne, setNetworkOne] = useState(NetworksObj[chainId ?? 820]);
 
-  const pendingBalance = useGetTokenBalances(Networks[0]);
+  const pendingBalance = useGetTokenBalances(NetworksObj[chainId ?? 820]);
   const { toastError, toastWarning, toastInfo, toastSuccess } = useToast();
 
   const cloBalance = useGetCLOBalance1();
@@ -52,13 +52,6 @@ export default function PreviousClaim() {
     setNetworkOne(option);
     dispatch(setFromNetwork(option));
   };
-
-  // useEffect(() => {
-  //   const changeNetwork = async () => {
-  //     await switchNetwork(networkOne);
-  //   };
-  //   changeNetwork();
-  // }, [networkOne]);
 
   async function handleClaim() {
     if (hash) {
@@ -129,7 +122,6 @@ export default function PreviousClaim() {
                   signatures,
                   {
                     value: 0
-                    // gasLimit: DEFAULT_GAS_LIMIT
                   }
                 )
               : await bridgeContract.claim(
@@ -166,7 +158,7 @@ export default function PreviousClaim() {
     <div className="previousclaim container">
       <div className="previousclaim__content">
         <div>
-          <WalletInfo pending={pendingBalance} fromNetwork={Networks[0]} />
+          <WalletInfo pending={pendingBalance} fromNetwork={NetworksObj[chainId ?? 820]} />
           <CustomButton className="previous_btn mt-4" onClick={onPrevious}>
             <div>
               <img src={previousIcon} alt="previousIcon" className="me-2" />

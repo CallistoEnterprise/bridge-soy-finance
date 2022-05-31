@@ -517,6 +517,62 @@ export const Networks = [
     explorer: 'https://scan.bt.io/'
   }
 ];
+export const NetworksObj: { [chainId: number | string]: any } = {
+  820: {
+    name: 'Callisto Network',
+    symbol: 'CLO',
+    devNet: 'mainnet',
+    img: '/images/clo.svg',
+    chainId: '820',
+    decimals: '18',
+    rpcs: ['https://clo-geth.0xinfra.com/'],
+    explorer: 'https://explorer.callisto.network/'
+  },
+  56: {
+    name: 'BSC Network',
+    symbol: 'BNB',
+    devNet: 'mainnet',
+    img: '/images/bnb.svg',
+    chainId: '56',
+    decimals: '18',
+    rpcs: [
+      'https://bsc-dataseed.binance.org/',
+      'https://bsc-dataseed1.defibit.io/'
+      // 'https://bsc-dataseed1.ninicoin.io/'
+    ],
+    explorer: 'https://bscscan.com/'
+  },
+  1: {
+    name: 'Ethereum Network',
+    symbol: 'ETH',
+    devNet: 'mainnet',
+    img: '/images/eth.svg',
+    chainId: '1',
+    decimals: '18',
+    rpcs: ['https://mainnet.infura.io/v3/d819f1add1a34a60adab4df578e0e741'],
+    explorer: 'https://etherscan.io/'
+  },
+  61: {
+    name: 'Ethereum Classic',
+    symbol: 'ETC',
+    devNet: 'mainnet',
+    img: '/images/etc.svg',
+    chainId: '61',
+    decimals: '18',
+    rpcs: ['https://www.ethercluster.com/etc'],
+    explorer: 'https://blockscout.com/etc/mainnet/'
+  },
+  199: {
+    name: 'BitTorrent Chain',
+    symbol: 'BTT',
+    devNet: 'mainnet',
+    img: '/images/btt.png',
+    chainId: '199',
+    decimals: '18',
+    rpcs: ['https://rpc.bt.io/'],
+    explorer: 'https://scan.bt.io/'
+  }
+};
 
 export const addTokenList = [
   {

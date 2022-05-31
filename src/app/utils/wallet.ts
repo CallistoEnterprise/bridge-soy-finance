@@ -1,3 +1,5 @@
+import { prevChainIdKey } from '../constants';
+
 // Set of helper functions to facilitate wallet setup
 declare let window: any;
 const BASE_URL = 'https://callistobridge.netlify.app';
@@ -10,6 +12,7 @@ export const setupNetwork = async (curNet: any) => {
 
   if (provider) {
     const chainId = parseInt(curNet.chainId, 10);
+    window.localStorage.setItem(prevChainIdKey, chainId);
     try {
       await provider.request({
         method: 'wallet_addEthereumChain',
@@ -41,6 +44,7 @@ export const setupEthereumNetwork = async (curNet: any) => {
   const provider = window.ethereum;
   if (provider) {
     const chainId = parseInt(curNet.chainId, 10);
+    window.localStorage.setItem(prevChainIdKey, chainId);
     try {
       await provider.request({
         method: 'wallet_switchEthereumChain',
@@ -66,6 +70,8 @@ export const switchNetwork = async (curNet: any, library?: any) => {
 
   if (provider) {
     const chainId = parseInt(curNet.chainId, 10);
+    window.localStorage.setItem(prevChainIdKey, chainId);
+
     try {
       await provider.request({
         method: 'wallet_switchEthereumChain',
