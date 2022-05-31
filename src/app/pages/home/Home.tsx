@@ -6,7 +6,8 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import BorderContainer from '~/app/components/common/BorderContainer';
 import CustomButton from '~/app/components/common/CustomButton';
-import { Networks } from '~/app/constants/strings';
+import { prevChainIdKey } from '~/app/constants';
+import { NetworksObj } from '~/app/constants/strings';
 import useActiveWeb3React from '~/app/hooks/useActiveWeb3React';
 import useAuth from '~/app/hooks/useAuth';
 import { setFromNetwork, setStartSwapping } from '~/app/modules/wallet/action';
@@ -24,6 +25,8 @@ export default function Home() {
   const [t] = useTranslation();
   const navigate = useNavigate();
   const [page, setPage] = useState<string>('');
+
+  const prevChainId = window.localStorage.getItem(prevChainIdKey);
 
   const { account } = useActiveWeb3React();
   const { login } = useAuth();
@@ -44,8 +47,9 @@ export default function Home() {
 
   const onPreviousClaim = async () => {
     setPage('previousclaim');
-    login(isMobile ? ConnectorNames.WalletConnect : ConnectorNames.Injected, Networks[0]);
-    const network = Networks[0];
+    const chainId = prevChainId ?? 820;
+    login(isMobile ? ConnectorNames.WalletConnect : ConnectorNames.Injected, NetworksObj[chainId]);
+    const network = NetworksObj[chainId];
     dispatch(setFromNetwork(network));
     if (network.symbol === 'ETH') {
       await setupEthereumNetwork(network);
@@ -55,8 +59,9 @@ export default function Home() {
   };
 
   const onClickMetamask = async (connectorId: ConnectorNames) => {
-    login(connectorId, Networks[0]);
-    const network = Networks[0];
+    const chainId = prevChainId ?? 820;
+    login(connectorId, NetworksObj[chainId]);
+    const network = NetworksObj[chainId];
     dispatch(setFromNetwork(network));
     if (network.symbol === 'ETH') {
       await setupEthereumNetwork(network);

@@ -57,11 +57,10 @@ const Swap = () => {
   const { toastError, toastWarning } = useToast();
   const tokenBalance = balance[`${selectedToken.symbol}`];
   const disable =
-    ((fromNetwork?.symbol === 'CLO' || toNetwork?.symbol !== 'CLO' || selectedToken.symbol === 'CLO') &&
-      toNetwork.chainId === '820') ||
-    ((fromNetwork?.symbol === 'BTT' || toNetwork?.symbol !== 'BTT' || selectedToken.symbol === 'BTT') &&
-      toNetwork.chainId === '199');
+    (selectedToken.symbol !== 'CLO' && toNetwork.chainId === '820') ||
+    (selectedToken.symbol !== 'BTT' && toNetwork.chainId === '199');
 
+  console.log(disable, toNetwork);
   const onPrevious = () => {
     navigate('/tokens');
   };

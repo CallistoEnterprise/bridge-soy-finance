@@ -104,3 +104,5 @@ export const RPCs: { [chainId: number | string]: string } = {
   '61': 'https://www.ethercluster.com/etc',
   '199': 'https://rpc.bt.io/'
 };
+
+export const prevChainIdKey = 'prevChainIdKey';

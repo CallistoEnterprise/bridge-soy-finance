@@ -9,7 +9,7 @@ import GuidePet from '~/app/components/common/GuidePet';
 import NetworkSelection from '~/app/components/NetworkSelection';
 import WalletInfo from '~/app/components/WalletInfo';
 import { INetwork } from '~/app/constants/interface';
-import { Networks } from '~/app/constants/strings';
+import { Networks, NetworksObj } from '~/app/constants/strings';
 import useActiveWeb3React from '~/app/hooks/useActiveWeb3React';
 import { useGetTokenBalances } from '~/app/hooks/wallet';
 import { setFromNetwork, setStartSwapping, setToNetwork } from '~/app/modules/wallet/action';
@@ -26,8 +26,8 @@ export default function Network() {
   const dispatch = useDispatch();
   const [t] = useTranslation();
   const navigate = useNavigate();
-  const { library } = useActiveWeb3React();
-  const [networkOne, setNetworkOne] = useState(Networks[0]);
+  const { library, chainId } = useActiveWeb3React();
+  const [networkOne, setNetworkOne] = useState(NetworksObj[chainId ?? 820]);
   const [networkTwo, setNetworkTwo] = useState<any>(null);
 
   const pendingBalance = useGetTokenBalances(networkOne);
