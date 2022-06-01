@@ -8,7 +8,14 @@ export default function GuidePet() {
     <div className="guidepet">
       <img src={guidePet} alt="guidePet" />
       <div>
-        <CustomButton className="guidepet__videoguide">Video Guide</CustomButton>
+        <CustomButton
+          className="guidepet__videoguide"
+          onClick={() => {
+            window.open('https://youtu.be/EWiSFPAkjSU', '_blank');
+          }}
+        >
+          Video Guide
+        </CustomButton>
       </div>
     </div>
   );

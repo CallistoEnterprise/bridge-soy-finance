@@ -13,7 +13,6 @@ import useAuth from '~/app/hooks/useAuth';
 import { setFromNetwork, setStartSwapping } from '~/app/modules/wallet/action';
 import { setupEthereumNetwork, setupNetwork } from '~/app/utils/wallet';
 import animal from '~/assets/images/animal.png';
-import helpIcon from '~/assets/images/help.svg';
 import metamaskIcon from '~/assets/images/metamask.svg';
 import moreWallet from '~/assets/images/more-wallet.svg';
 import trustIcon from '~/assets/images/trust.svg';
@@ -77,10 +76,10 @@ export default function Home() {
       <BorderContainer className="home__content bordercontainer--noborder">
         <div className="home__wallets">
           <p className="home__wallets__title">{t('Select your wallet')}</p>
-          <div className="home__help">
+          {/* <div className="home__help">
             <img src={helpIcon} alt="helpIcon" />
             <p>Help</p>
-          </div>
+          </div> */}
           <div className="mt-5">
             <BorderContainer className="home__wallets__block" onClick={() => onClickMetamask(ConnectorNames.Injected)}>
               <div>
