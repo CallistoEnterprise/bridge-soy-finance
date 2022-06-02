@@ -91,7 +91,7 @@ export const DEFAULT_GAS_LIMIT = 3000000;
 
 export const MIN_GAS_AMOUNT = {
   820: 0.1,
-  199: 50
+  199: 100
 };
 
 export const RPCs: { [chainId: number | string]: string } = {
