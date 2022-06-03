@@ -15,14 +15,19 @@ export enum PairState {
   INVALID
 }
 
-export function usePairs(currencies: [Currency | undefined, Currency | undefined][]): [PairState, Pair | null][] {
+export function usePairs(
+  currencies: [Currency | undefined, Currency | undefined][],
+  chainId?: number
+): [PairState, Pair | null][] {
   // const { chainId } = useActiveWeb3React();
   const tokens = useMemo(
     () =>
-      currencies.map(([currencyA, currencyB]) => [wrappedCurrency(currencyA, 820), wrappedCurrency(currencyB, 820)]),
-    [currencies]
+      currencies.map(([currencyA, currencyB]) => [
+        wrappedCurrency(currencyA, chainId),
+        wrappedCurrency(currencyB, chainId)
+      ]),
+    [currencies, chainId]
   );
-
   const pairAddresses = useMemo(
     () =>
       tokens.map(([tokenA, tokenB]) => {

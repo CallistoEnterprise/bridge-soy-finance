@@ -28,6 +28,8 @@ type props = {
   initialData?: any;
   pending: boolean;
   canBuyCLO: boolean;
+  inputCurrency: any;
+  outputCurrency: any;
   setBuyCLO: () => void;
 };
 
@@ -47,7 +49,17 @@ const registerSchema = Yup.object().shape({
 
 const inputRegex = RegExp(`^\\d*(?:\\\\[.])?\\d*$`);
 
-export default function SwapForm({ submit, initialData, pending, canBuyCLO, setBuyCLO, disable, tokenBalance }: props) {
+export default function SwapForm({
+  submit,
+  initialData,
+  pending,
+  canBuyCLO,
+  setBuyCLO,
+  disable,
+  tokenBalance,
+  inputCurrency,
+  outputCurrency
+}: props) {
   const [t] = useTranslation();
   // const dispatch = useDispatch();
 
@@ -68,7 +80,15 @@ export default function SwapForm({ submit, initialData, pending, canBuyCLO, setB
 
   const receiveOriginAmount = intInputAmount - getBalanceAmount(amountsIn).toNumber();
   const fullOutAmount = getBalanceAmount(amountsOut, selectedToken?.decimals[`${toNetwork.chainId}`]).toNumber();
+  // const parsedAmount = tryParseAmount(buy_amount, outputCurrency ?? undefined);
 
+  // const bestTradeExactOut = useTradeExactOut(
+  //   inputCurrency ?? undefined,
+  //   parsedAmount ?? undefined,
+  //   Number(toNetwork.chainId)
+  // );
+
+  // console.log(inputCurrency, bestTradeExactOut, parsedAmount);
   const onChangeDestination = (status: boolean) => {
     setDestination(status);
   };

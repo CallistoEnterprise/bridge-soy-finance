@@ -165,8 +165,11 @@ export function useToken(tokenAddress?: string): Token | undefined | null {
   ]);
 }
 
-export function useCurrency(currencyId: string | undefined): Currency | null | undefined {
+export function useCurrency(currencyId: string | undefined, disable?: boolean): Currency | null | undefined {
   const isCLO = currencyId?.toUpperCase() === 'CLO';
   const token = useToken(isCLO ? undefined : currencyId);
+  if (!disable) {
+    return null;
+  }
   return isCLO ? ETHER : token;
 }

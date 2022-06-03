@@ -23,12 +23,12 @@ const SwapFooter = ({ values, toNetwork }: SwapFooterProps) => {
           <p className="swapform__subtext margin-top-5">{`${values.buy_amount} ${symbol}`}</p>
         </div>
       </div>
-      <div className="d-flex justify-content-between mt-3">
+      {/* <div className="d-flex justify-content-between mt-3">
         <p className="swapform__subtext">
           <strong>{t('Price impact')}</strong>
         </p>
         <p className="swapform__subtext">{`<0.5%`}</p>
-      </div>
+      </div> */}
     </div>
   );
 };

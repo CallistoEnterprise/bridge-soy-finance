@@ -4,6 +4,8 @@ import { ToastListener } from '~/app/contexts/ToastsContext';
 import '../styles/app.css';
 import Spinner from './components/common/Spinner';
 import { Footer, Header } from './layout';
+import Updater from './modules/home/updater';
+import MulticallUpdater from './modules/multicall/updater';
 
 const Home = lazy(() => import('./pages/home'));
 const Network = lazy(() => import('./pages/Network'));
@@ -24,7 +26,8 @@ export default function AppRouter() {
   return (
     <BrowserRouter>
       <Header />
-
+      <Updater />
+      <MulticallUpdater />
       <Suspense fallback={<LoadingMessage />}>
         <Routes>
           <Route path="/" element={<Home />} />

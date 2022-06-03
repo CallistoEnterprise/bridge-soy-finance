@@ -49,10 +49,11 @@ export const NEVER_RELOAD: ListenerOptions = {
 
 // the lowest level call for subscribing to contract data
 function useCallsData(calls: (Call | undefined)[], options?: ListenerOptions): CallResult[] {
-  const chainId = 820;
+  const chainId = localStorage.getItem('toChainId') ? Number(localStorage.getItem('toChainId')) : 820;
   const callResults = useSelector<AppState, AppState['multicallBridge']['callResults']>(
     (state: any) => state.multicallBridge.callResults
   );
+
   const dispatch = useDispatch<AppDispatch>();
 
   const serializedCallKeys: string = useMemo(
@@ -89,7 +90,7 @@ function useCallsData(calls: (Call | undefined)[], options?: ListenerOptions): C
         })
       );
     };
-  }, [dispatch, options, serializedCallKeys]);
+  }, [dispatch, options, serializedCallKeys, chainId]);
 
   return useMemo(
     () =>
