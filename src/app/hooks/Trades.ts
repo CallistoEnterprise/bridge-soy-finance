@@ -14,8 +14,9 @@ import { useUnsupportedTokens } from './Tokens';
 import useActiveWeb3React from './useActiveWeb3React';
 import { PairState, usePairs } from './usePairs';
 
-function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency): Pair[] {
-  const { chainId } = useActiveWeb3React();
+function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency, chain?: number): Pair[] {
+  // const { chainId } = useActiveWeb3React();
+  const chainId = chain ? chain : 820;
 
   const [tokenA, tokenB] = chainId
     ? [wrappedCurrency(currencyA, chainId), wrappedCurrency(currencyB, chainId)]
@@ -24,9 +25,9 @@ function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency): Pair[] {
   const bases: Token[] = useMemo(() => {
     if (!chainId) return [];
 
-    const common = BASES_TO_CHECK_TRADES_AGAINST[820] ?? [];
-    const additionalA = tokenA ? ADDITIONAL_BASES[820]?.[tokenA.address] ?? [] : [];
-    const additionalB = tokenB ? ADDITIONAL_BASES[820]?.[tokenB.address] ?? [] : [];
+    const common = BASES_TO_CHECK_TRADES_AGAINST[chainId] ?? [];
+    const additionalA = tokenA ? ADDITIONAL_BASES[chainId]?.[tokenA.address] ?? [] : [];
+    const additionalB = tokenB ? ADDITIONAL_BASES[chainId]?.[tokenB.address] ?? [] : [];
 
     return [...common, ...additionalA, ...additionalB];
   }, [chainId, tokenA, tokenB]);
@@ -53,7 +54,7 @@ function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency): Pair[] {
             .filter(([t0, t1]) => t0.address !== t1.address)
             .filter(([tokenA_, tokenB_]) => {
               if (!chainId) return true;
-              const customBases = CUSTOM_BASES[820];
+              const customBases = CUSTOM_BASES[chainId];
 
               const customBasesA: Token[] | undefined = customBases?.[tokenA_.address];
               const customBasesB: Token[] | undefined = customBases?.[tokenB_.address];
@@ -128,8 +129,12 @@ export function useTradeExactIn(currencyAmountIn?: CurrencyAmount, currencyOut?:
 /**
  * Returns the best trade for the token in to the exact amount of token out
  */
-export function useTradeExactOut(currencyIn?: Currency, currencyAmountOut?: CurrencyAmount): Trade | null {
-  const allowedPairs = useAllCommonPairs(currencyIn, currencyAmountOut?.currency);
+export function useTradeExactOut(
+  currencyIn?: Currency,
+  currencyAmountOut?: CurrencyAmount,
+  chainId?: number
+): Trade | null {
+  const allowedPairs = useAllCommonPairs(currencyIn, currencyAmountOut?.currency, chainId);
 
   const singleHopOnly = false; // useUserSingleHopOnly();
 

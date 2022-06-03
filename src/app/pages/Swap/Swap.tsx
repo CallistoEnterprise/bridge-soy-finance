@@ -1,3 +1,4 @@
+import { Token } from '@soy-libs/sdk2';
 import BigNumber from 'bignumber.js';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -60,7 +61,21 @@ const Swap = () => {
     (selectedToken.symbol !== 'CLO' && toNetwork.chainId === '820') ||
     (selectedToken.symbol !== 'BTT' && toNetwork.chainId === '199');
 
-  console.log(disable, toNetwork);
+  const inputCurrency = new Token(
+    Number(toNetwork.chainId),
+    swapTokenAddrInCallisto,
+    Number(selectedToken?.decimals[`${toNetwork.chainId}`]),
+    selectedToken?.symbol,
+    selectedToken?.name
+  );
+  const outputCurrency = new Token(
+    Number(toNetwork.chainId),
+    wAddr,
+    18,
+    toNetwork.chainId === '820' ? 'WCLO' : 'BTT',
+    toNetwork.chainId === '820' ? 'Wrapped CLO' : 'Wrapped BTT'
+  );
+
   const onPrevious = () => {
     navigate('/tokens');
   };
@@ -261,6 +276,8 @@ const Swap = () => {
                       initialData={{ swap_amount: '0', buy_amount: '0', destination_wallet: account }}
                       setBuyCLO={() => setCanBuyCLO(!canBuyCLO)}
                       tokenBalance={tokenBalance}
+                      inputCurrency={inputCurrency}
+                      outputCurrency={outputCurrency}
                     />
                   </div>
                 </BorderContainer>

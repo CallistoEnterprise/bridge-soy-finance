@@ -52,6 +52,7 @@ export default function Network() {
   const onChangeNetworkOne = async (option: INetwork) => {
     dispatch(setFromNetwork(option));
     setNetworkOne(option);
+    localStorage.setItem('toChainId', option.chainId);
   };
 
   const onChangeNetworkTwo = (option: INetwork) => {

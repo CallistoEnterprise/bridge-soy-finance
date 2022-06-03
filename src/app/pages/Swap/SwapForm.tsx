@@ -2,8 +2,6 @@ import { useWeb3React } from '@web3-react/core';
 import { Field, Formik } from 'formik';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-// import { toast } from 'react-toastify';
-// import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 import CustomCheckbox from '~/app/components/common/CustomCheckbox';
 import FormInput from '~/app/components/common/FormInput';
@@ -11,9 +9,6 @@ import Spinner from '~/app/components/common/Spinner';
 import { useGetAmountsInput, useGetAmountsOut } from '~/app/hooks/useGetAmountsOut';
 import useToast from '~/app/hooks/useToast';
 import { useGetCLOBalance } from '~/app/hooks/wallet';
-// import { FieldInput } from '~/app/modules/swap/action';
-// import { useSwapActionHandlers } from '~/app/modules/swap/hooks';
-// import useGetSwapState, { useDerivedSwapInfo, useSwapActionHandlers } from '~/app/modules/swap/hooks';
 import useGetWalletState from '~/app/modules/wallet/hooks';
 import { escapeRegExp } from '~/app/utils';
 import { getBalanceAmount } from '~/app/utils/decimal';
@@ -28,6 +23,8 @@ type props = {
   initialData?: any;
   pending: boolean;
   canBuyCLO: boolean;
+  inputCurrency: any;
+  outputCurrency: any;
   setBuyCLO: () => void;
 };
 
@@ -36,20 +33,22 @@ const registerSchema = Yup.object().shape({
     .typeError('Amount must be a number')
     .required('Please provide swap amount.')
     .min(0, 'Too little')
-  // buy_amount: Yup.number()
-  //   .typeError('Amount must be a number')
-  //   .required('Please provide buy amount.')
-  //   .min(0, 'Too little'),
-  // destination_wallet: Yup.string()
-  //   .min(2, `buy_amount has to be at least 2 characters`)
-  //   .required('buy_amount is required')
 });
 
 const inputRegex = RegExp(`^\\d*(?:\\\\[.])?\\d*$`);
 
-export default function SwapForm({ submit, initialData, pending, canBuyCLO, setBuyCLO, disable, tokenBalance }: props) {
+export default function SwapForm({
+  submit,
+  initialData,
+  pending,
+  canBuyCLO,
+  setBuyCLO,
+  disable,
+  tokenBalance,
+  inputCurrency,
+  outputCurrency
+}: props) {
   const [t] = useTranslation();
-  // const dispatch = useDispatch();
 
   const [destination, setDestination] = useState(false);
   const { chainId } = useWeb3React();
@@ -68,7 +67,15 @@ export default function SwapForm({ submit, initialData, pending, canBuyCLO, setB
 
   const receiveOriginAmount = intInputAmount - getBalanceAmount(amountsIn).toNumber();
   const fullOutAmount = getBalanceAmount(amountsOut, selectedToken?.decimals[`${toNetwork.chainId}`]).toNumber();
+  // const parsedAmount = tryParseAmount(buy_amount, outputCurrency ?? undefined);
 
+  // const bestTradeExactOut = useTradeExactOut(
+  //   inputCurrency ?? undefined,
+  //   parsedAmount ?? undefined,
+  //   Number(toNetwork.chainId)
+  // );
+
+  // console.log(inputCurrency, bestTradeExactOut, parsedAmount);
   const onChangeDestination = (status: boolean) => {
     setDestination(status);
   };
