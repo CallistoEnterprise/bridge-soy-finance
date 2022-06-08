@@ -61,20 +61,27 @@ const Swap = () => {
     (selectedToken.symbol !== 'CLO' && toNetwork.chainId === '820') ||
     (selectedToken.symbol !== 'BTT' && toNetwork.chainId === '199');
 
-  const inputCurrency = new Token(
-    Number(toNetwork.chainId),
-    swapTokenAddrInCallisto,
-    Number(selectedToken?.decimals[`${toNetwork.chainId}`]),
-    selectedToken?.symbol,
-    selectedToken?.name
-  );
-  const outputCurrency = new Token(
-    Number(toNetwork.chainId),
-    wAddr,
-    18,
-    toNetwork.chainId === '820' ? 'WCLO' : 'BTT',
-    toNetwork.chainId === '820' ? 'Wrapped CLO' : 'Wrapped BTT'
-  );
+  const inputCurrency =
+    swapTokenAddrInCallisto === ''
+      ? undefined
+      : new Token(
+          Number(toNetwork.chainId),
+          swapTokenAddrInCallisto,
+          Number(selectedToken?.decimals[`${toNetwork.chainId}`]),
+          selectedToken?.symbol,
+          selectedToken?.name
+        );
+
+  const outputCurrency =
+    wAddr === ''
+      ? undefined
+      : new Token(
+          Number(toNetwork.chainId),
+          wAddr,
+          18,
+          toNetwork.chainId === '820' ? 'WCLO' : 'BTT',
+          toNetwork.chainId === '820' ? 'Wrapped CLO' : 'Wrapped BTT'
+        );
 
   const onPrevious = () => {
     navigate('/tokens');
