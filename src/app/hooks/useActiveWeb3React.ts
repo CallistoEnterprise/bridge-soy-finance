@@ -114,7 +114,7 @@ const useActiveWeb3React = (): Web3ReactContextInterface<Web3Provider> => {
   useEffect(() => {
     if (library !== refEth.current && library) {
       setprovider(library || simpleRpcProviderForMulti);
-      library?.provider.removeAllListeners(['networkChanged']);
+      library?.provider?.removeAllListeners(['networkChanged']);
       refEth.current = library;
     }
   }, [library, simpleRpcProviderForMulti]);
