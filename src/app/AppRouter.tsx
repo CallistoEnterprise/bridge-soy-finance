@@ -15,7 +15,7 @@ const Transfer = lazy(() => import('./pages/Transfer'));
 const PreviousClaim = lazy(() => import('./pages/PreviousClaim'));
 
 export default function AppRouter() {
-  window.ethereum.removeAllListeners(['networkChanged']);
+  window.ethereum?.removeAllListeners(['networkChanged']);
 
   const LoadingMessage = () => (
     <div className="loading">

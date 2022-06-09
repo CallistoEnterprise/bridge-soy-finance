@@ -1,6 +1,5 @@
 import { ConnectorNames } from '@soy-libs/uikit2';
 import React, { useEffect, useState } from 'react';
-import { isMobile } from 'react-device-detect';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +9,7 @@ import { prevChainIdKey } from '~/app/constants';
 import { NetworksObj } from '~/app/constants/strings';
 import useActiveWeb3React from '~/app/hooks/useActiveWeb3React';
 import useAuth from '~/app/hooks/useAuth';
+import useToast from '~/app/hooks/useToast';
 import { setFromNetwork, setStartSwapping } from '~/app/modules/wallet/action';
 import { setupEthereumNetwork, setupNetwork } from '~/app/utils/wallet';
 import animal from '~/assets/images/animal.png';
@@ -24,6 +24,8 @@ export default function Home() {
   const [t] = useTranslation();
   const navigate = useNavigate();
   const [page, setPage] = useState<string>('');
+  const [isPrev, setIsPrev] = useState<boolean>(false);
+  const { toastWarning } = useToast();
 
   const prevChainId = window.localStorage.getItem(prevChainIdKey);
 
@@ -45,9 +47,15 @@ export default function Home() {
   };
 
   const onPreviousClaim = async () => {
+    if (!account) {
+      setIsPrev(true);
+      toastWarning('Warning!', 'Please connect wallet.');
+      return;
+    }
+    setIsPrev(false);
     setPage('previousclaim');
     const chainId = prevChainId ?? 820;
-    login(isMobile ? ConnectorNames.WalletConnect : ConnectorNames.Injected, NetworksObj[chainId]);
+    // login(isMobile ? ConnectorNames.WalletConnect : ConnectorNames.Injected, NetworksObj[chainId]);
     const network = NetworksObj[chainId];
     dispatch(setFromNetwork(network));
     if (network.symbol === 'ETH') {
@@ -67,7 +75,11 @@ export default function Home() {
     } else {
       await setupNetwork(network);
     }
-    setPage('network');
+    if (!isPrev) {
+      setPage('network');
+    } else {
+      setPage('previousclaim');
+    }
   };
 
   return (
