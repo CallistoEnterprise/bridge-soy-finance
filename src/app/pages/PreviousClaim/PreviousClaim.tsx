@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -12,7 +12,7 @@ import { INetwork } from '~/app/constants/interface';
 import { Networks, NetworksObj } from '~/app/constants/strings';
 import useActiveWeb3React from '~/app/hooks/useActiveWeb3React';
 import useToast from '~/app/hooks/useToast';
-import { useGetBTTBalance, useGetCLOBalance1, useGetTokenBalances } from '~/app/hooks/wallet';
+import { useGetBTTBalance, useGetCLOBalance1, useGetTokenBalances, useNativeETHBalance } from '~/app/hooks/wallet';
 import { setFromNetwork } from '~/app/modules/wallet/action';
 import { getBridgeContract, shortAddress } from '~/app/utils';
 import { submitClaimAction } from '~/app/utils/apiHelper';
@@ -40,6 +40,7 @@ export default function PreviousClaim() {
   const cloBalance = useGetCLOBalance1();
   const bttBalance = useGetBTTBalance();
 
+  const nativeCoinBalance = useNativeETHBalance();
   const onPrevious = () => {
     navigate('/');
   };
@@ -54,6 +55,14 @@ export default function PreviousClaim() {
   };
 
   async function handleClaim() {
+    if (nativeCoinBalance < 0.005 && chainId !== 820) {
+      toastWarning('Warning!', 'Insufficient FEE amount.');
+      return;
+    }
+    if (nativeCoinBalance < 0.005 && chainId !== 199) {
+      toastWarning('Warning!', 'Insufficient FEE amount.');
+      return;
+    }
     if (hash) {
       setPending(true);
     } else {
