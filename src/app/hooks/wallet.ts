@@ -10,6 +10,7 @@ import defaultTokens from '~/app/constants/tokenLists/tokenLists2.json';
 import { setBalance } from '~/app/modules/wallet/action';
 import { getContract } from '~/app/utils';
 import { getBalanceAmount } from '~/app/utils/decimal';
+import { RPCs } from '../constants';
 import useActiveWeb3React from './useActiveWeb3React';
 
 // returns null on errors
@@ -121,6 +122,24 @@ export const useNativeCoinBalance = (fromNet: any, curAsset?: any) => {
     curAsset.symbol,
     curAsset.decimals
   ]);
+  return amt;
+};
+
+export const useNativeETHBalance = () => {
+  const { account, chainId } = useActiveWeb3React();
+  const [amt, setAmt] = useState<number | string>(0);
+  const RPC_URL = useRpcProvider([RPCs[`${chainId}`]]);
+
+  useEffect(() => {
+    const getBalance = async () => {
+      if (account) {
+        const amount = await RPC_URL.getBalance(account);
+        const bn = new BigNumber(amount + 'e-' + 18);
+        setAmt(bn.toFixed(2));
+      }
+    };
+    getBalance();
+  }, [account, chainId, RPC_URL]);
   return amt;
 };
 

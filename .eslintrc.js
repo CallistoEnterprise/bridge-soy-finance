@@ -33,6 +33,7 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': DISABLED,
     '@typescript-eslint/explicit-module-boundary-types': DISABLED,
     '@typescript-eslint/no-explicit-any': DISABLED,
+    'react/react-in-jsx-scope': 'off',
     '@typescript-eslint/explicit-member-accessibility': [
       ERROR,
       { accessibility: 'explicit', overrides: { constructors: 'no-public' } }

@@ -26,6 +26,31 @@
       "logoURI": "https://app.soy.finance/images/coins/clo.png"
     },
     {
+      "name": "Soy-ERC223",
+      "symbol": "SOY",
+      "address": {
+        "20729": "",
+        "820": "0x9FaE2529863bD691B4A7171bDfCf33C7ebB10a65",
+        "56": "",
+        "97": "",
+        "1": "",
+        "42": "",
+        "61": "",
+        "199": "0xcC00860947035a26Ffe24EcB1301ffAd3a89f910"
+      },
+      "decimals": {
+        "20729": 18,
+        "820": 18,
+        "56": 18,
+        "97": 18,
+        "1": 18,
+        "42": 18,
+        "61": 18,
+        "199": 18
+      },
+      "logoURI": "https://app.soy.finance/images/coins/0x9FaE2529863bD691B4A7171bDfCf33C7ebB10a65.png"
+    },
+    {
       "name": "Bulls USD",
       "symbol": "BUSDT",
       "address": {
@@ -36,7 +61,7 @@
         "1": "0xdAC17F958D2ee523a2206206994597C13D831ec7",
         "42": "",
         "61": "",
-        "199": ""
+        "199": "0xCC78D0A86B0c0a3b32DEBd773Ec815130F9527CF"
       },
       "decimals": {
         "20729": 18,
@@ -111,7 +136,7 @@
         "1": "",
         "42": "",
         "61": "0x0000000000000000000000000000000000000005",
-        "199": ""
+        "199": "0xCc944bF3e76d483e41CC6154d5196E2e5d348fB0"
       },
       "decimals": {
         "20729": 18,
