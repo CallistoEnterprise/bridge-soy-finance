@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
@@ -70,6 +70,17 @@ export default function Network() {
     }
   };
 
+  const toNetworks = [];
+  if (networkOne.symbol === 'BTT') {
+    toNetworks.push(Networks[0]);
+    toNetworks.push(Networks[3]);
+  } else if (networkOne.symbol === 'ETC') {
+    toNetworks.push(Networks[0]);
+    toNetworks.push(Networks[4]);
+  } else {
+    toNetworks.push(Networks[0]);
+  }
+
   return (
     <div className="network container">
       <div className="network__content">
@@ -95,7 +106,7 @@ export default function Network() {
           </p>
           <h6>{t('The network to which you want to send your assets.')}</h6>
           <NetworkSelection
-            options={networkOne.symbol === 'CLO' ? Networks : [Networks[0]]}
+            options={networkOne.symbol === 'CLO' ? Networks : toNetworks}
             disabled={networkOne.symbol}
             onChange={onChangeNetworkTwo}
           />
