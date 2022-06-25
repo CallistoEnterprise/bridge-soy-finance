@@ -25,7 +25,7 @@ export const setupNetwork = async (curNet: any) => {
               symbol: `${curNet.symbol}`,
               decimals: 18
             },
-            rpcUrls: curNet.rpcs,
+            rpcUrls: curNet?.rpcs,
             blockExplorerUrls: [`${curNet.explorer}`]
           }
         ]
@@ -91,7 +91,7 @@ export const switchNetwork = async (curNet: any, library?: any) => {
               {
                 chainId: `0x${chainId.toString(16)}`,
                 chainName: `${curNet.name}`,
-                rpcUrls: curNet.rpcs,
+                rpcUrls: curNet?.rpcs,
                 nativeCurrency: {
                   name: `${curNet.name}`,
                   symbol: `${curNet.symbol}`,

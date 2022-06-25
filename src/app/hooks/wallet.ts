@@ -35,7 +35,7 @@ const getNodeUrl = (nodes: any) => {
 export const useGetCLOBalance = (net: any) => {
   const { account } = useActiveWeb3React();
   const [amt, setAmt] = useState<number>(0);
-  const RPC_URL = useRpcProvider(net.rpcs);
+  const RPC_URL = useRpcProvider(net?.rpcs);
 
   useEffect(() => {
     const getBalance = async () => {
@@ -92,7 +92,7 @@ export const useGetBTTBalance = () => {
 export const useNativeCoinBalance = (fromNet: any, curAsset?: any) => {
   const { account, chainId } = useActiveWeb3React();
   const [amt, setAmt] = useState<number | string>(0);
-  const RPC_URL = useRpcProvider(fromNet.rpcs);
+  const RPC_URL = useRpcProvider(fromNet?.rpcs);
   const tokenContract = getErc20Contract(curAsset.address[`${fromNet.symbol}`], RPC_URL);
 
   useEffect(() => {
@@ -146,7 +146,7 @@ export const useNativeETHBalance = () => {
 export const useTokenBalance = (fromNet: any, curAsset?: any) => {
   const { account, chainId } = useActiveWeb3React();
   const [amt, setAmt] = useState<number | string>(0);
-  const RPC_URL = useRpcProvider(fromNet.rpcs);
+  const RPC_URL = useRpcProvider(fromNet?.rpcs);
   const tokenContract = getErc20Contract(curAsset.addresses[`${fromNet.symbol}`], RPC_URL);
   useEffect(() => {
     const getBalance = async () => {
@@ -176,7 +176,7 @@ export const useTokenBalance = (fromNet: any, curAsset?: any) => {
 
 export const useGetTokenBalances = (fromNet: any) => {
   const { account, chainId } = useActiveWeb3React();
-  const RPC_URL = useRpcProvider(fromNet.rpcs);
+  const RPC_URL = useRpcProvider(fromNet?.rpcs);
   const dispatch = useDispatch();
   const [pending, setPending] = useState(true);
 

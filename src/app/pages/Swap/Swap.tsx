@@ -1,6 +1,6 @@
 import { Token } from '@soy-libs/sdk2';
 import BigNumber from 'bignumber.js';
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -26,7 +26,7 @@ import {
 } from '~/app/modules/wallet/action';
 import useGetWalletState from '~/app/modules/wallet/hooks';
 import { getDecimalAmount } from '~/app/utils/decimal';
-import getEncodedData from '~/app/utils/getEncodedData';
+import getEncodedData, { getEncodedData2 } from '~/app/utils/getEncodedData';
 import { switchNetwork } from '~/app/utils/wallet';
 import previousIcon from '~/assets/images/previous.svg';
 import Claim from './Claim';
@@ -143,6 +143,8 @@ const Swap = () => {
     }
   };
 
+  console.log(Number(tokenBalance));
+
   async function advancedSwap(
     amount: any,
     distinationAddress: string,
@@ -171,15 +173,25 @@ const Swap = () => {
         await onApprove();
       }
     }
+    const amt = selectedToken.symbol === fromNetwork.symbol ? Number(amount) + 0.005 : Number(amount);
+    const isMax = amt === Number(tokenBalance);
     try {
       const maxAmountsIn = Math.floor(1.05 * Number(amountsIn));
-      const byte_data = await getEncodedData(web3, [
-        buyBigAmount,
-        new BigNumber(maxAmountsIn),
-        [swapTokenAddrInCallisto, wAddr],
-        distinationAddress,
-        new BigNumber(deadline + 15000)
-      ]);
+      const byte_data = isMax
+        ? await getEncodedData2(web3, [
+            buyBigAmount,
+            new BigNumber(maxAmountsIn),
+            [swapTokenAddrInCallisto, wAddr],
+            distinationAddress,
+            new BigNumber(deadline + 15000)
+          ])
+        : await getEncodedData(web3, [
+            buyBigAmount,
+            new BigNumber(maxAmountsIn),
+            [swapTokenAddrInCallisto, wAddr],
+            distinationAddress,
+            new BigNumber(deadline + 15000)
+          ]);
 
       try {
         const tx = await onAdvancedSwap(address, swapTokenAddr, bigAmount, toNetwork.chainId, byte_data, value);
