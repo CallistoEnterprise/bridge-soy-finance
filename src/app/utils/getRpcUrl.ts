@@ -16,7 +16,7 @@ export const getRpcForMulti = (rpcs: string[]) => {
 export const getProviderByChainId = (chainId: number) => {
   const filtered = Networks.filter((_) => Number(_.chainId) === chainId);
   if (filtered.length > 0) {
-    const RPC = getRpcForMulti(filtered[0].rpcs);
+    const RPC = getRpcForMulti(filtered[0]?.rpcs);
     const pvd = new ethers.providers.JsonRpcProvider(RPC);
     return pvd;
   }

@@ -1,6 +1,6 @@
 import { useWeb3React } from '@web3-react/core';
 import { Field, Formik } from 'formik';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 import CustomCheckbox from '~/app/components/common/CustomCheckbox';
@@ -110,7 +110,9 @@ export default function SwapForm({
   };
 
   const handleMaxInput = () => {
-    setSwapAmount(tokenBalance.toString());
+    selectedToken.symbol === fromNetwork.symbol
+      ? setSwapAmount((Number(tokenBalance) - 0.005).toString())
+      : setSwapAmount(tokenBalance.toString());
   };
 
   return (
