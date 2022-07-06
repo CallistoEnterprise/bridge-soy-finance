@@ -96,13 +96,13 @@ export const MIN_GAS_AMOUNT = {
 
 export const RPCs: { [chainId: number | string]: string } = {
   '20729': '',
-  '820': 'https://rpc.callisto.network/',
-  '56': 'https://bsc-dataseed.binance.org/',
+  '820': process.env.REACT_APP_NODE_1,
+  '56': process.env.REACT_APP_BSC_NODE_1,
   '97': '',
-  '1': 'https://mainnet.infura.io/v3/d819f1add1a34a60adab4df578e0e741',
+  '1': process.env.REACT_APP_ETH_NODE_1,
   '42': '',
-  '61': 'https://www.ethercluster.com/etc',
-  '199': 'https://rpc.bt.io/'
+  '61': process.env.REACT_APP_ETC_NODE_1,
+  '199': process.env.REACT_APP_BTT_NODE_1
 };
 
 export const prevChainIdKey = 'prevChainIdKey';
