@@ -9,7 +9,6 @@ const sigs = [
 const getSignatures = async (hash: string, chainId: string) => {
   const signatures: any = [];
   const { sig3, respJSON } = await getThirdSig(hash, chainId);
-
   if (sig3) {
     signatures.push(sig3);
   }
