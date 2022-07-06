@@ -96,7 +96,7 @@ export const MIN_GAS_AMOUNT = {
 
 export const RPCs: { [chainId: number | string]: string } = {
   '20729': '',
-  '820': 'https://clo-geth.0xinfra.com/',
+  '820': 'https://rpc.callisto.network/',
   '56': 'https://bsc-dataseed.binance.org/',
   '97': '',
   '1': 'https://mainnet.infura.io/v3/d819f1add1a34a60adab4df578e0e741',

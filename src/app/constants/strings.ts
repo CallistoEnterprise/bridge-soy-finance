@@ -469,7 +469,7 @@ export const Networks = [
     img: '/images/clo.svg',
     chainId: '820',
     decimals: '18',
-    rpcs: ['https://clo-geth.0xinfra.com/'],
+    rpcs: ['https://rpc.callisto.network/'],
     explorer: 'https://explorer.callisto.network/'
   },
   {
@@ -525,7 +525,7 @@ export const NetworksObj: { [chainId: number | string]: any } = {
     img: '/images/clo.svg',
     chainId: '820',
     decimals: '18',
-    rpcs: ['https://clo-geth.0xinfra.com/'],
+    rpcs: ['https://rpc.callisto.network/'],
     explorer: 'https://explorer.callisto.network/'
   },
   56: {

@@ -54,7 +54,7 @@ export const useGetCLOBalance = (net: any) => {
 export const useGetCLOBalance1 = () => {
   const { account, chainId } = useActiveWeb3React();
   const [amt, setAmt] = useState<number>(0);
-  const RPC_URL = useRpcProvider(['https://clo-geth.0xinfra.com/']);
+  const RPC_URL = useRpcProvider(['https://rpc.callisto.network/']);
 
   useEffect(() => {
     const getBalance = async () => {

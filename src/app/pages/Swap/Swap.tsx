@@ -143,8 +143,6 @@ const Swap = () => {
     }
   };
 
-  console.log(Number(tokenBalance));
-
   async function advancedSwap(
     amount: any,
     distinationAddress: string,
