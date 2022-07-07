@@ -9,14 +9,6 @@ const POLLING_INTERVAL = 12000;
 const rpcUrl = getNodeUrl();
 const chainId = process.env.REACT_APP_CHAIN_ID;
 
-// const rpcUrls = {
-//   '820': rpcUrl,
-//   '1': ['https://mainnet.infura.io/v3/d819f1add1a34a60adab4df578e0e741'],
-//   '56': ['https://bsc-dataseed.binance.org/', 'https://bsc-dataseed1.defibit.io/'],
-//   '61': ['https://www.ethercluster.com/etc'],
-//   '199': ['https://rpc.bt.io/']
-// };
-
 const injected = new InjectedConnector({ supportedChainIds: [1, 4, 56, 61, 820, 20729, 97, 199] });
 
 const walletconnect = new WalletConnectConnector({

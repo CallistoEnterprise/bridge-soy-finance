@@ -11,6 +11,7 @@ import { MIN_GAS_AMOUNT } from '~/app/constants';
 import { INetwork } from '~/app/constants/interface';
 import { Networks, NetworksObj } from '~/app/constants/strings';
 import useActiveWeb3React from '~/app/hooks/useActiveWeb3React';
+import useGetWeb3 from '~/app/hooks/useGetWeb3';
 import useToast from '~/app/hooks/useToast';
 import { useGetBTTBalance, useGetCLOBalance1, useGetTokenBalances, useNativeETHBalance } from '~/app/hooks/wallet';
 import { setFromNetwork } from '~/app/modules/wallet/action';
@@ -27,10 +28,13 @@ export default function PreviousClaim() {
   const dispatch = useDispatch();
 
   const [pending, setPending] = useState<boolean>(false);
-
+  const [destinationAddress, setDestinationAddress] = useState<string>('');
   const [hash, setHash] = useState<string>('');
 
-  const { fromNetwork, destinationAddress } = useSelector((state: any) => state.walletBridge);
+  const { fromNetwork } = useSelector((state: any) => state.walletBridge);
+  console.log(fromNetwork);
+  const web3 = useGetWeb3(fromNetwork?.rpcs[0]);
+
   const { library, chainId, account } = useActiveWeb3React();
   const [networkOne, setNetworkOne] = useState(NetworksObj[chainId ?? 820]);
 
