@@ -156,11 +156,11 @@ const Swap = () => {
 
     const bigAmount = getDecimalAmount(
       new BigNumber(amount.toString()),
-      selectedToken.decimals[`${fromNetwork.symbol}`]
+      selectedToken.decimals[`${fromNetwork.chainId}`]
     );
     const buyBigAmount = getDecimalAmount(
       new BigNumber(buy_amount.toString()),
-      selectedToken.decimals[`${toNetwork.symbol}`]
+      selectedToken.decimals[`${toNetwork.chainId}`]
     );
 
     let value = '0';
@@ -215,7 +215,7 @@ const Swap = () => {
 
     const bigAmount = getDecimalAmount(
       new BigNumber(amount.toString()),
-      selectedToken.decimals[`${fromNetwork.symbol}`]
+      selectedToken.decimals[`${fromNetwork.chainId}`]
     );
 
     if (swapTokenAddr === '') {
