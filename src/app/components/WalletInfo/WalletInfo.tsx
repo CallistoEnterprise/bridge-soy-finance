@@ -1,5 +1,5 @@
 import { useWeb3React } from '@web3-react/core';
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
@@ -35,7 +35,7 @@ export default function WalletInfo({ pending, fromNetwork }: walletInfoProps) {
   }, [fromNetwork.chainId]);
 
   const { logout } = useAuth();
-  const accountEllipsis = account ? `${account.substring(0, 8)}...${account.substring(account.length - 4)}` : null;
+  const accountEllipsis = account ? `${account?.substring(0, 8)}...${account?.substring(account.length - 4)}` : null;
 
   const { balance } = useSelector((state: AppState) => state.walletBridge);
   const balanceLen = Object.keys(balance).length;

@@ -26,7 +26,7 @@ export function basisPointsToPercent(num: number): Percent {
 // shorten the checksummed version of the input address to have 0x + 4 characters at start and end
 
 export function shortAddress(address: string, startChars = 8, endChars = 4): string {
-  return `${address.substring(0, startChars)}.......${address.substring(address.length - endChars)}`;
+  return `${address?.substring(0, startChars)}.......${address?.substring(address.length - endChars)}`;
 }
 
 export function shortenAddress(address: string, chars = 4): string {
@@ -34,7 +34,7 @@ export function shortenAddress(address: string, chars = 4): string {
   if (!parsed) {
     throw Error(`Invalid 'address' parameter '${address}'.`);
   }
-  return `${parsed.substring(0, chars + 2)}...${parsed.substring(42 - chars)}`;
+  return `${parsed?.substring(0, chars + 2)}...${parsed?.substring(42 - chars)}`;
 }
 
 // add 10%

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -32,7 +32,6 @@ export default function PreviousClaim() {
   const [hash, setHash] = useState<string>('');
 
   const { fromNetwork } = useSelector((state: any) => state.walletBridge);
-  console.log(fromNetwork);
   const web3 = useGetWeb3(fromNetwork?.rpcs[0]);
 
   const { library, chainId, account } = useActiveWeb3React();
@@ -45,6 +44,28 @@ export default function PreviousClaim() {
   const bttBalance = useGetBTTBalance();
 
   const nativeCoinBalance = useNativeETHBalance();
+
+  useEffect(() => {
+    const get = async () => {
+      web3.eth
+        .getTransaction(hash)
+        .then((response: any) => {
+          if (response) {
+            if (response.input.substring(0, 10) === '0x487cda0d') {
+              const reciever = `0x${response.input.substring(34, 74)}`;
+              setDestinationAddress(reciever);
+            }
+          }
+        })
+        .catch((error: any) => {
+          console.error(error);
+        });
+    };
+    if (web3 && hash !== '') {
+      get();
+    }
+  }, [web3, hash]);
+
   const onPrevious = () => {
     navigate('/');
   };
@@ -120,8 +141,8 @@ export default function PreviousClaim() {
               setHash('');
             });
         } else {
-          const dest = destinationAddress === '' ? account : destinationAddress;
-          const bridgeContract = await getBridgeContract(respJSON.bridge, library, dest);
+          // const dest = destinationAddress === '' ? account : destinationAddress;
+          const bridgeContract = await getBridgeContract(respJSON.bridge, library, account);
           const tx =
             respJSON.data && respJSON.toContract
               ? await bridgeContract.claimToContract(
@@ -195,7 +216,7 @@ export default function PreviousClaim() {
             autoFocus
           />
           <p className="mt-5">Destination wallet</p>
-          <h6>{shortAddress(destinationAddress === '' ? account : destinationAddress, 21, 7)}</h6>
+          <h6>{shortAddress(destinationAddress, 21, 7)}</h6>
           <hr />
           <button
             color="success"
