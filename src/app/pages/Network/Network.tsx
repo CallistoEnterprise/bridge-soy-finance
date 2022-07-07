@@ -27,6 +27,7 @@ export default function Network() {
   const [t] = useTranslation();
   const navigate = useNavigate();
   const { library, chainId } = useActiveWeb3React();
+  console.log(NetworksObj, chainId);
   const [networkOne, setNetworkOne] = useState(NetworksObj[chainId ?? 820]);
   const [networkTwo, setNetworkTwo] = useState<any>(null);
 

@@ -469,7 +469,7 @@ export const Networks = [
     img: '/images/clo.svg',
     chainId: '820',
     decimals: '18',
-    rpcs: ['https://rpc.callisto.network/'],
+    rpcs: [process.env.REACT_APP_NODE_1],
     explorer: 'https://explorer.callisto.network/'
   },
   {
@@ -479,11 +479,7 @@ export const Networks = [
     img: '/images/bnb.svg',
     chainId: '56',
     decimals: '18',
-    rpcs: [
-      'https://bsc-dataseed.binance.org/',
-      'https://bsc-dataseed1.defibit.io/'
-      // 'https://bsc-dataseed1.ninicoin.io/'
-    ],
+    rpcs: [process.env.REACT_APP_BSC_NODE_1, process.env.REACT_APP_BSC_NODE_2],
     explorer: 'https://bscscan.com/'
   },
   {
@@ -493,7 +489,7 @@ export const Networks = [
     img: '/images/eth.svg',
     chainId: '1',
     decimals: '18',
-    rpcs: ['https://mainnet.infura.io/v3/d819f1add1a34a60adab4df578e0e741'],
+    rpcs: [process.env.REACT_APP_ETH_NODE_1],
     explorer: 'https://etherscan.io/'
   },
   {
@@ -503,7 +499,7 @@ export const Networks = [
     img: '/images/etc.svg',
     chainId: '61',
     decimals: '18',
-    rpcs: ['https://www.ethercluster.com/etc'],
+    rpcs: [process.env.REACT_APP_ETC_NODE_1],
     explorer: 'https://blockscout.com/etc/mainnet/'
   },
   {
@@ -513,7 +509,7 @@ export const Networks = [
     img: '/images/btt.png',
     chainId: '199',
     decimals: '18',
-    rpcs: ['https://rpc.bt.io/'],
+    rpcs: [process.env.REACT_APP_BTT_NODE_1],
     explorer: 'https://scan.bt.io/'
   }
 ];
@@ -525,7 +521,7 @@ export const NetworksObj: { [chainId: number | string]: any } = {
     img: '/images/clo.svg',
     chainId: '820',
     decimals: '18',
-    rpcs: ['https://rpc.callisto.network/'],
+    rpcs: [process.env.REACT_APP_NODE_1],
     explorer: 'https://explorer.callisto.network/'
   },
   56: {
@@ -535,11 +531,7 @@ export const NetworksObj: { [chainId: number | string]: any } = {
     img: '/images/bnb.svg',
     chainId: '56',
     decimals: '18',
-    rpcs: [
-      'https://bsc-dataseed.binance.org/',
-      'https://bsc-dataseed1.defibit.io/'
-      // 'https://bsc-dataseed1.ninicoin.io/'
-    ],
+    rpcs: [process.env.REACT_APP_BSC_NODE_1, process.env.REACT_APP_BSC_NODE_2],
     explorer: 'https://bscscan.com/'
   },
   1: {
@@ -549,7 +541,7 @@ export const NetworksObj: { [chainId: number | string]: any } = {
     img: '/images/eth.svg',
     chainId: '1',
     decimals: '18',
-    rpcs: ['https://mainnet.infura.io/v3/d819f1add1a34a60adab4df578e0e741'],
+    rpcs: [process.env.REACT_APP_ETH_NODE_1],
     explorer: 'https://etherscan.io/'
   },
   61: {
@@ -559,7 +551,7 @@ export const NetworksObj: { [chainId: number | string]: any } = {
     img: '/images/etc.svg',
     chainId: '61',
     decimals: '18',
-    rpcs: ['https://www.ethercluster.com/etc'],
+    rpcs: [process.env.REACT_APP_ETC_NODE_1],
     explorer: 'https://blockscout.com/etc/mainnet/'
   },
   199: {
@@ -569,7 +561,7 @@ export const NetworksObj: { [chainId: number | string]: any } = {
     img: '/images/btt.png',
     chainId: '199',
     decimals: '18',
-    rpcs: ['https://rpc.bt.io/'],
+    rpcs: [process.env.REACT_APP_BTT_NODE_1],
     explorer: 'https://scan.bt.io/'
   }
 };

@@ -1,7 +1,7 @@
 import Blocks from 'eth-block-timestamp';
 import { useEffect, useState } from 'react';
 
-const ethereumInfura = 'https://mainnet.infura.io/v3/d819f1add1a34a60adab4df578e0e741';
+const ethereumInfura = process.env.REACT_APP_ETH_NODE_1;
 const blocks = new Blocks(ethereumInfura);
 
 export default function useCurrentBlockTimestamp(): number | undefined {
