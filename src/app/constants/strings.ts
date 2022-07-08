@@ -164,8 +164,8 @@ export const tokenList: Array<any> = [
       BTT: 18
     },
     addresses: {
-      CLO: '0xbf6c50889d3a620eb42c0f188b65ade90de958c4',
-      BNB: '0x55d398326f99059ff775485246999027b3197955',
+      CLO: '0xbf6c50889d3a620eb42C0F188b65aDe90De958c4',
+      BNB: '0x55d398326f99059fF775485246999027B3197955',
       ETH: '0xdAC17F958D2ee523a2206206994597C13D831ec7',
       ETC: '',
       BTT: ''

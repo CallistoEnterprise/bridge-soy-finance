@@ -4,7 +4,6 @@ const sigs = [
   'https://z3ks0jkyd5.execute-api.us-east-2.amazonaws.com/default/auth/',
   'https://a78aj8vsu0.execute-api.us-west-2.amazonaws.com/auth/'
 ];
-// const sigs = [process.env.SIG1, process.env.SIG2, process.env.SIG3]
 
 const getSignatures = async (hash: string, chainId: string) => {
   const signatures: any = [];

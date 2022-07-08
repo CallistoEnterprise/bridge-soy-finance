@@ -25,7 +25,7 @@ export const useGetAmountsOut = (amount: string) => {
         const outAmt = await contract.methods.getAmountsOut(bigAmount.toString(), path).call();
         setAmountsOut(outAmt[1]);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     };
     if (

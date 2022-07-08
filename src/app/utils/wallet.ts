@@ -102,7 +102,7 @@ export const switchNetwork = async (curNet: any, library?: any) => {
             ]
           });
         } catch (error: any) {
-          console.log(error.message);
+          console.error(error.message);
         }
       }
       return false;

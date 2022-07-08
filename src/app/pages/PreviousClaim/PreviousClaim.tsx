@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -11,6 +11,7 @@ import { MIN_GAS_AMOUNT } from '~/app/constants';
 import { INetwork } from '~/app/constants/interface';
 import { Networks, NetworksObj } from '~/app/constants/strings';
 import useActiveWeb3React from '~/app/hooks/useActiveWeb3React';
+import useGetWeb3 from '~/app/hooks/useGetWeb3';
 import useToast from '~/app/hooks/useToast';
 import { useGetBTTBalance, useGetCLOBalance1, useGetTokenBalances, useNativeETHBalance } from '~/app/hooks/wallet';
 import { setFromNetwork } from '~/app/modules/wallet/action';
@@ -27,10 +28,12 @@ export default function PreviousClaim() {
   const dispatch = useDispatch();
 
   const [pending, setPending] = useState<boolean>(false);
-
+  const [destinationAddress, setDestinationAddress] = useState<string>('');
   const [hash, setHash] = useState<string>('');
 
-  const { fromNetwork, destinationAddress } = useSelector((state: any) => state.walletBridge);
+  const { fromNetwork } = useSelector((state: any) => state.walletBridge);
+  const web3 = useGetWeb3(fromNetwork?.rpcs[0]);
+
   const { library, chainId, account } = useActiveWeb3React();
   const [networkOne, setNetworkOne] = useState(NetworksObj[chainId ?? 820]);
 
@@ -41,6 +44,28 @@ export default function PreviousClaim() {
   const bttBalance = useGetBTTBalance();
 
   const nativeCoinBalance = useNativeETHBalance();
+
+  useEffect(() => {
+    const get = async () => {
+      web3.eth
+        .getTransaction(hash)
+        .then((response: any) => {
+          if (response) {
+            if (response.input.substring(0, 10) === '0x487cda0d') {
+              const reciever = `0x${response.input.substring(34, 74)}`;
+              setDestinationAddress(reciever);
+            }
+          }
+        })
+        .catch((error: any) => {
+          console.error(error);
+        });
+    };
+    if (web3 && hash !== '') {
+      get();
+    }
+  }, [web3, hash]);
+
   const onPrevious = () => {
     navigate('/');
   };
@@ -116,8 +141,8 @@ export default function PreviousClaim() {
               setHash('');
             });
         } else {
-          const dest = destinationAddress === '' ? account : destinationAddress;
-          const bridgeContract = await getBridgeContract(respJSON.bridge, library, dest);
+          // const dest = destinationAddress === '' ? account : destinationAddress;
+          const bridgeContract = await getBridgeContract(respJSON.bridge, library, account);
           const tx =
             respJSON.data && respJSON.toContract
               ? await bridgeContract.claimToContract(
@@ -191,7 +216,7 @@ export default function PreviousClaim() {
             autoFocus
           />
           <p className="mt-5">Destination wallet</p>
-          <h6>{shortAddress(destinationAddress === '' ? account : destinationAddress, 21, 7)}</h6>
+          <h6>{shortAddress(destinationAddress, 21, 7)}</h6>
           <hr />
           <button
             color="success"
