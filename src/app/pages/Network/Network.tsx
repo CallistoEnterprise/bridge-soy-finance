@@ -71,16 +71,14 @@ export default function Network() {
     }
   };
 
-  const toNetworks = [];
-  if (networkOne.symbol === 'BTT') {
-    toNetworks.push(Networks[0]);
-    toNetworks.push(Networks[3]);
-  } else if (networkOne.symbol === 'ETC') {
-    toNetworks.push(Networks[0]);
-    toNetworks.push(Networks[4]);
-  } else {
-    toNetworks.push(Networks[0]);
-  }
+  // const toNetworks = [];
+  // if (networkOne.symbol === 'BTT') {
+  //   toNetworks.push(Networks[0]);
+  // } else if (networkOne.symbol === 'ETC') {
+  //   toNetworks.push(Networks[0]);
+  // } else {
+  //   toNetworks.push(Networks[0]);
+  // }
 
   return (
     <div className="network container">
@@ -107,7 +105,7 @@ export default function Network() {
           </p>
           <h6>{t('The network to which you want to send your assets.')}</h6>
           <NetworkSelection
-            options={networkOne.symbol === 'CLO' ? Networks : toNetworks}
+            options={networkOne.symbol === 'CLO' ? Networks : [Networks[0]]}
             disabled={networkOne.symbol}
             onChange={onChangeNetworkTwo}
           />
