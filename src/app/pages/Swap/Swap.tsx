@@ -197,6 +197,7 @@ const Swap = () => {
           await handleSetPending(tx.hash, address);
         }
       } catch (error) {
+        toastError('Execution reverted: There is no pair!');
         setPending(false);
         setSucced(false);
         dispatch(setStartSwapping(false));
@@ -241,7 +242,8 @@ const Swap = () => {
         if (tx.hash) {
           await handleSetPending(tx.hash, address);
         }
-      } catch (error) {
+      } catch (error: any) {
+        toastError('Execution reverted: There is no pair!');
         setPending(false);
         setSucced(false);
         dispatch(setStartSwapping(false));
