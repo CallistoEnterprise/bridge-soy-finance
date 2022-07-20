@@ -1,10 +1,10 @@
 import classNames from 'classnames';
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 import Facebook from '~/app/components/Svg/Icons/Facebook';
-import Medium from '~/app/components/Svg/Icons/Medium';
+// import Medium from '~/app/components/Svg/Icons/Medium';
+import Gitbook from '~/app/components/Svg/Icons/Gitbook';
 import Pulse from '~/app/components/Svg/Icons/Pulse';
 import Redit from '~/app/components/Svg/Icons/Redit';
 import Telegram from '~/app/components/Svg/Icons/Telegram';
@@ -100,7 +100,7 @@ export default function Footer() {
           <div className={classNames('footer__column', { footer__center__linklist: false })}>
             <a
               className="footer__link"
-              href="https://callisto.network/soy-finance-soy-security-audit/"
+              href="https://soy-finance.gitbook.io/soy-finance/soy-products/safety-on-yields/soy-finance-security-audit/"
               target="_blank"
               rel="noreferrer"
             >
@@ -111,7 +111,7 @@ export default function Footer() {
             </a>
             <a
               className="footer__link"
-              href="https://soy-finance.medium.com/soy-finance-monetary-policy-vision-4f07a1b48372"
+              href="https://soy-finance.gitbook.io/soy-finance/soy-products/soy-token/monetary-policy-vision/"
               target="_blank"
               rel="noreferrer"
             >
@@ -119,7 +119,7 @@ export default function Footer() {
             </a>
             <a
               className="footer__link"
-              href="https://callisto.network/erc223-token-standard/"
+              href="https://soy-finance.gitbook.io/soy-finance/soy-products/safety-on-yields/erc-223-token-standard/"
               target="_blank"
               rel="noreferrer"
             >
@@ -143,7 +143,7 @@ export default function Footer() {
               <Facebook />
             </a>
             <a href="https://soy-finance.gitbook.io/" target="_blank" rel="noreferrer">
-              <Medium />
+              <Gitbook />
             </a>
             <a href="https://defillama.com/protocol/soy-finance" target="_blank" rel="noreferrer">
               <Pulse width="38px" height="38px" />
