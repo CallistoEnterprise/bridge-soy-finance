@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import React from 'react';
 import { Radio, RadioGroup } from 'react-custom-radio-buttons';
 import { getTokenLogoLink } from '~/app/utils/getImageUrl';
 import './tokenselection.css';
@@ -65,7 +64,7 @@ export const TokenSelection2 = ({ options, fromNetwork, className, onChange }: p
                     src={
                       option.symbol === 'BUSDT' && fromNetwork.chainId !== '820'
                         ? 'images/usdt.png'
-                        : getTokenLogoLink(option.address)
+                        : getTokenLogoLink(option.address, option.chainId)
                     }
                     alt="icon"
                   />
