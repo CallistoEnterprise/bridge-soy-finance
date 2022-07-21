@@ -589,6 +589,76 @@ export const addTokenList = [
     decimals: 18
   },
   {
+    symbol: 'ccETH',
+    chainId: 61,
+    address: '0xcc74b43F5092B9Dd0A4a86c85794C7d19ff10d88',
+    network: 'ETC',
+    decimals: 18
+  },
+  {
+    symbol: 'ccBNB',
+    chainId: 61,
+    address: '0xcC653d74E087D35577049AB23e2141D619D95AEe',
+    network: 'ETC',
+    decimals: 18
+  },
+  {
+    symbol: 'SOY',
+    chainId: 61,
+    address: '0xcC67D978Ddf07971D9050d2b424f36f6C1a15893',
+    network: 'ETC',
+    decimals: 18
+  },
+  {
+    symbol: 'BUSDT',
+    chainId: 61,
+    address: '0xCC48CD0B4a6f50b8f8bf0f9b80eD7881fA547968',
+    network: 'ETC',
+    decimals: 18
+  },
+  {
+    symbol: 'ccCLO',
+    chainId: 199,
+    address: '0xCcbf1C9E8b4f2cDF3Bfba1098b8f56f97d219D53',
+    network: 'Bittorent',
+    decimals: 18
+  },
+  {
+    symbol: 'SOY',
+    chainId: 199,
+    address: '0xcC00860947035a26Ffe24EcB1301ffAd3a89f910',
+    network: 'Bittorent',
+    decimals: 18
+  },
+  {
+    symbol: 'BUSDT',
+    chainId: 199,
+    address: '0xCC78D0A86B0c0a3b32DEBd773Ec815130F9527CF',
+    network: 'Bittorent',
+    decimals: 18
+  },
+  {
+    symbol: 'ccBNB',
+    chainId: 199,
+    address: '0x185a4091027E2dB459a2433F85f894dC3013aeB5',
+    network: 'Bittorent',
+    decimals: 18
+  },
+  {
+    symbol: 'ccETH',
+    chainId: 199,
+    address: '0x1249C65AfB11D179FFB3CE7D4eEDd1D9b98AD006',
+    network: 'Bittorent',
+    decimals: 18
+  },
+  {
+    symbol: 'ccETC',
+    chainId: 199,
+    address: '0xCc944bF3e76d483e41CC6154d5196E2e5d348fB0',
+    network: 'Bittorent',
+    decimals: 18
+  },
+  {
     symbol: 'ccBNB',
     chainId: 820,
     address: '0xcCDe29903E621Ca12DF33BB0aD9D1ADD7261Ace9',
