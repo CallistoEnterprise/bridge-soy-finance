@@ -58,7 +58,7 @@ export default function WalletInfo({ pending, fromNetwork }: walletInfoProps) {
       return;
     }
     const decimal = item.decimals[chainId];
-    await registerToken(address, item.symbol, decimal, item.logoURI);
+    await registerToken(address, item.symbol, decimal, item.logoURI, item.chainId);
   };
 
   const handleClipboard = async () => {

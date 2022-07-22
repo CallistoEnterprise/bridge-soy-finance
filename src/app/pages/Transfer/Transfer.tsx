@@ -35,7 +35,7 @@ export default function Transfer() {
       toastError(`Please switch network to ${option.network}`);
       return;
     }
-    registerToken(option.address, option.symbol, option.decimals);
+    registerToken(option.address, option.symbol, option.decimals, option.chainId);
   };
 
   const onPrevious = () => {
