@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import CustomButton from '~/app/components/common/CustomButton';
@@ -137,7 +137,7 @@ export default function Claim({ succeed, totalBlockCounts }: props) {
           <p>
             {t(
               `Please wait for ${totalBlockCounts} ${
-                totalBlockCounts === 1 ? 'block confirmation' : 'blocks confirmations'
+                totalBlockCounts === 1 ? 'block confirmation' : 'block confirmations'
               } to claim your transaction.`
             )}
           </p>
