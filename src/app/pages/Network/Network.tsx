@@ -71,22 +71,13 @@ export default function Network() {
     }
   };
 
-  // const toNetworks = [];
-  // if (networkOne.symbol === 'BTT') {
-  //   toNetworks.push(Networks[0]);
-  // } else if (networkOne.symbol === 'ETC') {
-  //   toNetworks.push(Networks[0]);
-  // } else {
-  //   toNetworks.push(Networks[0]);
-  // }
-
   return (
     <div className="network container">
       <div className="network__content">
         <CustomButton className="previous_btn" onClick={onPrevious}>
           <div>
             <img src={previousIcon} alt="Icon" className="me-2" />
-            Previous
+            {t('Previous')}
           </div>
         </CustomButton>
         <Default>

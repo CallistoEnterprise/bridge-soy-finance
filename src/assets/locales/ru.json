@@ -40,7 +40,7 @@
   "Specific destination wallet": "Конкретный целевой кошелек",
   "destination_wallet": "предназначение_кошелька",
   "Buy BitTorent coins": "Купить монеты BitTorent",
-  "Transfer": "Передать",
+  "TRANSFER": "ПЕРЕДАЧА",
   "Transfer is in progress": "Выполняется передача",
   "Please wait for 64 block confirmations to claim your transaction.": "Чтобы запросить свою транзакцию пожалуйста дождитесь подтверждения 64 блоков.",
   "Transfer is done!": "Передача выполнена",
@@ -51,5 +51,8 @@
   "Claimed successfully.": "Запрос успешен.",
   "Transfer complete!": "Передача завершена!",
   "You don’t see your tokens?": "Вы не видите свои токены?",
-  "Just add your asset to your wallet by clicking on its icon!": "Просто добавьте свой актив в кошелек, нажав на его иконку!"
+  "Just add your asset to your wallet by clicking on its icon!": "Просто добавьте свой актив в кошелек, нажав на его иконку!",
+  "Search for an asset": "Поиск актива",
+  "Next": "Следующий",
+  "MAX": "МАКСИМУМ"
 }

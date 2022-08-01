@@ -40,7 +40,7 @@
   "Select the asset to transfer": "Select the asset to transfer",
   "Amount to transfer": "Amount to transfer",
   "Buy BitTorent coins": "Buy BitTorent coins",
-  "Transfer": "Transfer",
+  "TRANSFER": "TRANSFER",
   "Transfer is in progress": "Transfer is in progress",
   "Please wait for 64 block confirmations to claim your transaction.": "Please wait for 64 block confirmations to claim your transaction.",
   "Transfer is done!": "Transfer is done!",
@@ -51,5 +51,8 @@
   "Claimed successfully.": "Claimed successfully.",
   "Transfer complete!": "Transfer complete!",
   "You don’t see your tokens?": "You don’t see your tokens?",
-  "Just add your asset to your wallet by clicking on its icon!": "Just add your asset to your wallet by clicking on its icon!"
+  "Just add your asset to your wallet by clicking on its icon!": "Just add your asset to your wallet by clicking on its icon!",
+  "Search for an asset": "Search for an asset",
+  "Next": "Next",
+  "MAX": "MAX"
 }

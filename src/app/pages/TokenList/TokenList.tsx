@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
@@ -68,7 +68,7 @@ export default function TokenList() {
             className="form-control tokenlist__content__filter"
             value={value}
             onChange={(e) => setValue(e.target.value.toUpperCase())}
-            placeholder="🔍 Search for an asset"
+            placeholder={`🔍 ${t('Search for an asset')}`}
           />
           <TokenSelection
             options={tokenList.filter((item) => {
