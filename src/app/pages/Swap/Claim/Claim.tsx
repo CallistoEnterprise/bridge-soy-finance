@@ -38,6 +38,7 @@ export default function Claim({ succeed, totalBlockCounts }: props) {
     if (hash === '') {
       return;
     }
+    setPending(true);
     const { signatures, respJSON } = await getSignatures(hash, fromNetwork.chainId);
 
     if (signatures.length < 3) {
@@ -47,7 +48,8 @@ export default function Claim({ succeed, totalBlockCounts }: props) {
     }
 
     if (respJSON.chainId !== chainId.toString()) {
-      toastError(`You are in wrong network. Please switch to ${toNetwork.networkName}.`);
+      toastError(`You are in wrong network. Please switch to ${toNetwork.name}.`);
+      setPending(false);
       return;
     }
 
@@ -55,7 +57,6 @@ export default function Claim({ succeed, totalBlockCounts }: props) {
       (cloBalance < MIN_GAS_AMOUNT[820] && chainId === 820) ||
       (cloBalance < MIN_GAS_AMOUNT[199] && chainId === 199)
     ) {
-      setPending(true);
       submitClaimAction(hash, fromNetwork.chainId)
         .then((res: any) => {
           if (res?.isSuccess) {
