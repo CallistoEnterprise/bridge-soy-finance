@@ -1,4 +1,3 @@
-import React from 'react';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
@@ -18,6 +17,9 @@ export default function Header() {
         break;
       case 'ch':
         changeCurrentLanguage(Language.Chinese);
+        break;
+      case 'ru':
+        changeCurrentLanguage(Language.Russian);
         break;
       default:
         changeCurrentLanguage(Language.English);
@@ -47,6 +49,7 @@ export default function Header() {
         >
           <NavDropdown.Item onClick={() => onChangeLanguage('en')}>EN</NavDropdown.Item>
           <NavDropdown.Item onClick={() => onChangeLanguage('ch')}>CH</NavDropdown.Item>
+          <NavDropdown.Item onClick={() => onChangeLanguage('ru')}>RU</NavDropdown.Item>
         </NavDropdown>
       </Navbar.Collapse>
     </Navbar>

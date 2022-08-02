@@ -80,20 +80,6 @@ export default function PreviousClaim() {
   };
 
   async function handleClaim() {
-    if (nativeCoinBalance < 0.005 && chainId !== 820) {
-      toastWarning('Warning!', 'Insufficient FEE amount.');
-      return;
-    }
-    if (nativeCoinBalance < 0.005 && chainId !== 199) {
-      toastWarning('Warning!', 'Insufficient FEE amount.');
-      return;
-    }
-    if (hash) {
-      setPending(true);
-    } else {
-      return;
-    }
-
     try {
       const { signatures, respJSON } = await getSignatures(hash, fromNetwork.chainId);
       if (signatures.length < 3) {
@@ -117,6 +103,19 @@ export default function PreviousClaim() {
           return;
         }
       } else {
+        if (nativeCoinBalance < 0.005 && chainId !== 820) {
+          toastWarning('Warning!', 'Insufficient FEE amount.');
+          return;
+        }
+        if (nativeCoinBalance < 0.005 && chainId !== 199) {
+          toastWarning('Warning!', 'Insufficient FEE amount.');
+          return;
+        }
+        if (hash) {
+          setPending(true);
+        } else {
+          return;
+        }
         if (
           (cloBalance < MIN_GAS_AMOUNT[820] && chainId === 820) ||
           (bttBalance < MIN_GAS_AMOUNT[199] && chainId === 199)
