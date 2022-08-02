@@ -63,14 +63,14 @@ export default function Claim({ succeed, totalBlockCounts }: props) {
             setPending(false);
             window.localStorage.removeItem('prevData');
             navigate('/transfer');
-            toastSuccess('Claimed successfully.');
+            toastSuccess(t('Claimed successfully.'));
           } else {
             toastError(`Failed to claim. ${res.message}`);
             setPending(false);
           }
         })
         .catch((err) => {
-          toastError('Failed to claim. Please try again.');
+          toastError(t('Failed to claim. Please try again.'));
           setPending(false);
         });
     } else {
@@ -96,17 +96,17 @@ export default function Claim({ succeed, totalBlockCounts }: props) {
           setPending(false);
           window.localStorage.removeItem('prevData');
           navigate('/transfer');
-          toastSuccess('Claimed successfully.');
+          toastSuccess(t('Claimed successfully.'));
         } else {
           setPending(false);
         }
       } catch (error) {
         setPending(false);
-        toastError('Failed to claim. Please try again.');
+        toastError(t('Failed to claim. Please try again.'));
       }
     } catch (err) {
       setPending(false);
-      toastError('Failed to get signature. Please try again.');
+      toastError(t('Failed to get signature. Please try again.'));
     }
   }
 
@@ -126,12 +126,12 @@ export default function Claim({ succeed, totalBlockCounts }: props) {
         setPending(false);
         window.localStorage.removeItem('prevData');
         navigate('/transfer');
-        toastSuccess('Claimed successfully.');
+        toastSuccess(t('Claimed successfully.'));
       } else {
         setPending(false);
       }
     } catch (err) {
-      toastError('Failed to get signature. Please try again.');
+      toastError(t('Failed to get signature. Please try again.'));
       setPending(false);
     }
   }
@@ -164,7 +164,7 @@ export default function Claim({ succeed, totalBlockCounts }: props) {
               {pending ? (
                 <div>
                   <Spinner className="me-2" size="sm" />
-                  Wait...
+                  {t(`Wait...`)}
                 </div>
               ) : (
                 t('Claim')

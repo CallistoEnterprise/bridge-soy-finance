@@ -53,6 +53,7 @@ export default function PreviousClaim() {
           if (response) {
             if (response.input.substring(0, 10) === '0x487cda0d') {
               const reciever = `0x${response.input.substring(34, 74)}`;
+              console.log(reciever);
               setDestinationAddress(reciever);
             }
           }
@@ -127,7 +128,7 @@ export default function PreviousClaim() {
                 window.localStorage.removeItem('prevData');
                 navigate('/transfer');
                 setHash('');
-                toastSuccess('Claimed successfully.');
+                toastSuccess(t('Claimed successfully.'));
               } else {
                 toastError(`Failed to claim. ${res.message}`);
                 setPending(false);
@@ -135,7 +136,7 @@ export default function PreviousClaim() {
               }
             })
             .catch((err) => {
-              toastError('Failed to claim. Please try again.');
+              toastError(t('Failed to claim. Please try again.'));
               setPending(false);
               setHash('');
             });
@@ -173,16 +174,16 @@ export default function PreviousClaim() {
             setPending(false);
             setHash('');
             navigate('/transfer');
-            toastSuccess('Success!', 'Claimed successfully.');
+            toastSuccess(t('Success!'), t('Claimed successfully.'));
           } else {
             setPending(false);
-            toastError('Error!', 'Failed to claim. Please try again1.');
+            toastError(t('Error!'), t('Failed to claim. Please try again.'));
           }
           setPending(false);
         }
       }
     } catch (err) {
-      toastError('Error!', 'Failed to claim. Please try again.');
+      toastError(t('Error!'), t('Failed to claim. Please try again.'));
       setPending(false);
     }
   }
@@ -226,7 +227,7 @@ export default function PreviousClaim() {
             {pending ? (
               <div>
                 <Spinner className="me-2" size="sm" />
-                Wait...
+                {t(`Wait...`)}
               </div>
             ) : (
               t('Claim')
