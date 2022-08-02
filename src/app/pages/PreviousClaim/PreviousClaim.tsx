@@ -53,6 +53,7 @@ export default function PreviousClaim() {
           if (response) {
             if (response.input.substring(0, 10) === '0x487cda0d') {
               const reciever = `0x${response.input.substring(34, 74)}`;
+              console.log(reciever);
               setDestinationAddress(reciever);
             }
           }
