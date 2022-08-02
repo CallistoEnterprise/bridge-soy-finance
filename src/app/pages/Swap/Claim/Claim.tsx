@@ -38,6 +38,19 @@ export default function Claim({ succeed, totalBlockCounts }: props) {
     if (hash === '') {
       return;
     }
+    const { signatures, respJSON } = await getSignatures(hash, fromNetwork.chainId);
+
+    if (signatures.length < 3) {
+      setPending(false);
+      toastError('Failed to get signature.');
+      return;
+    }
+
+    if (respJSON.chainId !== chainId.toString()) {
+      toastError(`You are in wrong network. Please switch to ${toNetwork.networkName}.`);
+      return;
+    }
+
     if (
       (cloBalance < MIN_GAS_AMOUNT[820] && chainId === 820) ||
       (cloBalance < MIN_GAS_AMOUNT[199] && chainId === 199)
@@ -60,21 +73,21 @@ export default function Claim({ succeed, totalBlockCounts }: props) {
           setPending(false);
         });
     } else {
-      if (swapType === 'swap') handleClaim();
-      else if (swapType === 'advanced-swap') handleAdvancedClaim();
+      if (swapType === 'swap') handleClaim(signatures, respJSON);
+      else if (swapType === 'advanced-swap') handleAdvancedClaim(signatures, respJSON);
     }
   };
 
-  async function handleAdvancedClaim() {
+  async function handleAdvancedClaim(signatures: any, respJSON: any) {
     setPending(true);
     try {
-      const { signatures, respJSON } = await getSignatures(hash, fromNetwork.chainId);
+      // const { signatures, respJSON } = await getSignatures(hash, fromNetwork.chainId);
 
-      if (signatures.length < 3) {
-        setPending(false);
-        toastError('Failed to get signature.');
-        return;
-      }
+      // if (signatures.length < 3) {
+      //   setPending(false);
+      //   toastError('Failed to get signature.');
+      //   return;
+      // }
       try {
         const receipt = await onAdvancedClaim(respJSON, hash, fromNetwork.chainId, signatures);
         if (receipt.status) {
@@ -96,16 +109,16 @@ export default function Claim({ succeed, totalBlockCounts }: props) {
     }
   }
 
-  async function handleClaim() {
+  async function handleClaim(signatures: any, respJSON: any) {
     setPending(true);
 
     try {
-      const { signatures, respJSON } = await getSignatures(hash, fromNetwork.chainId);
-      if (signatures.length < 3) {
-        setPending(false);
-        toastError('Invalid signature.');
-        return;
-      }
+      // const { signatures, respJSON } = await getSignatures(hash, fromNetwork.chainId);
+      // if (signatures.length < 3) {
+      //   setPending(false);
+      //   toastError('Invalid signature.');
+      //   return;
+      // }
       const receipt = await onSimpleClaim(respJSON, hash, fromNetwork.chainId, signatures);
       if (receipt.status) {
         // await handleSetPending();
