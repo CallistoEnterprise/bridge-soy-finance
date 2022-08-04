@@ -96,7 +96,13 @@ export default function Network() {
           </p>
           <h6>{t('The network to which you want to send your assets.')}</h6>
           <NetworkSelection
-            options={networkOne.symbol === 'CLO' ? Networks : [Networks[0]]}
+            options={
+              networkOne.symbol === 'CLO'
+                ? Networks
+                : networkOne.symbol === 'BNB' || networkOne.symbol === 'ETH'
+                ? [Networks[0], Networks[3]]
+                : [Networks[0]]
+            }
             disabled={networkOne.symbol}
             onChange={onChangeNetworkTwo}
           />
