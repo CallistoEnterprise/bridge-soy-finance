@@ -32,6 +32,9 @@ export default function TokenList() {
     (t: any) => t.address[`${fromNetwork.chainId}`] !== '' && t.address[`${toNetwork.chainId}`] !== ''
   );
 
+  const bnbToken = defaultTokens.tokens.filter((t: any) => t.symbol === 'BNB');
+  const ethToken = defaultTokens.tokens.filter((t: any) => t.symbol === 'ETH');
+
   const onChangeToken = (option: IToken) => {
     setToken(option.symbol);
     dispatch(setSelectedToken(option));
@@ -71,16 +74,22 @@ export default function TokenList() {
             placeholder={`🔍 ${t('Search for an asset')}`}
           />
           <TokenSelection
-            options={tokenList.filter((item) => {
-              if (!value) return true;
-              if (
-                item.name.toLowerCase().includes(value.toLowerCase()) ||
-                item.name.toLowerCase().includes(value.toLowerCase())
-              ) {
-                return true;
-              }
-              return false;
-            })}
+            options={
+              fromNetwork.symbol === 'BNB' && toNetwork.symbol === 'ETC'
+                ? bnbToken
+                : fromNetwork.symbol === 'ETH' && toNetwork.symbol === 'ETC'
+                ? ethToken
+                : tokenList.filter((item) => {
+                    if (!value) return true;
+                    if (
+                      item.name.toLowerCase().includes(value.toLowerCase()) ||
+                      item.name.toLowerCase().includes(value.toLowerCase())
+                    ) {
+                      return true;
+                    }
+                    return false;
+                  })
+            }
             fromNetwork={fromNetwork}
             onChange={onChangeToken}
           />

@@ -1,13 +1,15 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import ch from '../assets/locales/ch.json';
+import de from '../assets/locales/de.json';
 import en from '../assets/locales/en.json';
 import ru from '../assets/locales/ru.json';
 
 export enum Language {
   English = 'en',
   Chinese = 'ch',
-  Russian = 'ru'
+  Russian = 'ru',
+  Germany = 'de'
 }
 
 const resources = {
@@ -19,6 +21,9 @@ const resources = {
   },
   [Language.Russian]: {
     translation: ru
+  },
+  [Language.Germany]: {
+    translation: de
   }
 };
 
@@ -44,7 +49,8 @@ export function getLanguagesList(): LanguageReturnType[] {
   return [
     ['English', Language.English],
     ['Chinese', Language.Chinese],
-    ['Russian', Language.Russian]
+    ['Russian', Language.Russian],
+    ['Germany', Language.Germany]
   ];
 }
 
