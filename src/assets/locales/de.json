@@ -66,10 +66,10 @@
   "TRANSFER": "ÜBERTRAGEN",
   "Wait...": "Bitte warten...",
   "Resources": "Ressourcen",
-  "Select the asset to transfer": "Wählen Sie das zu übertragende Asset aus",
-  "Amount to transfer": "zu überweisender Betrag",
+  "Select the asset to transfer": "Wählen Sie ein zu übertragendes Asset aus",
+  "Amount to transfer": "Betrag zum Überweisen",
   "Claimed successfully.": "Erfolgreich beansprucht.",
-  "Search for an asset": "Suchen Sie nach einem Vermögenswert",
+  "Search for an asset": "Suche nach einem Asset",
   "Next": "Nächste",
   "MAX": "MAX"
 }
