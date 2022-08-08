@@ -27,6 +27,9 @@ export default function Header() {
       case 'fr':
         changeCurrentLanguage(Language.French);
         break;
+      case 'es':
+        changeCurrentLanguage(Language.Spanish);
+        break;
       default:
         changeCurrentLanguage(Language.English);
     }
@@ -58,6 +61,7 @@ export default function Header() {
           <NavDropdown.Item onClick={() => onChangeLanguage('ru')}>RU</NavDropdown.Item>
           <NavDropdown.Item onClick={() => onChangeLanguage('de')}>DE</NavDropdown.Item>
           <NavDropdown.Item onClick={() => onChangeLanguage('fr')}>FR</NavDropdown.Item>
+          <NavDropdown.Item onClick={() => onChangeLanguage('es')}>ES</NavDropdown.Item>
         </NavDropdown>
       </Navbar.Collapse>
     </Navbar>
