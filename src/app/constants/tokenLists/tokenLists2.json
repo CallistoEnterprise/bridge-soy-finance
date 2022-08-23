@@ -151,6 +151,31 @@
       "logoURI": "https://app.soy.finance/images/coins/0xCCc766f97629a4E14b3af8C91EC54f0b5664A69F.png"
     },
     {
+      "name": "Callisto Enterprice",
+      "symbol": "CLOE",
+      "address": {
+        "20729": "",
+        "820": "0x1eAa43544dAa399b87EEcFcC6Fa579D5ea4A6187",
+        "56": "",
+        "97": "",
+        "1": "",
+        "42": "",
+        "61": "0x09c4a1ACAE1b591C63691B8E62F46E2F0eD9A0F9",
+        "199": "0xCC20d1B86bf1b80d4b9F0C19B138E17034457271"
+      },
+      "decimals": {
+        "20729": 18,
+        "820": 18,
+        "56": 18,
+        "97": 18,
+        "1": 18,
+        "42": 18,
+        "61": 18,
+        "199": 18
+      },
+      "logoURI": "https://app.soy.finance/images/coins/820/0x1eAa43544dAa399b87EEcFcC6Fa579D5ea4A6187.png"
+    },
+    {
       "name": "Wrapped CAKE",
       "symbol": "CAKE",
       "address": {
