@@ -482,16 +482,16 @@ export const Networks = [
     rpcs: [process.env.REACT_APP_BSC_NODE_1, process.env.REACT_APP_BSC_NODE_2],
     explorer: 'https://bscscan.com/'
   },
-  // {
-  //   name: 'Ethereum Network',
-  //   symbol: 'ETH',
-  //   devNet: 'mainnet',
-  //   img: '/images/eth.svg',
-  //   chainId: '1',
-  //   decimals: '18',
-  //   rpcs: [process.env.REACT_APP_ETH_NODE_1],
-  //   explorer: 'https://etherscan.io/'
-  // },
+  {
+    name: 'Ethereum Network',
+    symbol: 'ETH',
+    devNet: 'mainnet',
+    img: '/images/eth.svg',
+    chainId: '1',
+    decimals: '18',
+    rpcs: [process.env.REACT_APP_ETH_NODE_1],
+    explorer: 'https://etherscan.io/'
+  },
   {
     name: 'Ethereum Classic',
     symbol: 'ETC',
