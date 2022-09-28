@@ -50,7 +50,7 @@ export default function SwapForm({
 }: props) {
   const [t] = useTranslation();
 
-  const [destination, setDestination] = useState(false);
+  const [destination, setDestination] = useState(true);
   const { chainId } = useWeb3React();
 
   const { selectedToken, fromNetwork, toNetwork } = useGetWalletState();
