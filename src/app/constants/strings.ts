@@ -472,16 +472,16 @@ export const Networks = [
     rpcs: [process.env.REACT_APP_NODE_1],
     explorer: 'https://explorer.callisto.network/'
   },
-  {
-    name: 'BSC Network',
-    symbol: 'BNB',
-    devNet: 'mainnet',
-    img: '/images/bnb.svg',
-    chainId: '56',
-    decimals: '18',
-    rpcs: [process.env.REACT_APP_BSC_NODE_1, process.env.REACT_APP_BSC_NODE_2],
-    explorer: 'https://bscscan.com/'
-  },
+  //   {
+  //     name: 'BSC Network',
+  //     symbol: 'BNB',
+  //     devNet: 'mainnet',
+  //     img: '/images/bnb.svg',
+  //     chainId: '56',
+  //     decimals: '18',
+  //     rpcs: [process.env.REACT_APP_BSC_NODE_1, process.env.REACT_APP_BSC_NODE_2],
+  //     explorer: 'https://bscscan.com/'
+  //   },
   {
     name: 'Ethereum Network',
     symbol: 'ETH',
