@@ -1,4 +1,4 @@
-import { CurrencyAmount, Fraction, JSBI, Percent, TokenAmount, Trade } from '@soy-libs/sdk2';
+import { CurrencyAmount, Fraction, JSBI, Percent, TokenAmount, Trade } from '@callisto-enterprise/soy-sdk';
 import {
   ALLOWED_PRICE_IMPACT_HIGH,
   ALLOWED_PRICE_IMPACT_LOW,

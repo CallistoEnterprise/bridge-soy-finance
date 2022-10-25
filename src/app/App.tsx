@@ -1,4 +1,4 @@
-import { dark, light } from '@soy-libs/uikit2';
+import { dark, light } from '@callisto-enterprise/soy-uikit2';
 import { Web3ReactProvider } from '@web3-react/core';
 import BigNumber from 'bignumber.js';
 import React from 'react';

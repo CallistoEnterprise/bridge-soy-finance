@@ -1,4 +1,4 @@
-import { Toast } from '@soy-libs/uikit2';
+import { Toast } from '@callisto-enterprise/soy-uikit2';
 
 type ToastSignature = (title: Toast['title'], description?: Toast['description']) => void;
 

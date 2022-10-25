@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, ETHER, JSBI, Token, TokenAmount } from '@soy-libs/sdk2';
+import { Currency, CurrencyAmount, ETHERS, JSBI, Token, TokenAmount } from '@callisto-enterprise/soy-sdk';
 import { useWeb3React } from '@web3-react/core';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
@@ -106,7 +106,10 @@ export function useCurrencyBalances(
   );
 
   const tokenBalances = useTokenBalances(account, tokens);
-  const containsBNB: boolean = useMemo(() => currencies?.some((currency) => currency === ETHER) ?? false, [currencies]);
+  const containsBNB: boolean = useMemo(
+    () => currencies?.some((currency) => currency === ETHERS[820]) ?? false,
+    [currencies]
+  );
   const ethBalance = useBNBBalances(containsBNB ? [account] : []);
 
   return useMemo(
@@ -114,7 +117,7 @@ export function useCurrencyBalances(
       currencies?.map((currency) => {
         if (!account || !currency) return undefined;
         if (currency instanceof Token) return tokenBalances[currency.address];
-        if (currency === ETHER) return ethBalance[account];
+        if (currency === ETHERS[820]) return ethBalance[account];
         return undefined;
       }) ?? [],
     [account, currencies, ethBalance, tokenBalances]

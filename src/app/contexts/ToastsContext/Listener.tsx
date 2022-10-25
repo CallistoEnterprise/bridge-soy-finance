@@ -1,4 +1,4 @@
-import { ToastContainer } from '@soy-libs/uikit2';
+import { ToastContainer } from '@callisto-enterprise/soy-uikit2';
 import React from 'react';
 import useToast from '~/app/hooks/useToast';
 

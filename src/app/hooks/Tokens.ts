@@ -1,6 +1,8 @@
 /* eslint-disable no-param-reassign */
 import { parseBytes32String } from '@ethersproject/strings';
-import { Currency, ETHER, Token } from '@soy-libs/sdk2';
+import { Currency, ETHERS, Token } from '@callisto-enterprise/soy-sdk';
+// import { Currency, ETHER, Token } from '@soy-libs/sdk2';
+
 import { useWeb3React } from '@web3-react/core';
 import { arrayify } from 'ethers/lib/utils';
 import { useMemo } from 'react';
@@ -171,5 +173,5 @@ export function useCurrency(currencyId: string | undefined, disable?: boolean): 
   if (!disable) {
     return null;
   }
-  return isCLO ? ETHER : token;
+  return isCLO ? ETHERS[820] : token;
 }

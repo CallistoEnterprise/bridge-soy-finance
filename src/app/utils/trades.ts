@@ -1,4 +1,4 @@
-import { currencyEquals, Percent, Trade } from '@soy-libs/sdk2';
+import { currencyEquals, Percent, Trade } from '@callisto-enterprise/soy-sdk';
 import { ONE_HUNDRED_PERCENT, ZERO_PERCENT } from '~/app/constants';
 
 // returns whether tradeB is better than tradeA by at least a threshold percentage amount

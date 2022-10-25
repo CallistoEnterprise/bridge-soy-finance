@@ -3,7 +3,7 @@ import { BigNumber } from '@ethersproject/bignumber';
 import { AddressZero } from '@ethersproject/constants';
 import { Contract } from '@ethersproject/contracts';
 import { JsonRpcSigner, Web3Provider } from '@ethersproject/providers';
-import { JSBI, Percent } from '@soy-libs/sdk2';
+import { JSBI, Percent } from '@callisto-enterprise/soy-sdk';
 import { ethers } from 'ethers';
 import bridgeABI from '~/app/constants/abis/bridge.json';
 import soyRouterABI from '~/app/constants/abis/soyRouter.json';

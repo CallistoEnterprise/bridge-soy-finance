@@ -1,4 +1,4 @@
-import { ChainId, Token } from '@soy-libs/sdk2';
+import { ChainId, Token } from '@callisto-enterprise/soy-sdk';
 import { Tags, TokenInfo, TokenList } from '@uniswap/token-lists';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
@@ -43,7 +43,7 @@ export class WrappedTokenInfo extends Token {
 }
 
 export type TokenAddressMap = Readonly<{
-  [chainId in ChainId]: Readonly<{ [tokenAddress: string]: { token: WrappedTokenInfo; list: TokenList } }>;
+  [chainId: number]: Readonly<{ [tokenAddress: string]: { token: WrappedTokenInfo; list: TokenList } }>;
 }>;
 
 /**

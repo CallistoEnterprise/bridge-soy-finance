@@ -1,5 +1,5 @@
 import { BscConnector } from '@binance-chain/bsc-connector';
-import { ConnectorNames } from '@soy-libs/uikit2';
+import { ConnectorNames } from '@callisto-enterprise/soy-uikit2';
 import { InjectedConnector } from '@web3-react/injected-connector';
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector';
 import { ethers } from 'ethers';
@@ -24,7 +24,8 @@ const bscConnector = new BscConnector({ supportedChainIds: [1, 4, 56, 61, 820, 2
 export const connectorsByName: { [connectorName in ConnectorNames]: any } = {
   [ConnectorNames.Injected]: injected,
   [ConnectorNames.WalletConnect]: walletconnect,
-  [ConnectorNames.BSC]: bscConnector
+  [ConnectorNames.BSC]: bscConnector,
+  [ConnectorNames.Unstoppable]: undefined
 };
 
 export const getLibrary = (provider: any): ethers.providers.Web3Provider => {
@@ -42,7 +43,8 @@ export const getConnectorsByName = (curNet: any): any => {
   const connectorsByName1: { [connectorName in ConnectorNames]: any } = {
     [ConnectorNames.Injected]: injected,
     [ConnectorNames.WalletConnect]: walletconnect1,
-    [ConnectorNames.BSC]: bscConnector
+    [ConnectorNames.BSC]: bscConnector,
+    [ConnectorNames.Unstoppable]: undefined
   };
   return connectorsByName1;
 };

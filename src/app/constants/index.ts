@@ -1,4 +1,5 @@
-import { ChainId, JSBI, Percent, Token, WETH } from '@soy-libs/sdk2';
+import { ChainId, JSBI, Percent, Token, WETH } from '@callisto-enterprise/soy-sdk';
+// import { ChainId, JSBI, Percent, Token, WETH } from '@soy-libs/sdk2';
 import BigNumber from 'bignumber.js';
 import { BTCB, DAI, ETH, SOY, USDC, USDT, UST, WCLO } from './tokens';
 
@@ -11,7 +12,7 @@ export const ROUTER_ADDRESS = '0xeB5B468fAacC6bBdc14c4aacF0eec38ABCCC13e7'; // f
 
 // a list of tokens by chain
 type ChainTokenList = {
-  readonly [chainId in ChainId]: Token[];
+  readonly [chainId: number]: Token[];
 };
 
 // used to construct intermediary pairs for trading

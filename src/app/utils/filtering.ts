@@ -1,4 +1,4 @@
-import { Token } from '@soy-libs/sdk2';
+import { Token } from '@callisto-enterprise/soy-sdk';
 import { useMemo } from 'react';
 import { isAddress } from './';
 
