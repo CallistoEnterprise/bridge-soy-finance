@@ -1,4 +1,4 @@
-import { Token } from '@soy-libs/sdk2';
+import { Token } from '@callisto-enterprise/soy-sdk';
 import BigNumber from 'bignumber.js';
 import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
