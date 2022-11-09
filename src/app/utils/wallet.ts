@@ -2,7 +2,7 @@ import { prevChainIdKey } from '../constants';
 
 // Set of helper functions to facilitate wallet setup
 declare let window: any;
-const BASE_URL = 'https://deploy-preview-25--multichain-soy-finance.netlify.app/images/coins/';
+const BASE_URL = 'https://app.soy.finance/images/coins/';
 /**
  * Prompt the user to add BSC as a network on Metamask, or switch to BSC if the wallet is on a different network
  * @returns {boolean} true if the setup succeeded, false otherwise
