@@ -131,22 +131,22 @@ export default function Footer() {
         <div className="footer__socialmedia u-align-center">
           <div className="mt-3">
             <a href="https://t.me/Soy_Finance" target="_blank" rel="noreferrer">
-              <Telegram alt="Telegram" />
+              <Telegram />
             </a>
             <a href="https://twitter.com/Soy_Finance" target="_blank" rel="noreferrer">
-              <Twitter alt="Twitter" />
+              <Twitter />
             </a>
             <a href="https://www.reddit.com/Soy.Finance" target="_blank" rel="noreferrer">
-              <Redit alt="Reddit" />
+              <Redit />
             </a>
             <a href="https://www.facebook.com/Soy.Finance" target="_blank" rel="noreferrer">
-              <Facebook alt="Facebook" />
+              <Facebook />
             </a>
             <a href="https://soy-finance.gitbook.io/" target="_blank" rel="noreferrer">
-              <Gitbook alt="GitBook" />
+              <Gitbook />
             </a>
             <a href="https://defillama.com/protocol/soy-finance" target="_blank" rel="noreferrer">
-              <Pulse width="38px" height="38px" alt="DefiLlama" />
+              <Pulse width="38px" height="38px" />
             </a>
           </div>
         </div>
