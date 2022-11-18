@@ -11,7 +11,7 @@ import { useGetCLOBalance } from '~/app/hooks/wallet';
 import useGetWalletState from '~/app/modules/wallet/hooks';
 import { submitClaimAction } from '~/app/utils/apiHelper';
 import getSignatures from '~/app/utils/getSignatures';
-import claimAnimal from '~/assets/images/animal.webm';
+import claimAnimal from '~/assets/images/animal.gif';
 import './claim.css';
 
 type props = {
