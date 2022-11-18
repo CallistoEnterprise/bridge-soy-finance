@@ -130,23 +130,23 @@ export default function Footer() {
 
         <div className="footer__socialmedia u-align-center">
           <div className="mt-3">
-            <a href="https://t.me/Soy_Finance" target="_blank" rel="noreferrer" alt="Telegram">
-              <Telegram />
+            <a href="https://t.me/Soy_Finance" target="_blank" rel="noreferrer">
+              <Telegram alt="Telegram" />
             </a>
-            <a href="https://twitter.com/Soy_Finance" target="_blank" rel="noreferrer" alt="Twitter">
-              <Twitter />
+            <a href="https://twitter.com/Soy_Finance" target="_blank" rel="noreferrer">
+              <Twitter alt="Twitter" />
             </a>
-            <a href="https://www.reddit.com/Soy.Finance" target="_blank" rel="noreferrer" alt="Reddit">
-              <Redit />
+            <a href="https://www.reddit.com/Soy.Finance" target="_blank" rel="noreferrer">
+              <Redit alt="Reddit" />
             </a>
-            <a href="https://www.facebook.com/Soy.Finance" target="_blank" rel="noreferrer" alt="Facebook">
-              <Facebook />
+            <a href="https://www.facebook.com/Soy.Finance" target="_blank" rel="noreferrer">
+              <Facebook alt="Facebook" />
             </a>
-            <a href="https://soy-finance.gitbook.io/" target="_blank" rel="noreferrer" alt="GitBook">
-              <Gitbook />
+            <a href="https://soy-finance.gitbook.io/" target="_blank" rel="noreferrer">
+              <Gitbook alt="GitBook" />
             </a>
-            <a href="https://defillama.com/protocol/soy-finance" target="_blank" rel="noreferrer" alt="DefiLlama">
-              <Pulse width="38px" height="38px" />
+            <a href="https://defillama.com/protocol/soy-finance" target="_blank" rel="noreferrer">
+              <Pulse width="38px" height="38px" alt="DefiLlama" />
             </a>
           </div>
         </div>
