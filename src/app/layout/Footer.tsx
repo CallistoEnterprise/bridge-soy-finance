@@ -130,22 +130,22 @@ export default function Footer() {
 
         <div className="footer__socialmedia u-align-center">
           <div className="mt-3">
-            <a href="https://t.me/Soy_Finance" target="_blank" rel="noreferrer">
+            <a href="https://t.me/Soy_Finance" target="_blank" rel="noreferrer" alt="Telegram">
               <Telegram />
             </a>
-            <a href="https://twitter.com/Soy_Finance" target="_blank" rel="noreferrer">
+            <a href="https://twitter.com/Soy_Finance" target="_blank" rel="noreferrer" alt="Twitter">
               <Twitter />
             </a>
-            <a href="https://www.reddit.com/Soy.Finance" target="_blank" rel="noreferrer">
+            <a href="https://www.reddit.com/Soy.Finance" target="_blank" rel="noreferrer" alt="Reddit">
               <Redit />
             </a>
-            <a href="https://www.facebook.com/Soy.Finance" target="_blank" rel="noreferrer">
+            <a href="https://www.facebook.com/Soy.Finance" target="_blank" rel="noreferrer" alt="Facebook">
               <Facebook />
             </a>
-            <a href="https://soy-finance.gitbook.io/" target="_blank" rel="noreferrer">
+            <a href="https://soy-finance.gitbook.io/" target="_blank" rel="noreferrer" alt="GitBook">
               <Gitbook />
             </a>
-            <a href="https://defillama.com/protocol/soy-finance" target="_blank" rel="noreferrer">
+            <a href="https://defillama.com/protocol/soy-finance" target="_blank" rel="noreferrer" alt="DefiLlama">
               <Pulse width="38px" height="38px" />
             </a>
           </div>
