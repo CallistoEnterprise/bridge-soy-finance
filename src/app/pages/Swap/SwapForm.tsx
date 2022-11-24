@@ -110,9 +110,7 @@ export default function SwapForm({
   };
 
   const handleMaxInput = () => {
-    selectedToken.symbol === fromNetwork.symbol
-      ? setSwapAmount((Number(tokenBalance) - 0.005).toString())
-      : setSwapAmount(tokenBalance.toString());
+    setSwapAmount((Number(tokenBalance) - 0.005).toString());
   };
 
   return (
