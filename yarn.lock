@@ -1194,19 +1194,10 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@binance-chain/bsc-connector@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@binance-chain/bsc-connector/-/bsc-connector-1.0.0.tgz#5ce6b02af0921c5fb52c10861b7a0b4a958ca57a"
-  integrity sha512-Id/P/Zs8Cgg+fJv3XN3BVWZB3Pj+VA00flhpkB6K+vUzjMihS+sZFrMYDnjiRfrJgi0ppEMqRsMlOli9+qwxaA==
-  dependencies:
-    "@web3-react/abstract-connector" "^6.0.7"
-    "@web3-react/types" "^6.0.7"
-    tiny-warning "^1.0.3"
-
-"@callisto-enterprise/soy-sdk@0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@callisto-enterprise/soy-sdk/-/soy-sdk-0.1.1.tgz#6482791e8d4d816cbf9e9968068e6f6d6d8cf345"
-  integrity sha512-kGrW2jLczLbeRBN1ufILwPv5Mj57qv+LrHSpDIQmaCgTkRfBRJC91xX4ECxonciE9eVqxZ8KBXkGvUtcFq9szg==
+"@callisto-enterprise/soy-sdk@0.1.7":
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/@callisto-enterprise/soy-sdk/-/soy-sdk-0.1.7.tgz#d13bfe4af174e3877e06b08b303e8d67646da359"
+  integrity sha512-ZTjwOCaTaTP5wKcOdbN1bOC8eqyXZrxAWl3IvJ9TPnU/b46kXmvNbH76BSWCrV2zpiluIcrVlZ6pd1QYrG703Q==
   dependencies:
     big.js "^5.2.2"
     decimal.js-light "^2.5.0"
@@ -1215,10 +1206,10 @@
     tiny-warning "^1.0.3"
     toformat "^2.0.0"
 
-"@callisto-enterprise/soy-uikit2@^0.3.8":
-  version "0.3.8"
-  resolved "https://registry.yarnpkg.com/@callisto-enterprise/soy-uikit2/-/soy-uikit2-0.3.8.tgz#3f9fa3e8c2491ed1938bbefeb5d6160f637de2dc"
-  integrity sha512-hKJufUuzsyGFJ6FrNH/nAt6oArp4JcwBCauopjE0jxA++ZmXpAU1enYQY2/dQ3GoFbwn0LwThaEnsre2mgxi7Q==
+"@callisto-enterprise/soy-uikit2@^0.5.5":
+  version "0.5.5"
+  resolved "https://registry.yarnpkg.com/@callisto-enterprise/soy-uikit2/-/soy-uikit2-0.5.5.tgz#2f8a22c8209ba13059d5cb9028c1ae6dd1a4e2f8"
+  integrity sha512-v9WIitDwPTAMPaJCpcId/nGkjEHfX4HojRH7LWg/CtK8AzCgYZaYSfxFJQ5b1TF1ycoauwcKrsJ3b/jxO7NPkw==
   dependencies:
     "@popperjs/core" "^2.9.2"
     "@types/lodash" "^4.14.168"
@@ -23149,4 +23140,3 @@ yup@^0.32.11:
     nanoclone "^0.2.1"
     property-expr "^2.0.4"
     toposort "^2.0.2"
-    
