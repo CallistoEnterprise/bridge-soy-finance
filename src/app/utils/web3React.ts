@@ -24,7 +24,7 @@ const walletconnect = new WalletConnectConnector({
 export const connectorsByName: { [connectorName in ConnectorNames]: any } = {
   [ConnectorNames.Injected]: injected,
   [ConnectorNames.WalletConnect]: walletconnect,
-  //[ConnectorNames.BSC]: bscConnector,
+  [ConnectorNames.BSC]: injected,
   [ConnectorNames.Unstoppable]: undefined
 };
 
@@ -43,7 +43,7 @@ export const getConnectorsByName = (curNet: any): any => {
   const connectorsByName1: { [connectorName in ConnectorNames]: any } = {
     [ConnectorNames.Injected]: injected,
     [ConnectorNames.WalletConnect]: walletconnect1,
-    //[ConnectorNames.BSC]: bscConnector,
+    [ConnectorNames.BSC]: injected,
     [ConnectorNames.Unstoppable]: undefined
   };
   return connectorsByName1;
