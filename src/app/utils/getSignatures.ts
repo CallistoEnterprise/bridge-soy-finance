@@ -1,8 +1,8 @@
 // Array of available nodes to connect to
 const sigs = [
   'https://ip-159-225.cust.aspone.cz/auth?',
-  'https://z3ks0jkyd5.execute-api.us-east-2.amazonaws.com/default/auth/',
-  'https://a78aj8vsu0.execute-api.us-west-2.amazonaws.com/auth/'
+  'https://nrc6gwlqvajn4umvmcqurtni240usuqm.lambda-url.us-east-2.on.aws/auth?',
+  'https://srs27mbzuopehskfhvkdrdjwqi0qpjxk.lambda-url.us-west-2.on.aws/auth?'
 ];
 
 const getSignatures = async (hash: string, chainId: string) => {
