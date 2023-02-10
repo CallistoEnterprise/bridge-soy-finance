@@ -80,9 +80,20 @@ export default function PreviousClaim() {
     dispatch(setFromNetwork(option));
   };
 
+  async function getSig3() {
+    let sig;
+    for (let i = 0; i < 4; i++) {
+      sig = await getSignatures(hash, fromNetwork.chainId);
+      if (sig.signatures.length >= 3) {
+        return sig;
+      }
+    }
+    return sig;
+  }
+
   async function handleClaim() {
     try {
-      const { signatures, respJSON } = await getSignatures(hash, fromNetwork.chainId);
+      const { signatures, respJSON } = await getSig3();
       if (signatures.length < 3) {
         setPending(false);
         toastWarning(
