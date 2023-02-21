@@ -7,7 +7,6 @@ dist/
 
 # Packages folders
 node_modules/
-.vscode
 
 build/
 
