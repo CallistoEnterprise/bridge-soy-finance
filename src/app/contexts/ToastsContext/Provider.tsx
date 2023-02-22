@@ -1,4 +1,4 @@
-import { Toast, toastTypes } from '@soy-libs/uikit2';
+import { Toast, toastTypes } from '@callisto-enterprise/soy-uikit2';
 import { kebabCase } from 'lodash';
 import React, { createContext, ReactNode, useCallback, useState } from 'react';
 import { ToastContextApi } from './types';

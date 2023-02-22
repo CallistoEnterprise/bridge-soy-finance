@@ -1,4 +1,4 @@
-import { connectorLocalStorageKey, ConnectorNames } from '@soy-libs/uikit2';
+import { connectorLocalStorageKey, ConnectorNames } from '@callisto-enterprise/soy-uikit2';
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
 import {
   NoEthereumProviderError,

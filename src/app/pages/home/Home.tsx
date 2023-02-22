@@ -1,4 +1,4 @@
-import { ConnectorNames } from '@soy-libs/uikit2';
+import { ConnectorNames } from '@callisto-enterprise/soy-uikit2';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';

@@ -50,7 +50,7 @@ export default function SwapForm({
 }: props) {
   const [t] = useTranslation();
 
-  const [destination, setDestination] = useState(false);
+  const [destination, setDestination] = useState(true);
   const { chainId } = useWeb3React();
 
   const { selectedToken, fromNetwork, toNetwork } = useGetWalletState();
@@ -112,7 +112,7 @@ export default function SwapForm({
   const handleMaxInput = () => {
     selectedToken.symbol === fromNetwork.symbol
       ? setSwapAmount((Number(tokenBalance) - 0.005).toString())
-      : setSwapAmount(tokenBalance.toString());
+      : setSwapAmount((Number(tokenBalance) - 0.0000001).toString());
   };
 
   return (

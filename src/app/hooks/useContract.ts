@@ -1,6 +1,6 @@
 // Imports below migrated from Exchange useContract.ts
 import { Contract } from '@ethersproject/contracts';
-import { ChainId } from '@soy-libs/sdk2';
+import { ChainId } from '@callisto-enterprise/soy-sdk';
 import { useMemo } from 'react';
 import ENS_PUBLIC_RESOLVER_ABI from '~/app/constants/abis/ens-public-resolver.json';
 import ENS_ABI from '~/app/constants/abis/ens-registrar.json';

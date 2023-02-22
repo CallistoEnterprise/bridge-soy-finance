@@ -53,7 +53,7 @@ export default function PreviousClaim() {
           if (response) {
             if (response.input.substring(0, 10) === '0x487cda0d') {
               const reciever = `0x${response.input.substring(34, 74)}`;
-              console.log(reciever);
+              //console.log(reciever);
               setDestinationAddress(reciever);
             }
           }
@@ -80,9 +80,20 @@ export default function PreviousClaim() {
     dispatch(setFromNetwork(option));
   };
 
+  async function getSig3() {
+    let sig;
+    for (let i = 0; i < 4; i++) {
+      sig = await getSignatures(hash, fromNetwork.chainId);
+      if (sig.signatures.length >= 3) {
+        return sig;
+      }
+    }
+    return sig;
+  }
+
   async function handleClaim() {
     try {
-      const { signatures, respJSON } = await getSignatures(hash, fromNetwork.chainId);
+      const { signatures, respJSON } = await getSig3();
       if (signatures.length < 3) {
         setPending(false);
         toastWarning(
@@ -105,11 +116,11 @@ export default function PreviousClaim() {
         }
       } else {
         if (nativeCoinBalance < 0.005 && chainId !== 820) {
-          toastWarning('Warning!', 'Insufficient FEE amount.');
+          toastWarning('Warning!', 'Insufficient gas in wallet.');
           return;
         }
         if (nativeCoinBalance < 0.005 && chainId !== 199) {
-          toastWarning('Warning!', 'Insufficient FEE amount.');
+          toastWarning('Warning!', 'Insufficient gas in wallet.');
           return;
         }
         if (hash) {
@@ -143,30 +154,58 @@ export default function PreviousClaim() {
         } else {
           // const dest = destinationAddress === '' ? account : destinationAddress;
           const bridgeContract = await getBridgeContract(respJSON.bridge, library, account);
-          const tx =
-            respJSON.data && respJSON.toContract
-              ? await bridgeContract.claimToContract(
-                  respJSON.token,
-                  hash,
-                  respJSON.to,
-                  respJSON.value,
-                  fromNetwork.chainId,
-                  respJSON.toContract,
-                  respJSON.data,
-                  signatures,
-                  {
-                    value: 0
-                  }
-                )
-              : await bridgeContract.claim(
-                  respJSON.token,
-                  hash,
-                  respJSON.to,
-                  respJSON.value,
-                  fromNetwork.chainId,
-                  signatures,
-                  { value: 0 }
-                );
+
+          let tx;
+          if (respJSON.data && respJSON.toContract) {
+            const gasLimit = await bridgeContract.estimateGas.claimToContract(
+              respJSON.token,
+              hash,
+              respJSON.to,
+              respJSON.value,
+              fromNetwork.chainId,
+              respJSON.toContract,
+              respJSON.data,
+              signatures,
+              {
+                value: 0
+              }
+            );
+
+            tx = await bridgeContract.claimToContract(
+              respJSON.token,
+              hash,
+              respJSON.to,
+              respJSON.value,
+              fromNetwork.chainId,
+              respJSON.toContract,
+              respJSON.data,
+              signatures,
+              {
+                value: 0,
+                gasLimit: gasLimit.add(20000)
+              }
+            );
+          } else {
+            const gasLimit = await bridgeContract.estimateGas.claim(
+              respJSON.token,
+              hash,
+              respJSON.to,
+              respJSON.value,
+              fromNetwork.chainId,
+              signatures,
+              { value: 0 }
+            );
+
+            tx = await bridgeContract.claim(
+              respJSON.token,
+              hash,
+              respJSON.to,
+              respJSON.value,
+              fromNetwork.chainId,
+              signatures,
+              { value: 0, gasLimit: gasLimit.add(20000) }
+            );
+          }
 
           const receipt = await tx.wait();
           if (receipt.status) {

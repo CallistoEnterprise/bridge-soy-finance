@@ -30,11 +30,13 @@ module.exports = {
       '~': `${path.resolve(__dirname)}/src`
     },
     configure: (webpackConfig) => {
+      webpackConfig.optimization.minimize = true
       webpackConfig.optimization.minimizer = [
         new TerserPlugin({
           terserOptions: {
-            keep_classnames: true,
-            keep_fnames: true
+            keep_classnames: false,
+            keep_fnames: false,
+            mangle: true,
           }
         })
       ];

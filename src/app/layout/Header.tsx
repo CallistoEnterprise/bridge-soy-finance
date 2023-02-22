@@ -4,7 +4,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useTranslation } from 'react-i18next';
 import { changeCurrentLanguage, getCurrentLanguage, Language } from '~/app/app.i18n';
 import CustomButton from '~/app/components/common/CustomButton';
-import logo from '~/assets/images/newLogo.png';
+import logo from '~/assets/images/newLogo.svg';
 import './header.css';
 
 export default function Header() {

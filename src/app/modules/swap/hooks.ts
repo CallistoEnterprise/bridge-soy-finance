@@ -1,5 +1,5 @@
 import { parseUnits } from '@ethersproject/units';
-import { Currency, CurrencyAmount, JSBI, Token, TokenAmount, Trade } from '@soy-libs/sdk2';
+import { Currency, CurrencyAmount, JSBI, Token, TokenAmount, Trade } from '@callisto-enterprise/soy-sdk';
 import { useWeb3React } from '@web3-react/core';
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
