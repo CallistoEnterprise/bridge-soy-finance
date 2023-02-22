@@ -21,7 +21,7 @@ const useClaim = () => {
       );
       const tx = await bridgeContract.claim(respJson.token, txHash, respJson.to, respJson.value, fromChainId, sig, {
         value: 0,
-        gasLimit: gasLimit.add(100000)
+        gasLimit: gasLimit.add(20000)
       });
       const receipt = tx.wait();
       return receipt;
@@ -56,7 +56,7 @@ const useClaim = () => {
         sig,
         {
           value: 0,
-          gasLimit: gasLimit.add(100000)
+          gasLimit: gasLimit.add(20000)
         }
       );
       const receipt = tx.wait();
