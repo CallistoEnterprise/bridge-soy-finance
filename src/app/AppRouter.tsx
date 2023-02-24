@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ToastListener } from '~/app/contexts/ToastsContext';
 import '../styles/app.css';
 import Spinner from './components/common/Spinner';
+import CookiesBar from './components/CookiesBar';
 import { Footer, Header } from './layout';
 
 const Home = lazy(() => import('./pages/home'));
@@ -25,6 +26,7 @@ export default function AppRouter() {
     <BrowserRouter>
       <Header />
       <Suspense fallback={<LoadingMessage />}>
+        <CookiesBar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/network" element={<Network />} />
