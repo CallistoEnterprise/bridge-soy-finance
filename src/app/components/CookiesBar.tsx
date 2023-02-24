@@ -81,15 +81,16 @@ const Button = styled.button`
   color: #000000;
   background-color: white;
   font-size: 18px;
-  font-weight: 700;
-  font-family: 'Lato-Bold';
+  font-family: 'Lato-Regular';
   height: 40px;
+  width: 160px;
   padding: 5px 40px;
   border: 0;
   border-radius: 52px;
 
   &:hover {
-    color: #34c88a;
+    font-weight: 700;
+    font-family: 'Lato-Bold';
   }
 `;
 
