@@ -171,6 +171,7 @@ const Swap = () => {
         await onApprove();
       }
     }
+
     const amt = selectedToken.symbol === fromNetwork.symbol ? Number(amount) + 0.005 : Number(amount);
     const isMax = amt === Number(tokenBalance);
     try {
@@ -190,7 +191,6 @@ const Swap = () => {
             distinationAddress,
             new BigNumber(deadline + 15000)
           ]);
-
       try {
         const tx = await onAdvancedSwap(address, swapTokenAddr, bigAmount, toNetwork.chainId, byte_data, value);
         if (tx.hash) {

@@ -29,14 +29,16 @@ const method2 = {
 };
 
 const getEncodedData = async (web3: any, params: [BigNumber, BigNumber, [string, string], string, BigNumber]) => {
-  const data = await web3.eth.abi.encodeFunctionCall(method, params);
+  const params2 = [params[0].toString(), params[1].toString(), params[2], params[3], params[4].toString()];
+  const data = await web3.eth.abi.encodeFunctionCall(method, params2);
   return data;
 };
 export const getEncodedData2 = async (
   web3: any,
   params: [BigNumber, BigNumber, [string, string], string, BigNumber]
 ) => {
-  const data = await web3.eth.abi.encodeFunctionCall(method2, params);
+  const params2 = [params[0].toString(), params[1].toString(), params[2], params[3], params[4].toString()];
+  const data = await web3.eth.abi.encodeFunctionCall(method2, params2);
   return data;
 };
 
