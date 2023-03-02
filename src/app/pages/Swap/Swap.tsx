@@ -115,7 +115,6 @@ const Swap = () => {
   }, [dispatch, txBlockNumber, pending, library, toNetwork, web3, fromNetwork]);
 
   const onSubmit = (values: any) => {
-    console.log('Getting a submission of', values);
     let neededTokenBalance = Number(tokenBalance);
     if (selectedToken.symbol === fromNetwork.symbol) {
       neededTokenBalance += 0.005;
@@ -130,7 +129,6 @@ const Swap = () => {
       return;
     }
     if (canBuyCLO) {
-      console.log('Attempting advanced swap');
       advancedSwap(
         values.swap_amount,
         values.destination_wallet,
@@ -152,7 +150,6 @@ const Swap = () => {
     amountsIn: any,
     amountsOut: any
   ) {
-    console.log('Advaced swap 1');
     setPending(true);
     const address: any = distinationAddress === '' ? account : distinationAddress;
     setClaimAddress(address);
@@ -175,11 +172,8 @@ const Swap = () => {
       }
     }
 
-    console.log('Advaced swap 2 with value =', value);
-
     const amt = selectedToken.symbol === fromNetwork.symbol ? Number(amount) + 0.005 : Number(amount);
     const isMax = amt === Number(tokenBalance);
-    console.log('Advaced swap 3, trying getEncodedData', isMax ? 2 : 0);
     try {
       const maxAmountsIn = Math.floor(1.05 * Number(amountsIn));
       const byte_data = isMax
@@ -197,22 +191,18 @@ const Swap = () => {
             distinationAddress,
             new BigNumber(deadline + 15000)
           ]);
-      console.log('Advaced swap 4');
       try {
-        console.log('Advaced swap 5');
         const tx = await onAdvancedSwap(address, swapTokenAddr, bigAmount, toNetwork.chainId, byte_data, value);
         if (tx.hash) {
           await handleSetPending(tx.hash, address);
         }
       } catch (error) {
-        console.log('Advaced swap - catched error inner');
         toastError('Execution reverted: There is no pair!');
         setPending(false);
         setSucced(false);
         dispatch(setStartSwapping(false));
       }
     } catch (error) {
-      console.log('Advaced swap - catched error outer', error);
       setPending(false);
       setSucced(false);
       dispatch(setStartSwapping(false));
