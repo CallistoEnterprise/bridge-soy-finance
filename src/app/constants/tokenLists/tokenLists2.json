@@ -574,6 +574,31 @@
         "199": 18
       },
       "logoURI": "https://app.soy.finance/images/coins/0xcC6e7E97A46B6F0eD3bC81518Fc816da78F7cb65.png"
+    },
+    {
+      "name": "VIPSVERSE Token",
+      "symbol": "VVT",
+      "address": {
+        "20729": "",
+        "820": "0x9f9b6DD3DEDB4D2e6C679bCb8782f546400e9A53",
+        "56": "0x9f9b6DD3DEDB4D2e6C679bCb8782f546400e9A53",
+        "97": "",
+        "1": "",
+        "42": "",
+        "61": "",
+        "199": ""
+      },
+      "decimals": {
+        "20729": 18,
+        "820": 18,
+        "56": 18,
+        "97": 18,
+        "1": 18,
+        "42": 18,
+        "61": 18,
+        "199": 18
+      },
+      "logoURI": "https://testnet.soy.finance/images/coins/0x9f9b6DD3DEDB4D2e6C679bCb8782f546400e9A53.png"
     }
   ]
 }
