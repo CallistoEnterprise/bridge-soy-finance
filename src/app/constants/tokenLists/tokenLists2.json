@@ -598,7 +598,32 @@
         "61": 18,
         "199": 18
       },
-      "logoURI": "https://testnet.soy.finance/images/coins/0x9f9b6DD3DEDB4D2e6C679bCb8782f546400e9A53.png"
+      "logoURI": "https://app.soy.finance/images/coins/820/0x9f9b6DD3DEDB4D2e6C679bCb8782f546400e9A53.png"
+    },
+    {
+      "name": "ColdFi Tech Token",
+      "symbol": "CFT",
+      "address": {
+        "20729": "",
+        "820": "0x251A0d0121D50A9C907F701A1A644B8cF237d862",
+        "56": "0x251A0d0121D50A9C907F701A1A644B8cF237d862",
+        "97": "",
+        "1": "",
+        "42": "",
+        "61": "",
+        "199": ""
+      },
+      "decimals": {
+        "20729": 18,
+        "820": 18,
+        "56": 18,
+        "97": 18,
+        "1": 18,
+        "42": 18,
+        "61": 18,
+        "199": 18
+      },
+      "logoURI": "./images/0x251A0d0121D50A9C907F701A1A644B8cF237d862.png"
     }
   ]
 }
