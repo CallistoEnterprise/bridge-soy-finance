@@ -624,6 +624,31 @@
         "199": 18
       },
       "logoURI": "./images/0x251A0d0121D50A9C907F701A1A644B8cF237d862.png"
+    },
+    {
+      "name": "Dogecoin Token",
+      "symbol": "DOGE",
+      "address": {
+        "20729": "",
+        "820": "0xcc68a5a0fe33fe74a24955717989ea094e6c2b9f",
+        "56": "0xbA2aE424d960c26247Dd6c32edC70B295c744C43",
+        "97": "",
+        "1": "",
+        "42": "",
+        "61": "",
+        "199": ""
+      },
+      "decimals": {
+        "20729": 8,
+        "820": 8,
+        "56": 8,
+        "97": 8,
+        "1": 8,
+        "42": 8,
+        "61": 8,
+        "199": 8
+      },
+      "logoURI": "https://app.soy.finance/images/coins/820/0xcc68a5a0fe33fe74a24955717989ea094e6c2b9f.png"
     }
   ]
 }
