@@ -1,6 +1,6 @@
 // Array of available nodes to connect to
 const sigs = [
-  'https://ip-159-225.cust.aspone.cz/auth?',
+  'https://bridge01.callisto.network/auth?',
   'https://nrc6gwlqvajn4umvmcqurtni240usuqm.lambda-url.us-east-2.on.aws/auth?',
   'https://srs27mbzuopehskfhvkdrdjwqi0qpjxk.lambda-url.us-west-2.on.aws/auth?'
 ];
