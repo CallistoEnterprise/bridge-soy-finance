@@ -3,4 +3,3 @@ export const getTokenLogoLink = (address: string, chainId = 820) => {
     ? 'https://bridge.soy.finance/images/coins/clo.png'
     : `https://bridge.soy.finance/images/coins/${chainId}/${address}.png`;
 };
-
