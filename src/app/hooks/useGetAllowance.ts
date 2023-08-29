@@ -16,7 +16,7 @@ const useGetAllowance = (tokenAddress: string, succeed?: boolean) => {
 
         if (tkContract) {
           const allowance = await tkContract.allowance(account, bridgeAddr, { value: 0 });
-          setAllowed(allowance.gt(0));
+          setAllowed(allowance.gt(1e38));
         }
       } catch (error) {
         console.error(error);
