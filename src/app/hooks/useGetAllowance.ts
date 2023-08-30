@@ -6,7 +6,7 @@ import useActiveWeb3React from './useActiveWeb3React';
 
 const useGetAllowance = (tokenAddress: string, succeed?: boolean) => {
   const { account, library, chainId } = useActiveWeb3React();
-  const [allowed, setAllowed] = useState(false);
+  const [allowed, setAllowed] = useState('0');
 
   useEffect(() => {
     const get = async () => {
@@ -16,7 +16,7 @@ const useGetAllowance = (tokenAddress: string, succeed?: boolean) => {
 
         if (tkContract) {
           const allowance = await tkContract.allowance(account, bridgeAddr, { value: 0 });
-          setAllowed(allowance.gt(0));
+          setAllowed(allowance.toString());
         }
       } catch (error) {
         console.error(error);

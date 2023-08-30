@@ -167,7 +167,7 @@ const Swap = () => {
     if (swapTokenAddr.slice(0, -2) === '0x00000000000000000000000000000000000000') {
       value = bigAmount.toString();
     } else {
-      if (!allowed) {
+      if (bigAmount.gt(allowed)) {
         await onApprove();
       }
     }
@@ -226,7 +226,7 @@ const Swap = () => {
       if (swapTokenAddr.slice(0, -2) === '0x00000000000000000000000000000000000000') {
         value = bigAmount.toString();
       } else {
-        if (!allowed) {
+        if (bigAmount.gt(allowed)) {
           try {
             await onApprove();
           } catch (err) {
