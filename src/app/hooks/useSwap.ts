@@ -11,8 +11,10 @@ const useSwap = () => {
     async (receiver: string, tkAddress: string, amount: BigNumber, toChainId: number, value: string) => {
       const bridgeAddr = await getBridgeAddress(chainId);
       const bridgeContract = await getBridgeContract(bridgeAddr, library, account);
+      const gasLimit = await bridgeContract.estimateGas.depositTokens(receiver, tkAddress, amount.toString(), toChainId, { value });
       const tx = await bridgeContract.depositTokens(receiver, tkAddress, amount.toString(), toChainId, {
-        value
+        value,
+        gasLimit: gasLimit.add(30000)
       });
 
       return {
@@ -28,7 +30,7 @@ const useSwap = () => {
       const router = await getSoyRouterAddressByChain(toChainId);
       const bridgeAddr = await getBridgeAddress(chainId);
       const bridgeContract = await getBridgeContract(bridgeAddr, library, account);
-      const tx = await bridgeContract.bridgeToContract(
+      const gasLimit = await bridgeContract.estimateGas.bridgeToContract(
         receiver,
         tkAddress,
         amount.toString(),
@@ -37,6 +39,19 @@ const useSwap = () => {
         byteData,
         {
           value
+        }
+      );
+
+      const tx = await bridgeContract.bridgeToContract(
+        receiver,
+        tkAddress,
+        amount.toString(),
+        toChainId,
+        router,
+        byteData,
+        {
+          value,
+          gasLimit: gasLimit.add(30000)
         }
       );
 

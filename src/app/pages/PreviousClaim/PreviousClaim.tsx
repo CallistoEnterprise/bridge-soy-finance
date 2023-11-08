@@ -182,7 +182,7 @@ export default function PreviousClaim() {
               signatures,
               {
                 value: 0,
-                gasLimit: gasLimit.add(20000)
+                gasLimit: gasLimit.add(30000)
               }
             );
           } else {
@@ -203,7 +203,7 @@ export default function PreviousClaim() {
               respJSON.value,
               fromNetwork.chainId,
               signatures,
-              { value: 0, gasLimit: gasLimit.add(20000) }
+              { value: 0, gasLimit: gasLimit.add(30000) }
             );
           }
 
