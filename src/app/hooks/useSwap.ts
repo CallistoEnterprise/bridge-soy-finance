@@ -11,7 +11,13 @@ const useSwap = () => {
     async (receiver: string, tkAddress: string, amount: BigNumber, toChainId: number, value: string) => {
       const bridgeAddr = await getBridgeAddress(chainId);
       const bridgeContract = await getBridgeContract(bridgeAddr, library, account);
-      const gasLimit = await bridgeContract.estimateGas.depositTokens(receiver, tkAddress, amount.toString(), toChainId, { value });
+      const gasLimit = await bridgeContract.estimateGas.depositTokens(
+        receiver,
+        tkAddress,
+        amount.toString(),
+        toChainId,
+        { value }
+      );
       const tx = await bridgeContract.depositTokens(receiver, tkAddress, amount.toString(), toChainId, {
         value,
         gasLimit: gasLimit.add(30000)
