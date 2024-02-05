@@ -115,11 +115,11 @@ export default function PreviousClaim() {
           return;
         }
       } else {
-        if (nativeCoinBalance < 0.005 && chainId !== 820) {
+        if (nativeCoinBalance < 1.0 && chainId !== 820) {
           toastWarning('Warning!', 'Insufficient gas in wallet.');
           return;
         }
-        if (nativeCoinBalance < 0.005 && chainId !== 199) {
+        if (nativeCoinBalance < 100.0 && chainId !== 199) {
           toastWarning('Warning!', 'Insufficient gas in wallet.');
           return;
         }
