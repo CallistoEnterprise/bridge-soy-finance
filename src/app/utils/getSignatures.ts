@@ -1,7 +1,7 @@
 // Array of available nodes to connect to
 const sigs = [
-  'https://bridge01.callisto.network/auth?',
-  'https://nrc6gwlqvajn4umvmcqurtni240usuqm.lambda-url.us-east-2.on.aws/auth?',
+  'https://s32df63t4aw7rqbszb57aqdfsq0tufuk.lambda-url.us-east-1.on.aws/auth?',
+  'https://3lpvapi5h4tobz6a6h35276oqa0mijmd.lambda-url.us-east-1.on.aws/auth?',
   'https://srs27mbzuopehskfhvkdrdjwqi0qpjxk.lambda-url.us-west-2.on.aws/auth?'
 ];
 
