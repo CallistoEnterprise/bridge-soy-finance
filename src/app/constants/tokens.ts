@@ -62,7 +62,7 @@ const tokens = {
       20729: ''
     },
     decimals: 18,
-    projectLink: 'https://app.soy.finance/'
+    projectLink: 'https://app.sloth.finance/'
   },
   wclo: {
     symbol: 'WCLO',

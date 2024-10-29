@@ -36,7 +36,7 @@ export default function Header() {
   };
 
   const handleLaunchFinance = () => {
-    window.open('https://app.soy.finance', '_blank');
+    window.open('https://app.sloth.finance', '_blank');
   };
 
   return (
